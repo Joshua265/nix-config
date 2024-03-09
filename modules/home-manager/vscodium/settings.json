@@ -1,0 +1,140 @@
+{
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[dockercompose]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[dockerfile]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[nix]": {
+      "editor.defaultFormatter": "jnoortheen.nix-ide"
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[toml]": {
+      "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[rust]": {
+      "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "cloudcode.autoDependencies": "off",
+    "cloudcode.enableTelemetry": false,
+    "cmake.configureOnOpen": true,
+    "debug.allowBreakpointsEverywhere": false,
+    "debug.console.acceptSuggestionOnEnter": "on",
+    "debug.console.closeOnEnd": true,
+    "debug.console.fontSize": 14,
+    "debug.inlineValues": "on",
+    "debug.internalConsoleOptions": "openOnSessionStart",
+    "debug.openDebug": "openOnSessionStart",
+    "debug.openExplorerOnEnd": false,
+    "debug.terminal.clearBeforeReusing": true,
+    "debug.toolBarLocation": "commandCenter",
+    "debugpy.debugJustMyCode": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.find.autoFindInSelection": "multiline",
+    "editor.fontFamily": "Fantasque Sans Mono, monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.formatOnSave": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.mouseWheelZoom": true,
+    "editor.suggestSelection": "first",
+    "explorer.autoReveal": false,
+    "extensions.autoUpdate": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.allowNoVerifyCommit": true,
+    "git.autofetch": true,
+    "git.autoStash": true,
+    "git.confirmSync": false,
+    "git.rebaseWhenSync": true,
+    "git.suggestSmartCommit": false,
+    "git.terminalGitEditor": true,
+    "git.untrackedChanges": "separate",
+    "github.copilot.enable": {
+      "*": true,
+      "yaml": true,
+      "plaintext": true,
+      "markdown": true
+    },
+    "github.gitProtocol": "ssh",
+    "githubPullRequests.pullBranch": "always",
+    "githubPullRequests.pushBranch": "always",
+    "githubPullRequests.setAutoMerge": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.debugJustMyCode": false,
+    "jupyter.runStartupCommands": ["%load_ext autoreload", "%autoreload 2"],
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "nix.serverSettings": {
+      "nil": {
+        "formatting": {
+          "command": ["nixpkgs-fmt"]
+        },
+        "nix": {
+          "flake": {
+            "autoArchive": true,
+            "autoEvalInputs": true
+          }
+        }
+      }
+    },
+    "notebook.consolidatedRunButton": true,
+    "notebook.experimental.remoteSave": true,
+    "notebook.formatOnSave.enabled": true,
+    "notebook.globalToolbar": false,
+    "notebook.output.scrolling": true,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.inlayHints.callArgumentNames": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "none",
+    "redhat.telemetry.enabled": false,
+    "remote.downloadExtensionsLocally": true,
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.enableMultiLinePasteWarning": true,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.profiles.osx": {
+      "tmux-workspace": {
+        "path": "tmux",
+        "args": ["new-session", "-A", "-s", "vscode:${workspaceFolder}"]
+      }
+    },
+    "update.mode": "none",
+    "window.autoDetectColorScheme": true,
+    "window.commandCenter": true,
+    "window.restoreWindows": "none",
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Andromeda Italic",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.excludeDirty": true,
+    "workbench.editor.limit.value": 5,
+    "workbench.enableExperiments": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.layoutControl.enabled": true,
+    "workbench.preferredDarkColorTheme": "GitHub Dark",
+    "workbench.preferredLightColorTheme": "GitHub Light",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.startupEditor": "readme",
+    "zenMode.centerLayout": false,
+    "zenMode.showTabs": "none"
+  }
