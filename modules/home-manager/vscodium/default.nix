@@ -11,10 +11,9 @@ let
 in
 {
   programs.vscode = {
-    inherit userSettings keybindings;
+    inherit userSettings extentions keybindings;
     enable = true;
     package = pkgs.vscodium
-    extensions = with pkgs.vscode-extensions; inherit extensions
   };
 
   # Copy VS Code settings into the default location as a mutable copy.
