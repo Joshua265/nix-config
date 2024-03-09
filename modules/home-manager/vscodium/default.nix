@@ -10,7 +10,7 @@ let
   extensions = import ./extensions.nix { inherit pkgs; };
 in
 {
-  programs.vscode = {
+  programs.vscodium = {
     inherit userSettings extensions keybindings;
     enable = true;
     mutableExtensionsDir = false;
