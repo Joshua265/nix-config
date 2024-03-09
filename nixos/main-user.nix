@@ -22,7 +22,6 @@ in
       initialPassword = "12345";
       description = "main user";
       extraGroups = [ "networkmanager" "wheel" ];
-      shell = pkgs.zsh;
     };
   };
 }
