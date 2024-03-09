@@ -57,14 +57,12 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [ 
     steam
-    vscodium
     firefox
     git
     discord
     conda
     spotify
     keepass
-
   ];
 
   # Enable home-manager and git
