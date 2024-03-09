@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 pushd ~/dotfiles/nixos/
-# nvim oatman-pc.nix
 alejandra . &>/dev/null
 git diff -U0 *.nix
 echo "NixOS Rebuilding..."
