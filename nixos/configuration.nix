@@ -73,7 +73,8 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
-
+  time.hardwareClockInLocalTime = true;
+  
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -131,9 +132,17 @@
   networking.hostName = "nixos-desktop";
 
   # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+    };
+  };
+
 
   main-user.enable = true;
   main-user.userName = "user";
