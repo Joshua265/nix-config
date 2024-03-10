@@ -80,6 +80,7 @@
       # gaming
       dotnet-runtime_8
       lutris
+      wine
       gnome3.adwaita-icon-theme
       steam
     ])
