@@ -13,6 +13,7 @@
   imports = [
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
+    outputs.homeManagerModules.gtk
   ];
 
   nixpkgs = {
@@ -98,10 +99,13 @@
         "apps-menu@gnome-shell-extensions.gcampax.github.com"
         "blur-my-shell@aunetx"
         "caffeine@patapon.info"
-        "hue-lights@chlumskyvaclav.gmail.com"
         "rounded-window-corners@yilozt"
       ];
     };
+  };
+
+  home.sessionVariables = {
+    EDITOR = "codium";
   };
 
   # Shell Aliases

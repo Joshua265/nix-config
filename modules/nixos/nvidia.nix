@@ -26,7 +26,7 @@
     # of just the bare essentials.
     powerManagement.enable = false;
 
-    # Fix flickering forcing nvidia gpu to render everything
+    # PRIME render offload. Usually only used for laptops with Nvidia Optimus.
     prime.nvidiaBusId = "PCI:1:0:0";
     prime.intelBusId = "PCI:0:0:2";
     prime.sync.enable = true;

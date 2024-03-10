@@ -3,22 +3,28 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  settings-directory =
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then "$HOME/Library/Application Support/Code/User"
+    else "$HOME/.config/Code/User";
+  userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
+  keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
+in {
   programs.vscode = {
+    inherit userSettings keybindings;
     enable = true;
+    mutableExtensionsDir = false;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       dbaeumer.vscode-eslint
       esbenp.prettier-vscode
       github.copilot
-      github.github-vscode-theme
       github.vscode-github-actions
       github.vscode-pull-request-github
-      gitlab.gitlab-workflow
       jnoortheen.nix-ide
       mikestead.dotenv
       ms-azuretools.vscode-docker
-      ms-kubernetes-tools.vscode-kubernetes-tools
       ms-python.black-formatter
       ms-python.isort
       ms-python.python
@@ -29,15 +35,41 @@
       ms-vscode-remote.remote-ssh
       ms-vscode.cmake-tools
       ms-vscode.makefile-tools
-      njpwerner.autodocstring
       pkief.material-icon-theme
       redhat.vscode-yaml
       rust-lang.rust-analyzer
       stkb.rewrap
-      svelte.svelte-vscode
       tamasfe.even-better-toml
       tomoki1207.pdf
       twxs.cmake
+      kamadorueda.alejandra
+      dart-code.flutter
+      enkia.tokyo-night
     ];
+  };
+
+  # Copy VS Code settings into the default location as a mutable copy.
+  home.activation = {
+    beforeCheckLinkTargets = {
+      after = [];
+      before = ["checkLinkTargets"];
+      data = ''
+        if [ -f "${settings-directory}/settings.json" ]; then
+          rm "${settings-directory}/settings.json"
+        fi
+        if [ -f "${settings-directory}/keybindings.json" ]; then
+          rm "${settings-directory}/keybindings.json"
+        fi
+      '';
+    };
+
+    afterWriteBoundary = {
+      after = ["writeBoundary"];
+      before = [];
+      data = ''
+        cat ${(pkgs.formats.json {}).generate "settings.json" userSettings} > "${settings-directory}/settings.json"
+        cat ${(pkgs.formats.json {}).generate "keybindings.json" keybindings} > "${settings-directory}/keybindings.json"
+      '';
+    };
   };
 }
