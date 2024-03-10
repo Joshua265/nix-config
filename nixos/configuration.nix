@@ -107,7 +107,7 @@
   hardware.bluetooth.enable = true;
 
   # hostname
-  networking.hostName = "nixos";
+  networking.hostName = "nixos-desktop";
 
   # Bootloader
 

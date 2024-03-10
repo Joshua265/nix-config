@@ -9,10 +9,11 @@
   self,
   ...
 }: {
-  # You can import other home-manager modules here
-  outputs.homeModules.vscodium
-  outputs.homeModules.git
-  outputs.homeModules.git-refresh
+  # Import home-manager modules here
+  imports = [
+    outputs.homeManagerModules.git
+    outputs.homeManagerModules.vscodium
+  ];
 
   nixpkgs = {
     # You can add overlays here
@@ -34,7 +35,6 @@
     ];
     # Configure your nixpkgs instance
     config = {
-
       # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
@@ -54,19 +54,31 @@
     homeDirectory = "/home/user";
   };
 
-  home.packages = with pkgs; [ 
-    steam
-    firefox
-    discord
-    conda
-    spotify
-    keepassxc
-    obs-studio
-    
-    alejandra
-    lspci
-  ] ++ (with pkgs.gnomeExtensions;
-    [
+  programs.git = {
+    userEmail = "Joshua_Noel@gmx.de";
+    userName = "Joshua265";
+  };
+
+  home.packages =
+    (with pkgs; [
+      steam
+      firefox
+      discord
+      conda
+      spotify
+      keepassxc
+      obs-studio
+
+      alejandra
+
+      # system tools
+      sysstat
+      lm_sensors # for `sensors` command
+      ethtool
+      pciutils # lspci
+      usbutils # lsusb
+    ])
+    ++ (with pkgs.gnomeExtensions; [
       blur-my-shell
       caffeine
       hue-lights
@@ -83,13 +95,18 @@
         "blur-my-shell@aunetx"
         "caffeine@patapon.info"
         "hue-lights@chlumskyvaclav.gmail.com"
-        "places-menu@gnome-shell-extensions.gcampax.github.com"
         "rounded-window-corners@yilozt"
       ];
     };
   };
 
-  # Enable home-manager 
+  # Shell Aliases
+  home.shellAliases = {
+    code = "codium";
+    nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+  };
+
+  # Enable home-manager
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs

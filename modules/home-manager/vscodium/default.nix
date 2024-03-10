@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.vscode = {
-    inherit userSettings keybindings;
     enable = true;
-    package = pkgs.vscodium
+    package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       dbaeumer.vscode-eslint
       esbenp.prettier-vscode

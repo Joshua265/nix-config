@@ -1,4 +1,8 @@
-{ config, pkgs, self, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
@@ -10,7 +14,6 @@
       b = "branch";
       d = "diff";
       find = "grep -w";
-      refresh = "!${self.packages.${pkgs.system}.git-refresh}/bin/git-refresh";
     };
     signing = {
       signByDefault = true;
