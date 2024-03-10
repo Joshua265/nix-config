@@ -80,6 +80,7 @@
       # gaming
       dotnet-runtime_8
       lutris
+      gnome3.adwaita-icon-theme
       steam
     ])
     ++ (with pkgs.gnomeExtensions; [
