@@ -10,11 +10,9 @@
   ...
 }: {
   # You can import other home-manager modules here
-  imports = with self.homeModules; [
-    vscodium
-    git
-    git-refresh
-  ];
+  outputs.homeModules.vscodium
+  outputs.homeModules.git
+  outputs.homeModules.git-refresh
 
   nixpkgs = {
     # You can add overlays here
