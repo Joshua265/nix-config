@@ -62,7 +62,6 @@
   home.packages =
     (with pkgs; [
       firefox
-      discord
       conda
       spotify
       keepassxc
