@@ -103,9 +103,11 @@
     #media-session.enable = true;
   };
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
 
   # hostname
-  networking.hostName = "nixos-desktop";
+  networking.hostName = "nixos";
 
   # Bootloader
 
