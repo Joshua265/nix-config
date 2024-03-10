@@ -13,6 +13,7 @@
     # If you want to use modules your own flake exports (from modules/nixos):
     outputs.nixosModules.nvidia
     outputs.nixosModules.cuda
+    outputs.nixosModules.discord
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -50,7 +51,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
   time.hardwareClockInLocalTime = true;
-  
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -115,12 +116,11 @@
     efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
-      devices = [ "nodev" ];
+      devices = ["nodev"];
       efiSupport = true;
       useOSProber = true;
     };
   };
-
 
   main-user.enable = true;
   main-user.userName = "user";
@@ -128,7 +128,6 @@
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "user";
-
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

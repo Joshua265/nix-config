@@ -4,4 +4,5 @@
   # List your module files here
   cuda = import ./cuda.nix;
   nvidia = import ./nvidia.nix;
+  discord = import ./discord.nix;
 }
