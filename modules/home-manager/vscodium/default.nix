@@ -7,13 +7,44 @@ let
   defaultExtensions = { "remote.SSH.defaultExtensions" = map (x: x.vscodeExtUniqueId) extensions; };
   userSettings = (builtins.fromJSON (builtins.readFile ./settings.json)) // defaultExtensions;
   keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
-  extensions = import ./extensions.nix { inherit pkgs; };
 in
 {
   programs.vscode = {
-    inherit userSettings extentions keybindings;
+    inherit userSettings keybindings;
     enable = true;
     package = pkgs.vscodium
+    extensions = with pkgs.vscode-extensions; [
+      dbaeumer.vscode-eslint
+      esbenp.prettier-vscode
+      github.copilot
+      github.github-vscode-theme
+      github.vscode-github-actions
+      github.vscode-pull-request-github
+      gitlab.gitlab-workflow
+      jnoortheen.nix-ide
+      mikestead.dotenv
+      ms-azuretools.vscode-docker
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-python.black-formatter
+      ms-python.isort
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-toolsai.jupyter
+      ms-toolsai.vscode-jupyter-slideshow
+      ms-vscode-remote.remote-containers
+      ms-vscode-remote.remote-ssh
+      ms-vscode.cmake-tools
+      ms-vscode.makefile-tools
+      njpwerner.autodocstring
+      pkief.material-icon-theme
+      redhat.vscode-yaml
+      rust-lang.rust-analyzer
+      stkb.rewrap
+      svelte.svelte-vscode
+      tamasfe.even-better-toml
+      tomoki1207.pdf
+      twxs.cmake
+    ];
   };
 
   # Copy VS Code settings into the default location as a mutable copy.
