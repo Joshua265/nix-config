@@ -12,7 +12,8 @@
   # You can import other home-manager modules here
   imports = with self.homeModules; [
     vscodium
-    shellcolor
+    git
+    git-refresh
   ];
 
   nixpkgs = {
@@ -35,10 +36,17 @@
     ];
     # Configure your nixpkgs instance
     config = {
+
       # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      #   "discord"
+      #   "spotify"
+      #   "steam-original"
+      #   "steam"
+      ];
     };
   };
 
@@ -48,21 +56,43 @@
     homeDirectory = "/home/user";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
   home.packages = with pkgs; [ 
     steam
     firefox
-    git
     discord
     conda
     spotify
-    keepass
-  ];
+    keepassxc
+    obs-studio
+    
+    alejandra
+    lspci
+  ] ++ (with pkgs.gnomeExtensions;
+    [
+      blur-my-shell
+      caffeine
+      hue-lights
+      night-theme-switcher
+      rounded-window-corners
+    ]);
 
-  # Enable home-manager and git
+  # Use `dconf watch /` to track stateful changes you are doing, then set them here.
+  dconf.settings = {
+    "org/gnome/shell" = {
+      enabled-extensions = [
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "apps-menu@gnome-shell-extensions.gcampax.github.com"
+        "blur-my-shell@aunetx"
+        "caffeine@patapon.info"
+        "hue-lights@chlumskyvaclav.gmail.com"
+        "places-menu@gnome-shell-extensions.gcampax.github.com"
+        "rounded-window-corners@yilozt"
+      ];
+    };
+  };
+
+  # Enable home-manager 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

@@ -20,6 +20,18 @@
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
+
+    # project shells
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # tree wide formatter
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -44,9 +56,32 @@
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+    # format pre commit hooks
+    pre-commit = {
+      settings.excludes = ["flake.lock"];
+
+      settings.hooks = {
+        alejandra.enable = true;
+        prettier.enable = true;
+      };
+    };
+
+    # configure treefmt
+    treefmt = {
+      projectRootFile = "flake.nix";
+
+      programs = {
+        alejandra.enable = true;
+        black.enable = true;
+        deadnix.enable = false;
+        shellcheck.enable = true;
+        shfmt = {
+          enable = true;
+          indent_size = 4;
+        };
+      };
+    };
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
