@@ -14,6 +14,7 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia" "intel"]; # or "nvidiaLegacy470 etc.
   virtualisation.docker.enableNvidia = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   hardware.nvidia = {
     # Modesetting is required.
