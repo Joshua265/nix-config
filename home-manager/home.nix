@@ -78,11 +78,18 @@
       usbutils # lsusb
 
       # gaming
-      dotnet-runtime_8
-      lutris
       wine
       gnome3.adwaita-icon-theme
       steam
+      (lutris.override {
+        extraPkgs = pkgs: [
+          gamescope
+          winetricks
+        ];
+        extraLibraries = pkgs: [
+          gamescope
+        ];
+      })
     ])
     ++ (with pkgs.gnomeExtensions; [
       blur-my-shell

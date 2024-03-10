@@ -14,9 +14,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
-  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
@@ -28,6 +25,9 @@
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "kamadorueda.alejandra"
   },
   "cloudcode.autoDependencies": "off",
   "cloudcode.enableTelemetry": false,
@@ -82,9 +82,6 @@
   "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nil": {
-      "formatting": {
-        "command": ["nixpkgs-fmt"]
-      },
       "nix": {
         "flake": {
           "autoArchive": true,
