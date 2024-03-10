@@ -61,7 +61,6 @@
 
   home.packages =
     (with pkgs; [
-      steam
       firefox
       discord
       conda
@@ -77,6 +76,11 @@
       ethtool
       pciutils # lspci
       usbutils # lsusb
+
+      # gaming
+      dotnet-runtime_8
+      lutris
+      steam
     ])
     ++ (with pkgs.gnomeExtensions; [
       blur-my-shell
