@@ -12,7 +12,7 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
+  services.xserver.videoDrivers = ["nvidia" "intel"]; # or "nvidiaLegacy470 etc.
   virtualisation.docker.enableNvidia = true;
 
   hardware.nvidia = {
