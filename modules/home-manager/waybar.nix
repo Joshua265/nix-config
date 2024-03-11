@@ -21,8 +21,8 @@
         layer = "top";
         position = "bottom";
         tray = {spacing = 10;};
-        modules-center = ["sway/window"];
-        modules-left = ["sway/workspaces" "sway/mode"];
+        modules-center = ["hyprland/window"];
+        modules-left = ["hyperland/workspaces" "hyperland/mode"];
         modules-right =
           [
             "pulseaudio"
@@ -81,7 +81,7 @@
           format-source-muted = "";
           on-click = "pavucontrol";
         };
-        "sway/mode" = {format = ''<span style="italic">{}</span>'';};
+        "hyperland/mode" = {format = ''<span style="italic">{}</span>'';};
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";

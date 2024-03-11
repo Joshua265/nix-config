@@ -22,11 +22,6 @@ in {
     # hyprlock deps
     wayland-protocols
     mesa
-    # (
-    #   waybar.overrideAttrs (oldAttrs: {
-    #     mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-    #   })
-    # )
   ];
   wayland.windowManager.hyprland = {
     inherit settings;
