@@ -91,7 +91,7 @@ in {
     [
       "$mod, F, exec, firefox"
       ", Print, exec, grimblast copy area"
-      "$mod, space, exec, rofi -show drun -show icons || rofi" # rofi
+      "$mod, space, exec, rofi -show drun -show-icons || rofi" # rofi
       "$mod, V, exec, cliphist list | rofi --dmenu | cliphist decode | wl-copy" # clipboard history
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"

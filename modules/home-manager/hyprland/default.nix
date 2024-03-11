@@ -18,6 +18,7 @@ in {
     networkmanagerapplet
     polkit-kde-agent # auth agent
     xdg-desktop-portal
+    dolphin # file manager
     # hyprlock deps
     wayland-protocols
     mesa

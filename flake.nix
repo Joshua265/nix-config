@@ -13,7 +13,7 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Add any other flake you might need
+    # Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -23,6 +23,9 @@
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
     hyprlock.url = "github:hyprwm/Hyprlock";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
