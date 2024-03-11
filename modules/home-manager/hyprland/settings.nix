@@ -4,10 +4,13 @@
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+    /usr/lib/polkit-kde-authentication-agent-1 &
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
+    wl-paste --type text --watch cliphist store &
+    wl-paste --type image --watch cliphist store
     sleep 1
 
   '';
@@ -81,14 +84,15 @@ in {
   # Set programs that you use
   "$terminal" = "kitty";
   "$fileManager" = "dolphin";
-  "$menu" = "wofi --show drun";
+  "$menu" = "rofi --show drun";
 
   "$mod" = "SUPER";
   bind =
     [
       "$mod, F, exec, firefox"
       ", Print, exec, grimblast copy area"
-      "$mod, space, exec, wofi -show drun || wofi" # wofi
+      "$mod, space, exec, rofi -show drun -show icons || rofi" # rofi
+      "$mod, V, exec, cliphist list | rofi --dmenu | cliphist decode | wl-copy" # clipboard history
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
       "$mod, Q, exec, $terminal"
@@ -127,6 +131,19 @@ in {
   monitor = [
     "DP-1, 5120x1440@120, 0x0, 1"
     "DP-2, 2560x1440@60, 5120x0, 1, transform, 3"
+  ];
+
+  workspace = [
+    "1, monitor:DP-1"
+    "2, monitor:DP-1"
+    "3, monitor:DP-1"
+    "4, monitor:DP-1"
+    "5, monitor:DP-1"
+    "6, monitor:DP-1"
+    "7, monitor:DP-1"
+    "8, monitor:DP-1"
+    "9, monitor:DP-1"
+    "10, monitor:DP-2"
   ];
 
   exec-once = ''${startupScript}/bin/start'';

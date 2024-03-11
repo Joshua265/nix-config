@@ -22,6 +22,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
+    hyprlock.url = "github:hyprwm/Hyprlock";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!

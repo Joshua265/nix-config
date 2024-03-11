@@ -13,11 +13,14 @@ in {
     swww
     kitty
     alacritty
-    wofi
+    rofi-wayland
     networkmanager
     networkmanagerapplet
     polkit-kde-agent # auth agent
     xdg-desktop-portal
+    # hyprlock deps
+    wayland-protocols
+    mesa
     (
       waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
@@ -33,6 +36,12 @@ in {
     #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     # ];
   };
+
+  # enable hyprctl
+  systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+
+  # enable hyprlock
+  programs.hyprlock.enable = true;
 
   gtk = {
     enable = true;

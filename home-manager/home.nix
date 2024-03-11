@@ -20,6 +20,7 @@ in {
     outputs.homeManagerModules.fonts
     outputs.homeManagerModules.keepassxc
     outputs.homeManagerModules.nextcloud-client
+    inputs.hyprlock.homeManagerModules.hyprlock
   ];
 
   nixpkgs = {
