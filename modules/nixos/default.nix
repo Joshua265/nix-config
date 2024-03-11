@@ -7,4 +7,6 @@
   discord = import ./discord.nix;
   display-manager = import ./display-manager.nix;
   auto-upgrade = import ./auto-upgrade.nix;
+  security = import ./security.nix;
+  gamemode = import ./gamemode.nix;
 }

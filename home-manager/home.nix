@@ -14,6 +14,9 @@
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland
+    outputs.homeManagerModules.fonts
+    outputs.homeManagerModules.keepassxc
+    outputs.homeManagerModules.nextcloud-client
   ];
 
   nixpkgs = {
@@ -59,37 +62,6 @@
     userEmail = "Joshua_Noel@gmx.de";
     userName = "Joshua265";
   };
-
-  home.packages = with pkgs; [
-    firefox
-    conda
-    spotify
-    keepassxc
-    obs-studio
-
-    alejandra
-
-    # system tools
-    sysstat
-    lm_sensors # for `sensors` command
-    ethtool
-    pciutils # lspci
-    usbutils # lsusb
-
-    # gaming
-    wine
-    gnome3.adwaita-icon-theme
-    steam
-    (lutris.override {
-      extraPkgs = pkgs: [
-        gamescope
-        winetricks
-      ];
-      extraLibraries = pkgs: [
-        gamescope
-      ];
-    })
-  ];
 
   home.sessionVariables = {
     EDITOR = "codium";

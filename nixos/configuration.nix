@@ -16,6 +16,8 @@
     outputs.nixosModules.discord
     outputs.nixosModules.display-manager
     outputs.nixosModules.auto-upgrade
+    outputs.nixosModules.security
+    outputs.nixosModules.gamemode
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -69,29 +71,6 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Add Hyprland extensions
-  environment.systemPackages = with pkgs; [
-    libnotify # Required for dunst
-    dunst
-    swww
-    kitty
-    alacritty
-    rofi-wayland
-    (
-      waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-      })
-    )
-  ];
-
-  # Add XDG Portal
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -132,10 +111,6 @@
 
   main-user.enable = true;
   main-user.userName = "user";
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "user";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

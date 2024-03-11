@@ -12,5 +12,9 @@
 
   environment.systemPackages = with pkgs; [
     greetd.tuigreet
+    greetd.regreet
   ];
+
+  # unlock GPG keyring on login
+  security.pam.services.greetd.enableGnomeKeyring = true;
 }

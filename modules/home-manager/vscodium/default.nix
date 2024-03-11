@@ -1,3 +1,5 @@
+# Code adapted from
+# https://github.com/carlthome/dotfiles/tree/66e806a7560aeaaf77b706e5d81a2c2b72f60900/modules/home-manager/vscode
 {
   config,
   pkgs,
