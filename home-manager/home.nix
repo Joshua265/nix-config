@@ -8,9 +8,12 @@
   pkgs,
   self,
   ...
-}: {
+}: let
+  packages = import ./packages.nix;
+in {
   # Import home-manager modules here
   imports = [
+    packages
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland

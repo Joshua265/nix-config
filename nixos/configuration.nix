@@ -112,6 +112,10 @@
   main-user.enable = true;
   main-user.userName = "user";
 
+  # Spotify track sync with other devices
+  # TODO: move
+  networking.firewall.allowedTCPPorts = [57621];
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
