@@ -13,10 +13,9 @@ in {
     swww
     kitty
     alacritty
-    rofi-wayland
+    wofi
     networkmanager
     networkmanagerapplet
-    alacritty
     polkit-kde-agent # auth agent
     xdg-desktop-portal
     (

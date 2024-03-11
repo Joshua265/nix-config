@@ -75,7 +75,7 @@ in {
     workspace_swipe = false;
   };
 
-  windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this.
+  # windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this. # error
 
   # Set programs that you use
   "$terminal" = "kitty";
