@@ -46,11 +46,12 @@ in {
     col.shadow = "rgba(1a1a1aee)";
   };
 
-  animations =
+  animations = {
+    enabled = true;
     # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-    [
-      "enabled = true"
-      "myBezier, 0.05, 0.9, 0.1, 1.05"
+    bezier = ["myBezier, 0.05, 0.9, 0.1, 1.05"];
+
+    animation = [
       "windows, 1, 7, myBezier"
       "windowsOut, 1, 7, default, popin 80%"
       "border, 1, 10, default"
@@ -58,7 +59,7 @@ in {
       "fade, 1, 7, default"
       "workspaces, 1, 6, default"
     ];
-
+  };
   dwindle = {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
     pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
@@ -90,6 +91,11 @@ in {
       "$mod, space, exec, wofi -show drun || wofi" # wofi
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
+      "$mod, Q, exec, $terminal"
+      "$mod, C, killactive,"
+      "$mod, M, exit,"
+      "$mod, E, exec, $fileManager"
+      "$mod, V, togglefloating,"
     ]
     ++ (
       # workspaces
