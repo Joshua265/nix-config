@@ -13,7 +13,7 @@
   imports = [
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
-    outputs.homeManagerModules.gtk
+    outputs.homeManagerModules.hyprland
   ];
 
   nixpkgs = {

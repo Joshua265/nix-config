@@ -1,5 +1,5 @@
 {
   git = import ./git;
   vscodium = import ./vscodium;
-  gtk = import ./gtk;
+  hyprland = import ./hyprland;
 }

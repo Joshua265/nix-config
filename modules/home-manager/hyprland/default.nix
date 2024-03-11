@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -10,8 +11,8 @@
     nm-applet --indicator &
     sleep 1
 
-    # ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
   '';
+  # ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
 in {
   home.packages = with pkgs; [
     libnotify # Required for dunst
@@ -32,7 +33,7 @@ in {
     enable = true;
     enableNvidiaPatches = true;
     xwayland.enable = true;
-    setting = {
+    settings = {
       "$mod" = "SUPER";
       bind =
         [
@@ -58,8 +59,8 @@ in {
         );
       exec-once = ''${startupScript}/bin/start'';
     };
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-    ];
+    # plugins = [
+    #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+    # ];
   };
 }
