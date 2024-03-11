@@ -14,6 +14,8 @@
     outputs.nixosModules.nvidia
     outputs.nixosModules.cuda
     outputs.nixosModules.discord
+    outputs.nixosModules.display-manager
+    outputs.nixosModules.auto-upgrade
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -67,21 +69,27 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Add Hyprland extensions
+  environment.systemPackages = with pkgs; [
+    libnotify # Required for dunst
+    dunst
+    swww
+    kitty
+    alacritty
+    rofi-wayland
+    (
+      waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      })
+    )
+  ];
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  # Add XDG Portal
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   # Enable CUPS to print documents.

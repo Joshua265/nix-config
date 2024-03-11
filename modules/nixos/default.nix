@@ -5,4 +5,6 @@
   cuda = import ./cuda.nix;
   nvidia = import ./nvidia.nix;
   discord = import ./discord.nix;
+  display-manager = import ./display-manager.nix;
+  auto-upgrade = import ./auto-upgrade.nix;
 }

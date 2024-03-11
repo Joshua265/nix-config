@@ -60,57 +60,36 @@
     userName = "Joshua265";
   };
 
-  home.packages =
-    (with pkgs; [
-      firefox
-      conda
-      spotify
-      keepassxc
-      obs-studio
+  home.packages = with pkgs; [
+    firefox
+    conda
+    spotify
+    keepassxc
+    obs-studio
 
-      alejandra
+    alejandra
 
-      # system tools
-      sysstat
-      lm_sensors # for `sensors` command
-      ethtool
-      pciutils # lspci
-      usbutils # lsusb
+    # system tools
+    sysstat
+    lm_sensors # for `sensors` command
+    ethtool
+    pciutils # lspci
+    usbutils # lsusb
 
-      # gaming
-      wine
-      gnome3.adwaita-icon-theme
-      steam
-      (lutris.override {
-        extraPkgs = pkgs: [
-          gamescope
-          winetricks
-        ];
-        extraLibraries = pkgs: [
-          gamescope
-        ];
-      })
-    ])
-    ++ (with pkgs.gnomeExtensions; [
-      blur-my-shell
-      caffeine
-      hue-lights
-      night-theme-switcher
-      rounded-window-corners
-    ]);
-
-  # Use `dconf watch /` to track stateful changes you are doing, then set them here.
-  dconf.settings = {
-    "org/gnome/shell" = {
-      enabled-extensions = [
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "apps-menu@gnome-shell-extensions.gcampax.github.com"
-        "blur-my-shell@aunetx"
-        "caffeine@patapon.info"
-        "rounded-window-corners@yilozt"
+    # gaming
+    wine
+    gnome3.adwaita-icon-theme
+    steam
+    (lutris.override {
+      extraPkgs = pkgs: [
+        gamescope
+        winetricks
       ];
-    };
-  };
+      extraLibraries = pkgs: [
+        gamescope
+      ];
+    })
+  ];
 
   home.sessionVariables = {
     EDITOR = "codium";
