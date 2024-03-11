@@ -20,6 +20,8 @@ in {
     outputs.homeManagerModules.fonts
     outputs.homeManagerModules.keepassxc
     outputs.homeManagerModules.nextcloud-client
+    outputs.homeManagerModules.alacritty
+    outputs.homeManagerModules.waybar
     inputs.hyprlock.homeManagerModules.hyprlock
   ];
 

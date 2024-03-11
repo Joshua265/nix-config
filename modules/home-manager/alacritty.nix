@@ -20,10 +20,7 @@
       };
 
       font = {
-        size =
-          if config.hostId == "yoga"
-          then 18
-          else 12;
+        size = 12;
       };
 
       mouse_bindings = [

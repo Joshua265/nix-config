@@ -14,18 +14,6 @@
         background: transparent;
         border-bottom: none;
       }
-
-      * {
-        ${
-        if config.hostId == "yoga"
-        then ''
-          font-size: 18px;
-        ''
-        else ''
-
-        ''
-      }
-      }
     '';
     settings = [
       {
@@ -43,11 +31,6 @@
             "memory"
             "temperature"
           ]
-          ++ (
-            if config.hostId == "yoga"
-            then ["battery"]
-            else []
-          )
           ++ [
             "clock"
             "tray"

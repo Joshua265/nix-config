@@ -5,6 +5,6 @@
   nextcloud-client = import ./nextcloud-client;
   keepassxc = import ./keepassxc;
   fonts = import ./fonts;
-  waybar = import ./waybar;
-  alacritty = import ./alacritty;
+  waybar = import ./waybar.nix;
+  alacritty = import ./alacritty.nix;
 }
