@@ -7,6 +7,7 @@
     /usr/lib/polkit-kde-authentication-agent-1 &
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
+    waypaper-engine daemon &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
@@ -92,12 +93,11 @@ in {
       "$mod, F, exec, firefox"
       ", Print, exec, grimblast copy area"
       "$mod, space, exec, rofi -show drun -show-icons || rofi" # rofi
-      "$mod, V, exec, cliphist list | rofi --dmenu | cliphist decode | wl-copy" # clipboard history
+      "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy" # clipboard history
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
       "$mod, Q, exec, $terminal"
-      "$mod, C, killactive,"
-      "$mod, M, exit,"
+      "$mod, W, killactive,"
       "$mod, E, exec, $fileManager"
       "$mod, V, togglefloating,"
     ]
@@ -129,7 +129,7 @@ in {
   bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
   monitor = [
-    "DP-1, 2560x1440@60, 5120x0, 1, transform, 3"
+    "HDMI-A-3, 2560x1440@60, 5120x0, 1, transform, 3"
     "DP-2, 5120x1440@120, 0x0, 1"
   ];
 
@@ -143,7 +143,7 @@ in {
     "7, monitor:DP-2"
     "8, monitor:DP-2"
     "9, monitor:DP-2"
-    "10, monitor:DP-1"
+    "10, monitor:HDMI-A-3"
   ];
 
   exec-once = ''${startupScript}/bin/start'';

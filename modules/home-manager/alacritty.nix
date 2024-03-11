@@ -25,7 +25,7 @@
 
       mouse_bindings = [
         {
-          mouse = "Middle";
+          mouse = "Right";
           action = "PasteSelection";
         }
       ];

@@ -75,6 +75,8 @@ in {
 
   # Shell Aliases
   home.shellAliases = {
+    cdnix = "cd ~/Documents/nixos-config && codium ~/Documents/nixos-config";
+    rebuild = "~/Documents/nixos-config/rebuild.sh";
     code = "codium";
     nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
   };
