@@ -8,8 +8,8 @@
 }: let
   settings-directory =
     if pkgs.stdenv.hostPlatform.isDarwin
-    then "$HOME/Library/Application Support/Code/User"
-    else "$HOME/.config/Code/User";
+    then "$HOME/Library/Application Support/VSCodium/User"
+    else "$HOME/.config/VSCodium/User";
   userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
   keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
 in {
