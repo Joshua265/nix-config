@@ -112,6 +112,25 @@
   main-user.enable = true;
   main-user.userName = "user";
 
+  # important packages and dependencies
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    htop
+    tree
+    tmux
+    which
+    python3
+    gcc11
+    glib
+    zlib
+    sysstat
+    lm_sensors # for `sensors` command
+    ethtool
+    pciutils # lspci
+    usbutils # lsusb
+  ];
+
   # Spotify track sync with other devices
   # TODO: move
   networking.firewall.allowedTCPPorts = [57621];

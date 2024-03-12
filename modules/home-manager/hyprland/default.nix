@@ -22,6 +22,8 @@ in {
     # hyprlock deps
     wayland-protocols
     mesa
+    iwgtk # wifi management
+    blueberry # bluetooth management
   ];
   wayland.windowManager.hyprland = {
     inherit settings;

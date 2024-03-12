@@ -99,7 +99,7 @@ in {
       "$mod, Q, exec, $terminal"
       "$mod, W, killactive,"
       "$mod, E, exec, $fileManager"
-      "$mod, V, togglefloating,"
+      "$mod, T, togglefloating,"
     ]
     ++ (
       # workspaces
