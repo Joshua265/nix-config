@@ -129,6 +129,7 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    gparted
   ];
 
   # Spotify track sync with other devices
