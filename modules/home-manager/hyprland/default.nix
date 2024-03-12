@@ -27,6 +27,7 @@ in {
     mesa # hyprlock dependency
     iwgtk # wifi management
     blueberry # bluetooth management
+    pavucontrol # audio management
   ];
   wayland.windowManager.hyprland = {
     inherit settings;
