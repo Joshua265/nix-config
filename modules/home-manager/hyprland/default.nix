@@ -9,6 +9,10 @@ in {
   home.packages = with pkgs; [
     libnotify # Required for dunst
     dconf # Required for gtk
+    cliphist # Clipboard manager
+    wl-clipboard # Cliphist dependency
+    go # Required for cliphist
+    xdg-utils # mimetypes
     dunst
     swww
     kitty
@@ -19,9 +23,8 @@ in {
     polkit-kde-agent # auth agent
     xdg-desktop-portal
     dolphin # file manager
-    # hyprlock deps
-    wayland-protocols
-    mesa
+    wayland-protocols # hyprlock dependency
+    mesa # hyprlock dependency
     iwgtk # wifi management
     blueberry # bluetooth management
   ];
