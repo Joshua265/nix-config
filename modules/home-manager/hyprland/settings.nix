@@ -7,8 +7,8 @@
     /usr/lib/polkit-kde-authentication-agent-1 &
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
-    eww deamon &
-    eww open bar &
+    ${pkgs.eww}/bin/eww deamon &
+    ${pkgs.eww}/bin/eww open bar &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
