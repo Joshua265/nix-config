@@ -8,12 +8,12 @@
     noto-fonts-cjk
     noto-fonts-emoji
     roboto
-    (google-fonts.override {fonts = ["Inter"];})
+    google-fonts
 
     # monospace fonts
     jetbrains-mono
 
     # nerdfonts
-    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly" "JetBrainsMono"];})
+    nerdfonts
   ];
 }
