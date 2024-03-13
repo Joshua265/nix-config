@@ -14,6 +14,6 @@
     jetbrains-mono
 
     # nerdfonts
-    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly" "JetBrainsMono"];})
   ];
 }
