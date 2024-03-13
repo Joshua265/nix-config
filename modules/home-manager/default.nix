@@ -7,4 +7,5 @@
   fonts = import ./fonts;
   waybar = import ./waybar;
   alacritty = import ./alacritty.nix;
+  wlogout = import ./wlogout;
 }

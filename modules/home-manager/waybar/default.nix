@@ -17,7 +17,28 @@ in {
         position = "top";
         tray = {spacing = 10;};
         modules-center = ["hyprland/window"];
-        modules-left = ["hyperland/workspaces" "hyperland/mode"];
+        modules-left = ["hyperland/workspaces"];
+        "hyprland/workspaces" = {
+          on-click = "activate";
+          active-only = false;
+          all-outputs = true;
+          format = "{icon}";
+          format-icons = {
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            "7" = "";
+            "8" = "";
+            "9" = "󰙯";
+            "10" = "";
+            # "urgent": "",
+            # "active": "",
+            # "default": ""
+          };
+        };
         modules-right =
           [
             "pulseaudio"
@@ -76,11 +97,16 @@ in {
           format-source-muted = "";
           on-click = "pavucontrol";
         };
-        "hyperland/mode" = {format = ''<span style="italic">{}</span>'';};
+
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = ["" "" ""];
+        };
+        "custom/wlogout" = {
+          format = "";
+          interval = "once";
+          on-click = "wlogout -c 5 -r 5 -p layer-shell";
         };
       }
     ];
