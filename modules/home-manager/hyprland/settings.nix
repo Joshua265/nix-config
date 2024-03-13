@@ -52,8 +52,10 @@ in {
   input = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-    force_no_accel = true; # Trying to fix mouse issue in wine with it
+    force_no_accel = true; # Feels better to me, even if not recommended
+    focus_on_activate = true;
     follow_mouse = 1;
+    numlock_by_default = true;
   };
 
   decoration = {

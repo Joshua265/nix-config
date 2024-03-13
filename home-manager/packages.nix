@@ -29,6 +29,11 @@
     conda
     ollama
 
+    ## c
+    cmake
+    boost
+    catch2
+
     # gaming
     wine
     gnome3.adwaita-icon-theme
