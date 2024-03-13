@@ -124,7 +124,6 @@
 )
 
 ;; ━━━ BATTERY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defvar battery "{}")
 (defpoll battery :interval "60s" "./scripts/battery.sh")
 
 (defwidget battery []
