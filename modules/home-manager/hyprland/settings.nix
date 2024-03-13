@@ -8,6 +8,7 @@
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
     ${pkgs.eww}/bin/eww deamon &
+    sleep 1
     ${pkgs.eww}/bin/eww open bar &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
