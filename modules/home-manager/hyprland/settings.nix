@@ -5,6 +5,8 @@
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     /usr/lib/polkit-kde-authentication-agent-1 &
+    killall -q waybar &
+    ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
     waypaper-engine daemon &
     ${pkgs.dunst}/bin/dunst init &
@@ -14,7 +16,6 @@
     sleep 1
 
   '';
-  # ${pkgs.waybar}/bin/waybar &
   # ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
 in {
   general = {
