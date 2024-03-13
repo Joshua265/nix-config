@@ -40,7 +40,7 @@ in {
   };
 
   # enable hyprctl
-  systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+  # systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
   # enable hyprlock
   programs.hyprlock.enable = true;
