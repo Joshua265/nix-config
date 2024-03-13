@@ -7,7 +7,8 @@
     /usr/lib/polkit-kde-authentication-agent-1 &
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
-    waypaper-engine daemon &
+    eww deamon &
+    eww open bar &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
@@ -48,10 +49,19 @@ in {
     allow_tearing = false;
   };
 
+  input = {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+    force_no_accel = true; # Trying to fix mouse issue in wine with it
+    follow_mouse = 1;
+  };
+
   decoration = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-    rounding = 10;
+    rounding = 8;
+    inactive_opacity = 0.8;
+    active_opacity = 0.9;
 
     blur = {
       enabled = true;
@@ -165,9 +175,6 @@ in {
 
   windowrule = [
     "forceinput,title:^BLACK DESERT - \d+$"
-    "opacity 0.8 0.8,class:^(alacritty)$"
-    "opacity 0.8 0.8,class:^(VSCodium)$"
-    "opacity 0.8 0.8,class:^(Firefox)$"
   ];
 
   exec-once = ''${startupScript}/bin/start'';

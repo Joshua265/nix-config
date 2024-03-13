@@ -17,11 +17,17 @@
     # coding
     # vscodium from modules
 
+    # dart
+    flutter
+    android-tools
+    android-studio
+
     ## nix
     alejandra
 
     ## python
     conda
+    ollama
 
     # gaming
     wine

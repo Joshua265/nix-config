@@ -21,7 +21,8 @@ in {
     outputs.homeManagerModules.keepassxc
     outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.alacritty
-    outputs.homeManagerModules.waybar
+    outputs.homeManagerModules.eww
+    # outputs.homeManagerModules.wlogout
     inputs.hyprlock.homeManagerModules.hyprlock
   ];
 

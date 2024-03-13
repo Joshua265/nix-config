@@ -130,6 +130,7 @@
     pciutils # lspci
     usbutils # lsusb
     gparted
+    unzip
   ];
 
   # Spotify track sync with other devices
