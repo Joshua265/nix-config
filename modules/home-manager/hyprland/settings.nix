@@ -164,7 +164,7 @@ in {
   ];
 
   windowrule = [
-    "forceinput,title:^(Black Desert)$"
+    "forceinput,title:^BLACK DESERT - \d+$"
     "opacity 0.8 0.8,class:^(alacritty)$"
     "opacity 0.8 0.8,class:^(VSCodium)$"
     "opacity 0.8 0.8,class:^(Firefox)$"
