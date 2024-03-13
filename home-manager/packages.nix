@@ -30,9 +30,7 @@
     ollama
 
     ## c
-    cmake
-    boost
-    catch2
+    extra-cmake-modules
 
     # gaming
     wine
