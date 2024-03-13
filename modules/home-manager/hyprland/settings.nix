@@ -7,6 +7,7 @@
     /usr/lib/polkit-kde-authentication-agent-1 &
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
+    ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
     ${pkgs.eww}/bin/eww deamon &
     sleep 1
     ${pkgs.eww}/bin/eww open bar &
@@ -18,7 +19,6 @@
 
   '';
   # ${pkgs.waybar}/bin/waybar &
-  # ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
   gameModeScript = pkgs.pkgs.writeShellScriptBin "gameModeScript" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then

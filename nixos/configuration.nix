@@ -18,6 +18,7 @@
     outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
     outputs.nixosModules.gamemode
+    outputs.nixosModules.fonts
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

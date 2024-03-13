@@ -9,4 +9,5 @@
   auto-upgrade = import ./auto-upgrade.nix;
   security = import ./security.nix;
   gamemode = import ./gamemode.nix;
+  fonts = import ./fonts.nix;
 }
