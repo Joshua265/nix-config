@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
+  fonts.packages = with pkgs; [
     # icon fonts
     material-symbols
 
@@ -16,5 +16,4 @@
     # nerdfonts
     (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
   ];
-  fonts.fontconfig.enable = true;
 }

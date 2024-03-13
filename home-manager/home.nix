@@ -17,7 +17,6 @@ in {
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland
-    outputs.homeManagerModules.fonts
     outputs.homeManagerModules.keepassxc
     outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.alacritty
