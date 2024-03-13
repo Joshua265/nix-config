@@ -5,7 +5,6 @@
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     /usr/lib/polkit-kde-authentication-agent-1 &
-    ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
     waypaper-engine daemon &
     ${pkgs.dunst}/bin/dunst init &
@@ -15,6 +14,7 @@
     sleep 1
 
   '';
+  # ${pkgs.waybar}/bin/waybar &
   # ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
 in {
   general = {
@@ -145,6 +145,8 @@ in {
     "9, monitor:DP-2"
     "10, monitor:HDMI-A-3"
   ];
+
+  windowrule = "forceinput,title:^(Black Desert Online)$";
 
   exec-once = ''${startupScript}/bin/start'';
 }

@@ -3,23 +3,18 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  style = import ./styles.nix;
+in {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    style = ''
-      ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
-
-      window#waybar {
-        background: transparent;
-        border-bottom: none;
-      }
-    '';
+    inherit style;
     settings = [
       {
         height = 30;
         layer = "top";
-        position = "bottom";
+        position = "left";
         tray = {spacing = 10;};
         modules-center = ["hyprland/window"];
         modules-left = ["hyperland/workspaces" "hyperland/mode"];
