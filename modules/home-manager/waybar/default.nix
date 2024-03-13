@@ -14,7 +14,7 @@ in {
       {
         height = 30;
         layer = "top";
-        position = "left";
+        position = "top";
         tray = {spacing = 10;};
         modules-center = ["hyprland/window"];
         modules-left = ["hyperland/workspaces" "hyperland/mode"];
