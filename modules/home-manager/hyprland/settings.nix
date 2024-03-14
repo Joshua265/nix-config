@@ -76,6 +76,9 @@ in {
     "col.shadow" = "rgba(1a1a1aee)";
   };
 
+  disable_hyprland_logo = true; # we have swww for that
+  focus_on_activate = true; # focus on window when it's activated
+
   animations = {
     enabled = true;
     # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more

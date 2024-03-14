@@ -10,6 +10,9 @@
     roboto
     google-fonts
 
+    # Serif fonts
+    profont
+
     # monospace fonts
     jetbrains-mono
 

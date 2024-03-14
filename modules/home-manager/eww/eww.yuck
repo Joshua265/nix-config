@@ -230,8 +230,8 @@
                 :onclick "eww open powermenu --toggle &"	"")
   )
 )
-                                                  (defwidget powermenucontent []
-                                                  (box :orientation "h"
+(defwidget powermenucontent []
+(box :orientation "h"
   :class "powermenu-container"
   (box :class "shutdown-btn-box"
        :orientation "h"
