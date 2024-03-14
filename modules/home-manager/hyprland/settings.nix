@@ -77,7 +77,6 @@ in {
   };
 
   disable_hyprland_logo = true; # we have swww for that
-  focus_on_activate = true; # focus on window when it's activated
 
   animations = {
     enabled = true;
