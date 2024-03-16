@@ -16,4 +16,5 @@
     # nerdfonts
     nerdfonts
   ];
+  fonts.enableDefaultFonts = false;
 }
