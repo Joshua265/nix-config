@@ -179,9 +179,5 @@ in {
     "10, monitor:HDMI-A-3"
   ];
 
-  windowrule = [
-    "forceinput,title:^BLACK DESERT - \d+$"
-  ];
-
   exec-once = ''${startupScript}/bin/start'';
 }

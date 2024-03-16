@@ -10,6 +10,7 @@
     eww-wayland
     pamixer
     brightnessctl
+    lua
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
