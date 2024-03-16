@@ -221,7 +221,7 @@
 (defwidget launch []
   (button		:class "reg-btn launchbutton"
                 :hexpand true
-                :onclick "rofi --show drun " "")
+                :onclick "rofi -show drun -show-icons || rofi" "")
 )
 
 (defwidget powerbutton []
