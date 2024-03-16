@@ -2,8 +2,11 @@
   fonts.packages = with pkgs; [
     # icon fonts
     material-symbols
+    powerline-symbols
 
     # Sans(Serif) fonts
+    powerline-fonts
+    font-awesome
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
