@@ -7,16 +7,16 @@
     /usr/lib/polkit-kde-authentication-agent-1 &
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
-    ${pkgs.eww}/bin/eww deamon &
+    # ${pkgs.eww}/bin/eww deamon &
+    ${pkgs.waybar}/bin/waybar &
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
-    ${pkgs.eww}/bin/eww open bar &
+    # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
   '';
-  # ${pkgs.waybar}/bin/waybar &
   gameModeScript = pkgs.pkgs.writeShellScriptBin "start" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then
@@ -163,7 +163,7 @@ in {
   monitor = [
     "HDMI-A-3, 2560x1440@60, 5120x0, 1, transform, 3"
     "DP-2, 5120x1440@120, 0x0, 1"
-    "DP-2, addreserved, 0, 0, 52, 0"
+    # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
 
   workspace = [

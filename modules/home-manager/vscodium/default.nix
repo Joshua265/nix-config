@@ -47,6 +47,7 @@ in {
       kamadorueda.alejandra
       dart-code.flutter
       enkia.tokyo-night
+      arrterian.nix-env-selector
     ];
   };
 

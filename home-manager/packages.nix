@@ -10,6 +10,7 @@
     # utils
     spotify
     obs-studio
+    xournalpp
 
     # UI
     # hyprland from modules

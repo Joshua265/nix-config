@@ -1,0 +1,236 @@
+From 6d57e8d500eb828dc67521e14dd1a91bb5294224 Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@gmail.com>
+Date: Tue, 12 Mar 2024 23:01:41 +0100
+Subject: [PATCH] pointer input: handle warp events differently from absolute
+ motion events
+
+As Wayland doesn't have a warp event yet, before this commit, warps were
+dealt with like normal absolute motion events. This trips up games though,
+which don't deal with actual absolute motion events well. As a solution
+to that, until an actual warp event is a thing, we send a motion event with
+a position + a relative motion event with no motion
+
+BUG: 458233
+CCBUG: 482476
+---
+ autotests/libinput/input_event_test.cpp |  2 +-
+ src/input.cpp                           |  6 ++++-
+ src/input_event.cpp                     |  3 ++-
+ src/input_event.h                       |  8 ++++++-
+ src/pointer_input.cpp                   | 30 +++++++++++++++----------
+ src/pointer_input.h                     |  7 +++++-
+ 6 files changed, 39 insertions(+), 17 deletions(-)
+
+diff --git a/autotests/libinput/input_event_test.cpp b/autotests/libinput/input_event_test.cpp
+index ed2096e6a5d..d3ccb0d4560 100644
+--- a/autotests/libinput/input_event_test.cpp
++++ b/autotests/libinput/input_event_test.cpp
+@@ -53,7 +53,7 @@ void InputEventsTest::testInitMouseEvent()
+     QFETCH(QEvent::Type, type);
+     // now create our own event
+     MouseEvent event(type, QPointF(100, 200), Qt::LeftButton, Qt::LeftButton | Qt::RightButton,
+-                     Qt::ShiftModifier | Qt::ControlModifier, 300ms, QPointF(1, 2), QPointF(3, 4), &d);
++                     Qt::ShiftModifier | Qt::ControlModifier, 300ms, QPointF(1, 2), QPointF(3, 4), &d, false);
+     // and verify the contract of QMouseEvent
+     QCOMPARE(event.type(), type);
+     QCOMPARE(event.globalPos(), QPoint(100, 200));
+diff --git a/src/input.cpp b/src/input.cpp
+index 0f3e76d9d7e..144d85dde7a 100644
+--- a/src/input.cpp
++++ b/src/input.cpp
+@@ -1788,7 +1788,11 @@ public:
+         case QEvent::MouseMove: {
+             seat->notifyPointerMotion(event->globalPosition());
+             MouseEvent *e = static_cast<MouseEvent *>(event);
+-            if (!e->delta().isNull()) {
++            // absolute motion events confuse games and Wayland doesn't have a warp event yet
++            // -> send a relative motion event with a zero delta to signal the warp instead
++            if (e->isWarp()) {
++                seat->relativePointerMotion(QPointF(0, 0), QPointF(0, 0), e->timestamp());
++            } else if (!e->delta().isNull()) {
+                 seat->relativePointerMotion(e->delta(), e->deltaUnaccelerated(), e->timestamp());
+             }
+             break;
+diff --git a/src/input_event.cpp b/src/input_event.cpp
+index 9a4d3c5ba03..3eac2f96585 100644
+--- a/src/input_event.cpp
++++ b/src/input_event.cpp
+@@ -14,12 +14,13 @@ namespace KWin
+ 
+ MouseEvent::MouseEvent(QEvent::Type type, const QPointF &pos, Qt::MouseButton button,
+                        Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, std::chrono::microseconds timestamp,
+-                       const QPointF &delta, const QPointF &deltaNonAccelerated, InputDevice *device)
++                       const QPointF &delta, const QPointF &deltaNonAccelerated, InputDevice *device, bool warp)
+     : QMouseEvent(type, pos, pos, button, buttons, modifiers)
+     , m_delta(delta)
+     , m_deltaUnccelerated(deltaNonAccelerated)
+     , m_timestamp(timestamp)
+     , m_device(device)
++    , m_warp(warp)
+ {
+     setTimestamp(std::chrono::duration_cast<std::chrono::milliseconds>(timestamp).count());
+ }
+diff --git a/src/input_event.h b/src/input_event.h
+index 416887e6364..60d1aea4118 100644
+--- a/src/input_event.h
++++ b/src/input_event.h
+@@ -23,7 +23,7 @@ class MouseEvent : public QMouseEvent
+ public:
+     explicit MouseEvent(QEvent::Type type, const QPointF &pos, Qt::MouseButton button, Qt::MouseButtons buttons,
+                         Qt::KeyboardModifiers modifiers, std::chrono::microseconds timestamp,
+-                        const QPointF &delta, const QPointF &deltaNonAccelerated, InputDevice *device);
++                        const QPointF &delta, const QPointF &deltaNonAccelerated, InputDevice *device, bool warp);
+ 
+     QPointF delta() const
+     {
+@@ -65,6 +65,11 @@ public:
+         m_nativeButton = button;
+     }
+ 
++    bool isWarp() const
++    {
++        return m_warp;
++    }
++
+ private:
+     QPointF m_delta;
+     QPointF m_deltaUnccelerated;
+@@ -72,6 +77,7 @@ private:
+     InputDevice *m_device;
+     Qt::KeyboardModifiers m_modifiersRelevantForShortcuts = Qt::KeyboardModifiers();
+     quint32 m_nativeButton = 0;
++    bool m_warp = false;
+ };
+ 
+ // TODO: Don't derive from QWheelEvent, this event is quite domain specific.
+diff --git a/src/pointer_input.cpp b/src/pointer_input.cpp
+index 5da860932f3..dfe2b72ee44 100644
+--- a/src/pointer_input.cpp
++++ b/src/pointer_input.cpp
+@@ -187,7 +187,7 @@ public:
+         if (s_counter == 0) {
+             if (!s_scheduledPositions.isEmpty()) {
+                 const auto pos = s_scheduledPositions.takeFirst();
+-                m_pointer->processMotionInternal(pos.pos, pos.delta, pos.deltaNonAccelerated, pos.time, nullptr);
++                m_pointer->processMotionInternal(pos.pos, pos.delta, pos.deltaNonAccelerated, pos.time, nullptr, pos.type);
+             }
+         }
+     }
+@@ -197,9 +197,9 @@ public:
+         return s_counter > 0;
+     }
+ 
+-    static void schedulePosition(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time)
++    static void schedulePosition(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, PointerInputRedirection::MotionType type)
+     {
+-        s_scheduledPositions.append({pos, delta, deltaNonAccelerated, time});
++        s_scheduledPositions.append({pos, delta, deltaNonAccelerated, time, type});
+     }
+ 
+ private:
+@@ -210,6 +210,7 @@ private:
+         QPointF delta;
+         QPointF deltaNonAccelerated;
+         std::chrono::microseconds time;
++        PointerInputRedirection::MotionType type;
+     };
+     static QList<ScheduledPosition> s_scheduledPositions;
+ 
+@@ -221,22 +222,27 @@ QList<PositionUpdateBlocker::ScheduledPosition> PositionUpdateBlocker::s_schedul
+ 
+ void PointerInputRedirection::processMotionAbsolute(const QPointF &pos, std::chrono::microseconds time, InputDevice *device)
+ {
+-    processMotionInternal(pos, QPointF(), QPointF(), time, device);
++    processMotionInternal(pos, QPointF(), QPointF(), time, device, MotionType::Motion);
++}
++
++void PointerInputRedirection::processWarp(const QPointF &pos, std::chrono::microseconds time, InputDevice *device)
++{
++    processMotionInternal(pos, QPointF(), QPointF(), time, device, MotionType::Warp);
+ }
+ 
+ void PointerInputRedirection::processMotion(const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, InputDevice *device)
+ {
+-    processMotionInternal(m_pos + delta, delta, deltaNonAccelerated, time, device);
++    processMotionInternal(m_pos + delta, delta, deltaNonAccelerated, time, device, MotionType::Motion);
+ }
+ 
+-void PointerInputRedirection::processMotionInternal(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, InputDevice *device)
++void PointerInputRedirection::processMotionInternal(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, InputDevice *device, MotionType type)
+ {
+     input()->setLastInputHandler(this);
+     if (!inited()) {
+         return;
+     }
+     if (PositionUpdateBlocker::isPositionBlocked()) {
+-        PositionUpdateBlocker::schedulePosition(pos, delta, deltaNonAccelerated, time);
++        PositionUpdateBlocker::schedulePosition(pos, delta, deltaNonAccelerated, time, type);
+         return;
+     }
+ 
+@@ -244,7 +250,7 @@ void PointerInputRedirection::processMotionInternal(const QPointF &pos, const QP
+     updatePosition(pos, time);
+     MouseEvent event(QEvent::MouseMove, m_pos, Qt::NoButton, m_qtButtons,
+                      input()->keyboardModifiers(), time,
+-                     delta, deltaNonAccelerated, device);
++                     delta, deltaNonAccelerated, device, type == MotionType::Warp);
+     event.setModifiersRelevantForGlobalShortcuts(input()->modifiersRelevantForGlobalShortcuts());
+ 
+     update();
+@@ -272,7 +278,7 @@ void PointerInputRedirection::processButton(uint32_t button, InputRedirection::P
+     updateButton(button, state);
+ 
+     MouseEvent event(type, m_pos, buttonToQtMouseButton(button), m_qtButtons,
+-                     input()->keyboardModifiers(), time, QPointF(), QPointF(), device);
++                     input()->keyboardModifiers(), time, QPointF(), QPointF(), device, false);
+     event.setModifiersRelevantForGlobalShortcuts(input()->modifiersRelevantForGlobalShortcuts());
+     event.setNativeButton(button);
+ 
+@@ -668,7 +674,7 @@ void PointerInputRedirection::updatePointerConstraints()
+                 m_locked = false;
+                 disconnectLockedPointerAboutToBeUnboundConnection();
+                 if (!(hint.x() < 0 || hint.y() < 0) && focus()) {
+-                    processMotionAbsolute(focus()->mapFromLocal(hint), waylandServer()->seat()->timestamp());
++                    processWarp(focus()->mapFromLocal(hint), waylandServer()->seat()->timestamp());
+                 }
+             }
+             return;
+@@ -688,7 +694,7 @@ void PointerInputRedirection::updatePointerConstraints()
+ 
+                 // When the resource finally goes away, reposition the cursor according to the hint
+                 connect(lock, &LockedPointerV1Interface::destroyed, this, [this, globalHint]() {
+-                    processMotionAbsolute(globalHint, waylandServer()->seat()->timestamp());
++                    processWarp(globalHint, waylandServer()->seat()->timestamp());
+                 });
+             });
+             // TODO: connect to region change - is it needed at all? If the pointer is locked it's always in the region
+@@ -863,7 +869,7 @@ void PointerInputRedirection::updateButton(uint32_t button, InputRedirection::Po
+ void PointerInputRedirection::warp(const QPointF &pos)
+ {
+     if (supportsWarping()) {
+-        processMotionAbsolute(pos, waylandServer()->seat()->timestamp());
++        processWarp(pos, waylandServer()->seat()->timestamp());
+     }
+ }
+ 
+diff --git a/src/pointer_input.h b/src/pointer_input.h
+index 559742c087e..cd198ed3827 100644
+--- a/src/pointer_input.h
++++ b/src/pointer_input.h
+@@ -152,7 +152,12 @@ private:
+         EdgeElementBarrier,
+         CornerBarrier,
+     };
+-    void processMotionInternal(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, InputDevice *device);
++    void processWarp(const QPointF &pos, std::chrono::microseconds time, InputDevice *device = nullptr);
++    enum class MotionType {
++        Motion,
++        Warp
++    };
++    void processMotionInternal(const QPointF &pos, const QPointF &delta, const QPointF &deltaNonAccelerated, std::chrono::microseconds time, InputDevice *device, MotionType type);
+     void cleanupDecoration(Decoration::DecoratedClientImpl *old, Decoration::DecoratedClientImpl *now) override;
+ 
+     void focusUpdate(Window *focusOld, Window *focusNow) override;
+-- 
+GitLab
+

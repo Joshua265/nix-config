@@ -22,7 +22,7 @@ in {
     outputs.homeManagerModules.alacritty
     # outputs.homeManagerModules.eww
     outputs.homeManagerModules.waybar
-    # outputs.homeManagerModules.wlogout
+    outputs.homeManagerModules.wlogout
     inputs.hyprlock.homeManagerModules.hyprlock
   ];
 

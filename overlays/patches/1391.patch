@@ -1,0 +1,31 @@
+From ac181dc85ef1685c4e4b46c7d404073f81e15f0b Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@gmail.com>
+Date: Wed, 13 Mar 2024 01:58:54 +0100
+Subject: [PATCH] hw/xwayland: fix absolute and relative pointer event flags
+ being flipped
+
+Signed-off-by: Xaver Hugl <xaver.hugl@kde.org>
+---
+ hw/xwayland/xwayland-input.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/hw/xwayland/xwayland-input.c b/hw/xwayland/xwayland-input.c
+index 078e7c2d38..1586b96104 100644
+--- a/hw/xwayland/xwayland-input.c
++++ b/hw/xwayland/xwayland-input.c
+@@ -650,10 +650,10 @@ dispatch_absolute_motion(struct xwl_seat *xwl_seat)
+     valuator_mask_set(&mask, 1, y);
+ 
+     if (xwl_seat->pending_pointer_event.has_relative) {
+-         flags = POINTER_ABSOLUTE | POINTER_SCREEN | POINTER_NORAW;
++         flags = POINTER_ABSOLUTE | POINTER_SCREEN;
+          device = xwl_seat->relative_pointer;
+     } else {
+-         flags = POINTER_ABSOLUTE | POINTER_SCREEN;
++         flags = POINTER_ABSOLUTE | POINTER_SCREEN | POINTER_NORAW;
+          device = xwl_seat->pointer;
+     }
+ 
+-- 
+GitLab
+
