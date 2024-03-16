@@ -13,9 +13,6 @@
     # Serif fonts
     profont
 
-    # monospace fonts
-    jetbrains-mono
-
     # nerdfonts
     nerdfonts
   ];

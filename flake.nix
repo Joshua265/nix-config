@@ -31,12 +31,6 @@
     # everything match nicely? Try nix-colors!
     # nix-colors.url = "github:misterio77/nix-colors";
 
-    # project shells
-    devshell = {
-      url = "github:numtide/devshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # tree wide formatter
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -58,6 +52,9 @@
       config.allowUnfree = true;
     };
     lib = nixpkgs.lib;
+    # dev shells
+    pythonEnv = import ./shells/python-env.nix;
+    nodeEnv = import ./shells/node-env.nix;
   in {
     # format pre commit hooks
     pre-commit = {
@@ -83,6 +80,12 @@
           indent_size = 2;
         };
       };
+    };
+
+    # dev shells
+    devShells = {
+      pythonEnv = pythonEnv;
+      nodeEnv = nodeEnv;
     };
 
     # Your custom packages and modifications, exported as overlays

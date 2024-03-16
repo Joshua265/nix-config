@@ -221,7 +221,7 @@
 (defwidget launch []
   (button		:class "reg-btn launchbutton"
                 :hexpand true
-                :onclick "rofi --show run --xoffset=1670 --yoffset=12 --width=230px --height=984 --style=$HOME/.config/rofi.css --term=footclient --prompt=Run &" "")
+                :onclick "rofi --show drun --xoffset=1670 --yoffset=12 --width=230px --height=984 --style=$HOME/.config/rofi.css --term=footclient --prompt=Run &" "")
 )
 
 (defwidget powerbutton []
