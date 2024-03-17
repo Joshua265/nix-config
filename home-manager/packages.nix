@@ -11,6 +11,7 @@
     spotify
     obs-studio
     xournalpp
+    onlyoffice-bin # office suite
 
     # UI
     # hyprland from modules

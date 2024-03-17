@@ -88,7 +88,7 @@
     };
 
     # dev shells
-    devShells = {
+    devShells.x86_64-linux = {
       pythonEnv = pythonEnv;
       nodeEnv = nodeEnv;
       unityEnv = unityEnv;
