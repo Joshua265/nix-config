@@ -29,6 +29,7 @@
 
     ## python
     (pkgs.python310.withPackages (python-pkgs: [
+      python-pkgs.pip
       python-pkgs.pandas
       python-pkgs.requests
       python-pkgs.beautifulsoup4
