@@ -12,7 +12,7 @@
     obs-studio
     xournalpp
     onlyoffice-bin # office suite
-
+    thunderbird # email client
     # UI
     # hyprland from modules
 
