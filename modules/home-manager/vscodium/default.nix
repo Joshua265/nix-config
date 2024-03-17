@@ -13,6 +13,9 @@
   userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
   keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
 in {
+  # home.packages = with pkgs; [
+  #   rnix-lsp
+  # ];
   programs.vscode = {
     inherit userSettings keybindings;
     enable = true;
@@ -48,6 +51,7 @@ in {
       dart-code.flutter
       enkia.tokyo-night
       arrterian.nix-env-selector
+      mkhl.direnv
     ];
   };
 
