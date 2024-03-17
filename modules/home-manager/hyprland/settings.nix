@@ -132,8 +132,8 @@ in {
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
       ''$mod, F10, exec, ${gameModeScript}/bin/start''
-      '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
-      ''$mod, s, exec, grim -g "$(slurp -d)" - | wl-copy''
+      '', Print, exec, filename="~/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
+      ''$mod, s, exec, filename="~/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
     ]
     ++ (
       # workspaces
