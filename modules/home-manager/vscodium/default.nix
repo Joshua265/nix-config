@@ -16,6 +16,7 @@ in {
   # home.packages = with pkgs; [
   #   rnix-lsp
   # ];
+  programs.direnv.enable = true;
   programs.vscode = {
     inherit userSettings keybindings;
     enable = true;
