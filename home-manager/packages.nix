@@ -37,14 +37,7 @@
     wine
     gnome3.adwaita-icon-theme
     steam
-    (lutris.override {
-      extraPkgs = pkgs: [
-        gamescope
-        winetricks
-      ];
-      extraLibraries = pkgs: [
-        gamescope
-      ];
-    })
+    flatpak
+    gnome.gnome-software
   ];
 }
