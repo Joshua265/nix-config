@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) ["corefonts"];
   fonts.packages = with pkgs; [
     # icon fonts
     material-symbols
@@ -18,6 +24,9 @@
 
     # nerdfonts
     nerdfonts
+
+    # Onlyoffice fonts
+    corefonts
   ];
   fonts.enableDefaultFonts = false;
 }
