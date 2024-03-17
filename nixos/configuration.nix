@@ -116,6 +116,7 @@
   # important packages and dependencies
   environment.systemPackages = with pkgs; [
     wget
+    busybox
     curl
     htop
     tree
@@ -133,6 +134,10 @@
     gparted
     unzip
   ];
+
+  services.flatpak.enable = true; # only for games
+  xdg.portal.enable = true; # only for games
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk]; # only for games
 
   # Spotify track sync with other devices
   # TODO: move

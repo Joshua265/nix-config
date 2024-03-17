@@ -17,12 +17,7 @@ in {
         position = "top";
         tray = {spacing = 10;};
         modules-center = ["hyprland/window"];
-        modules-left = ["hyperland/workspaces"];
-        "hyprland/workspaces" = {
-          format = "{icon}";
-          "on-scroll-up" = "hyprctl dispatch workspace e+1";
-          "on-scroll-down" = "hyprctl dispatch workspace e-1";
-        };
+        modules-left = ["hyprland/workspaces"];
         modules-right = [
           "pulseaudio"
           "network"
@@ -44,6 +39,11 @@ in {
         #     warning = 30;
         #   };
         # };
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          "on-scroll-up" = "hyprctl dispatch workspace e+1";
+          "on-scroll-down" = "hyprctl dispatch workspace e-1";
+        };
         clock = {
           format-alt = "{:%Y-%m-%d}";
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
