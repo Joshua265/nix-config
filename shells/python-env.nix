@@ -1,6 +1,6 @@
-{pkgs}:
+{pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
-  packages = [
+  nativeBuildInputs = [
     (pkgs.python310.withPackages (python-pkgs: [
       python-pkgs.pandas
       python-pkgs.requests

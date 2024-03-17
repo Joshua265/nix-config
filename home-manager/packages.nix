@@ -34,6 +34,9 @@
     ## c
     extra-cmake-modules
 
+    ## unity
+    unityhub
+
     # gaming
     wine
     gnome3.adwaita-icon-theme
