@@ -59,6 +59,7 @@
     # dev shells
     pythonEnv = import ./shells/python-env.nix;
     nodeEnv = import ./shells/node-env.nix;
+    unityEnv = import ./shells/unity-env.nix;
   in {
     # format pre commit hooks
     pre-commit = {
@@ -90,6 +91,7 @@
     devShells = {
       pythonEnv = pythonEnv;
       nodeEnv = nodeEnv;
+      unityEnv = unityEnv;
     };
 
     # Your custom packages and modifications, exported as overlays
