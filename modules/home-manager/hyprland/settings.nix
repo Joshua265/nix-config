@@ -132,6 +132,8 @@ in {
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
       ''$mod, F10, exec, ${gameModeScript}/bin/start''
+      '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
+      ''$mod, s, exec, grim -g "$(slurp -d)" - | wl-copy''
     ]
     ++ (
       # workspaces

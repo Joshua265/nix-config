@@ -28,6 +28,9 @@ in {
     iwgtk # wifi management
     blueberry # bluetooth management
     pavucontrol # audio management
+    grim # screenshot
+    slurp # grim dependencies
+    qt6.qtwayland # qt6 obs patch
   ];
   wayland.windowManager.hyprland = {
     inherit settings;
