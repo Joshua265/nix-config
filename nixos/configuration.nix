@@ -116,7 +116,6 @@
   # important packages and dependencies
   environment.systemPackages = with pkgs; [
     wget
-    busybox
     curl
     htop
     tree
