@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-personal.url = "github:Joshua265/nixpkgs/master";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -51,9 +52,15 @@
     inherit (self) outputs;
     # Supported systems for your flake packages, shell, etc.
     system = "x86_64-linux";
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [
+        overlays.unstable-packages
+        overlays.personal-packages
+      ];
     };
     lib = nixpkgs.lib;
     # dev shells
@@ -86,20 +93,18 @@
       };
     };
 
-    # dev shells
-    devShells.x86_64-linux = {
-      pythonEnv = pythonEnv;
-      nodeEnv = nodeEnv;
-    };
-
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
     nixosModules = import ./modules/nixos;
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
+
+    # dev shells
+    devShells.x86_64-linux = {
+      pythonEnv = pythonEnv;
+      nodeEnv = nodeEnv;
+    };
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

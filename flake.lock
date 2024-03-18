@@ -374,6 +374,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-personal": {
+      "locked": {
+        "lastModified": 1710758315,
+        "narHash": "sha256-Sn4V7UtLQ9EKbsYAHTePTe5oq+5tbbPVS88TrLX9oM4=",
+        "owner": "Joshua265",
+        "repo": "nixpkgs",
+        "rev": "ddc1bfd9349e5695bef88fff20ae0cd3e08ae073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Joshua265",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1710451336,
@@ -440,11 +456,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1710420202,
-        "narHash": "sha256-MvFKESbq4rUWuaf2RKPNYENaSZEw/jaCLo2gU6oREcM=",
+        "lastModified": 1710695816,
+        "narHash": "sha256-3Eh7fhEID17pv9ZxrPwCLfqXnYP006RKzSs0JptsN84=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "878ef7d9721bee9f81f8a80819f9211ad1f993da",
+        "rev": "614b4613980a522ba49f0d194531beddbb7220d3",
         "type": "github"
       },
       "original": {
@@ -485,6 +501,7 @@
         "nix-gaming": "nix-gaming",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_5",
+        "nixpkgs-personal": "nixpkgs-personal",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "rnix-lsp": "rnix-lsp",
         "treefmt-nix": "treefmt-nix",

@@ -13,6 +13,9 @@
     xournalpp
     onlyoffice-bin # office suite
     thunderbird # email client
+    webex
+    
+
     # UI
     # hyprland from modules
 

@@ -32,4 +32,11 @@
       config.allowUnfree = true;
     };
   };
+
+  personal-packages = final: _prev: {
+    personal = import inputs.nixpkgs-personal {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
 }
