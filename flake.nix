@@ -31,6 +31,7 @@
       url = "github:nix-community/rnix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
@@ -46,6 +47,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-xr,
     home-manager,
     ...
   } @ inputs: let
@@ -123,6 +125,7 @@
               inherit inputs outputs pkgs;
             };
           }
+          nixpkgs-xr.nixosModules.nixpkgs-xr
         ];
       };
     };
