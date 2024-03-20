@@ -28,5 +28,5 @@
     # Onlyoffice fonts
     corefonts
   ];
-  fonts.enableDefaultFonts = false;
+  fonts.enableDefaultPackages = false;
 }

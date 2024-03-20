@@ -62,6 +62,7 @@
       overlays = [
         overlays.unstable-packages
         overlays.personal-packages
+        overlays.additions
       ];
     };
     lib = nixpkgs.lib;

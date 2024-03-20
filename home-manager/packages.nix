@@ -24,6 +24,7 @@
 
     # coding
     # vscodium from modules
+    pkgs.personal.zed
 
     # dart
     flutter

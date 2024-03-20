@@ -99,7 +99,6 @@
   networking.hostName = "nixos-desktop";
 
   # Bootloader
-
   boot.loader = {
     efi.canTouchEfiVariables = true;
     grub = {
@@ -138,6 +137,28 @@
   services.flatpak.enable = true; # only for games
   xdg.portal.enable = true; # only for games
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk]; # only for games
+  xdg.portal.config = {
+    common = {
+      default = [
+        "gtk"
+      ];
+    };
+    pantheon = {
+      default = [
+        "pantheon"
+        "gtk"
+      ];
+      "org.freedesktop.impl.portal.Secret" = [
+        "gnome-keyring"
+      ];
+    };
+    x-cinnamon = {
+      default = [
+        "xapp"
+        "gtk"
+      ];
+    };
+  };
 
   # Spotify track sync with other devices
   # TODO: move
