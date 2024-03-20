@@ -62,7 +62,6 @@
     (steam.override {
       extraPkgs = pkgs: [monado openhmd];
     })
-    .run
     flatpak
     gnome.gnome-software
   ];
