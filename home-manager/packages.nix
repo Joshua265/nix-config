@@ -59,9 +59,11 @@
     # gaming
     wine
     gnome3.adwaita-icon-theme
+    steam
     (steam.override {
       extraPkgs = pkgs: [monado openhmd];
     })
+    .run
     flatpak
     gnome.gnome-software
   ];
