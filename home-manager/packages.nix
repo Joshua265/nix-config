@@ -5,6 +5,9 @@
 }: {
   home.packages = with pkgs; [
     # essentials
+    # essentials defined in configuration.nix
+
+    # essentials
     firefox
 
     # utils
@@ -14,10 +17,10 @@
     onlyoffice-bin # office suite
     thunderbird # email client
     webex
-    
 
     # UI
     # hyprland from modules
+    # waybar from modules
 
     # coding
     # vscodium from modules
@@ -56,7 +59,10 @@
     # gaming
     wine
     gnome3.adwaita-icon-theme
-    steam
+    (steam.override {
+      extraPkgs = pkgs: [monado openhmd];
+    })
+    .run
     flatpak
     gnome.gnome-software
   ];

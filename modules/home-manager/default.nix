@@ -7,5 +7,5 @@
   waybar = import ./waybar;
   eww = import ./eww;
   alacritty = import ./alacritty.nix;
-  wlogout = import ./wlogout.nix;
+  wlogout = import ./wlogout;
 }

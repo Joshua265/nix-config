@@ -12,7 +12,7 @@ in ''
     min-height: 0;
     font-family: "JetBrainsMono Nerd Font", "Hack Nerd Font", FontAwesome, Roboto,
       Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     /* background-color: #04142d; */
   }
 
@@ -41,8 +41,9 @@ in ''
     border: 2px solid ${bordercolor};
     border-radius: 20px;
 
-    padding-right: 5px;
-    padding-left: 5px;
+    margin-right: 12px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .modules-center {

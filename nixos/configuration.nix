@@ -127,6 +127,7 @@
     zlib
     sysstat
     lm_sensors # for `sensors` command
+    neofetch
     ethtool
     pciutils # lspci
     usbutils # lsusb
