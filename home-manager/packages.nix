@@ -9,6 +9,8 @@
 
     # essentials
     firefox
+    chromium
+    vlc
 
     # utils
     spotify
@@ -17,6 +19,8 @@
     onlyoffice-bin # office suite
     thunderbird # email client
     webex
+    whatsapp-for-linux
+    blender
 
     # UI
     # hyprland from modules
@@ -24,7 +28,7 @@
 
     # coding
     # vscodium from modules
-    pkgs.personal.zed
+    # personal.zed-editor
 
     # dart
     flutter
@@ -58,6 +62,9 @@
     unityhub
 
     # gaming
+    openhmd
+    monado
+    openvr
     wine
     gnome3.adwaita-icon-theme
     steam

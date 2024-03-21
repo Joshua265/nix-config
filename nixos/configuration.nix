@@ -120,6 +120,7 @@
     tree
     tmux
     which
+    fd
     python3
     gcc11
     glib
