@@ -18,7 +18,7 @@ in {
     inherit userSettings keybindings;
     enable = true;
     mutableExtensionsDir = false;
-    package = pkgs.vscodium;
+    package = pkgs.unstable.vscodium;
     extensions = with pkgs.vscode-extensions;
       [
         dbaeumer.vscode-eslint
