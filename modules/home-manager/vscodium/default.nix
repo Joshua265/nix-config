@@ -19,7 +19,7 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.unstable.vscodium;
-    extensions = with pkgs.vscode-extensions;
+    extensions = with pkgs.unstable.vscode-extensions;
       [
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
