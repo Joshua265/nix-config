@@ -20,7 +20,11 @@
     thunderbird # email client
     webex
     whatsapp-for-linux
+
+    # 3D
     blender
+    freecad
+    cura
 
     # UI
     # hyprland from modules
