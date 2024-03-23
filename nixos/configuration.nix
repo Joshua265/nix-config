@@ -133,6 +133,7 @@
     usbutils # lsusb
     gparted
     unzip
+    ntfs3g # NTFS disk support
   ];
 
   services.flatpak.enable = true; # only for games
