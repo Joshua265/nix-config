@@ -4,7 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    cudatoolkit
+    cudaPackages.cudatoolkit
     cudaPackages.cudnn
   ];
 
@@ -12,6 +12,7 @@
     cudaSupport = true;
     cudnnSupport = true;
     allowUnfree = true;
+    cudaCapabilities = ["8.6"];
   };
 
   systemd.services.nvidia-control-devices = {
