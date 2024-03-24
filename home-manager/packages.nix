@@ -28,7 +28,7 @@
 
     # 2D
     krita
-
+    personal.comfyui
     # UI
     # hyprland from modules
     # waybar from modules

@@ -88,7 +88,7 @@ in {
         "custom/wlogout" = {
           format = "";
           interval = "once";
-          on-click = "wlogout -c 5 -r 5 -p layer-shell";
+          on-click = "wlogout";
         };
       }
     ];
