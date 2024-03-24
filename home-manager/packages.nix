@@ -26,6 +26,9 @@
     freecad
     cura
 
+    # 2D
+    krita
+
     # UI
     # hyprland from modules
     # waybar from modules
