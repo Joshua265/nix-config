@@ -30,9 +30,13 @@
     krita
     # personal.comfyui-cuda # comfyui-cuda
     # personal.comfyui-custom-nodes # not sure how to install, seems to be an override
+
     # UI
     # hyprland from modules
     # waybar from modules
+
+    # music & DAW
+    bitwig-studio
 
     # coding
     # vscodium from modules
