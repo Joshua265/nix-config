@@ -29,6 +29,9 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+
+    # cachix
+    ../cachix.nix
   ];
 
   # This will add each flake input as a registry
@@ -122,8 +125,8 @@
     which
     fd
     python3
-    gcc11
     glib
+    libgcc
     zlib
     sysstat
     lm_sensors # for `sensors` command
