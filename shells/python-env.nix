@@ -8,7 +8,7 @@ pkgs.mkShell {
       python-pkgs.numpy
       python-pkgs.scipy
       python-pkgs.matplotlib
-      python-pkgs.pytorch
+      python-pkgs.torchWithCuda
       python-pkgs.pydantic
       python-pkgs.flask
       python-pkgs.flask-cors
