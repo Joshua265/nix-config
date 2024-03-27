@@ -66,7 +66,6 @@
     #   python-pkgs.ipykernel
     # ]))
     ollama
-    conda
 
     ## c
     extra-cmake-modules

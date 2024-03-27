@@ -105,7 +105,7 @@
 
     # dev shells
     devShells.x86_64-linux = {
-      pythonEnv = pythonEnv;
+      # pythonEnv = pythonEnv;
       nodeEnv = nodeEnv;
     };
 
