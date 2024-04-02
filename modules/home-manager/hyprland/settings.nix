@@ -53,10 +53,8 @@ in {
 
     follow_mouse = 1;
     numlock_by_default = true;
-    "*" = {
-      kb_layout = "us,de";
-      kb_options = "grp:alt_shift_toggle";
-    };
+    kb_layout = "us,de";
+    kb_options = "grp:alt_shift_toggle";
   };
 
   decoration = {
