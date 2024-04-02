@@ -51,9 +51,12 @@ in {
   input = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-    force_no_accel = true; # Feels better to me, even if not recommended
     follow_mouse = 1;
     numlock_by_default = true;
+    "*" = {
+      xkb_layout = "us,de";
+      xkb_options = "grp:alt_shift_toggle";
+    };
   };
 
   decoration = {

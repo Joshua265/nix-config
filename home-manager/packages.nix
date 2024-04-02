@@ -20,6 +20,7 @@
     thunderbird # email client
     webex
     whatsapp-for-linux
+    unstable.obsidian
 
     # 3D
     blender
@@ -28,7 +29,7 @@
 
     # 2D
     krita
-    # personal.comfyui-cuda # comfyui-cuda
+    personal.comfyui # comfyui-cuda
     # personal.comfyui-custom-nodes # not sure how to install, seems to be an override
 
     # UI

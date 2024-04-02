@@ -5,6 +5,11 @@
   ...
 }: let
   style = import ./styles.nix;
+  getKeyboardLayoutScript = pkgs.writeScriptBin "get_keyboard_layout.sh" ''
+    #!${pkgs.bash}/bin/bash
+    layout=$(hyprctl active | grep -oP 'Layout: \K\w+')
+    echo $layout
+  '';
 in {
   programs.waybar = {
     enable = true;
@@ -19,6 +24,7 @@ in {
         modules-center = ["hyprland/window"];
         modules-left = ["hyprland/workspaces"];
         modules-right = [
+          "custom/keyboard_layout"
           "pulseaudio"
           "network"
           "cpu"
@@ -43,6 +49,11 @@ in {
           format = "{icon}";
           "on-scroll-up" = "hyprctl dispatch workspace e+1";
           "on-scroll-down" = "hyprctl dispatch workspace e-1";
+        };
+        "custom/keyboard_layout" = {
+          exec = "${getKeyboardLayoutScript}";
+          interval = 5;
+          format = "Layout: {}";
         };
         clock = {
           format-alt = "{:%Y-%m-%d}";
