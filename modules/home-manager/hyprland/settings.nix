@@ -17,7 +17,7 @@
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
   '';
-  gameModeScript = pkgs.pkgs.writeShellScriptBin "start" ''
+  gameModeScript = pkgs.pkgs.writeShellScriptBin "gameModeScript" ''
     HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
     if [ "$HYPRGAMEMODE" = 1 ] ; then
         hyprctl --batch "\
@@ -132,7 +132,7 @@ in {
       "$mod, W, killactive,"
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
-      ''$mod, F10, exec, ${gameModeScript}/bin/start''
+      ''$mod, F10, exec, ${gameModeScript}/bin/gameModeScript''
       '', Print, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       ''$mod, s, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
     ]

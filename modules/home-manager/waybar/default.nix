@@ -5,7 +5,7 @@
   ...
 }: let
   style = import ./styles.nix;
-  getKeyboardLayoutScript = pkgs.writeScriptBin "get_keyboard_layout.sh" ''
+  getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
     layout=$(hyprctl active | grep -oP 'Layout: \K\w+')
     echo $layout
@@ -51,7 +51,7 @@ in {
           "on-scroll-down" = "hyprctl dispatch workspace e-1";
         };
         "custom/keyboard_layout" = {
-          exec = "${getKeyboardLayoutScript}";
+          exec = "${getKeyboardLayoutScript}/bin/getKeyboardLayout";
           interval = 5;
           format = "Layout: {}";
         };
@@ -97,7 +97,7 @@ in {
           format-icons = ["" "" ""];
         };
         "custom/wlogout" = {
-          format = "";
+          format = " ";
           interval = "once";
           on-click = "wlogout";
         };
