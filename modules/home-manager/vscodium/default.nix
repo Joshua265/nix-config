@@ -39,6 +39,7 @@ in {
         ms-vscode-remote.remote-ssh
         ms-vscode.cmake-tools
         ms-vscode.makefile-tools
+        ms-vscode.live-server
         pkief.material-icon-theme
         redhat.vscode-yaml
         rust-lang.rust-analyzer
