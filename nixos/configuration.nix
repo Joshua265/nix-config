@@ -19,6 +19,7 @@
     outputs.nixosModules.security
     outputs.nixosModules.gamemode
     outputs.nixosModules.fonts
+    outputs.nixosModules.xp-pen
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

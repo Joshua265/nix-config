@@ -8,7 +8,7 @@
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
     # ${pkgs.eww}/bin/eww deamon &
-    # ${pkgs.waybar}/bin/waybar &
+    ${pkgs.waybar}/bin/waybar &
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
     # ${pkgs.eww}/bin/eww open bar &
@@ -55,6 +55,10 @@ in {
     numlock_by_default = true;
     kb_layout = "us,de";
     kb_options = "grp:alt_shift_toggle";
+  };
+
+  "device:ugee-21.5-inch-pendisplay-stylus" = {
+    output = "HDMI-A-3";
   };
 
   decoration = {

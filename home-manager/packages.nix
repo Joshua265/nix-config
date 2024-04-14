@@ -21,7 +21,6 @@
     webex
     whatsapp-for-linux
     unstable.obsidian
-    libsForQt5.xp-pen-g430-driver # xp-pen tablet driver
 
     # 3D
     blender

@@ -10,4 +10,5 @@
   security = import ./security.nix;
   gamemode = import ./gamemode.nix;
   fonts = import ./fonts.nix;
+  xp-pen = import ./xp-pen.nix;
 }
