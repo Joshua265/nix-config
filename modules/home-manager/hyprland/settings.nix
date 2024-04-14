@@ -164,7 +164,8 @@ in {
   bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
   monitor = [
-    "HDMI-A-3, 2560x1440@60, 5120x0, 1, transform, 3"
+    "HDMI-A-3, 1920x1080@60, 0x1440, 1"
+    "HDMI-A-4, 2560x1440@60, 5120x0, 1, transform, 3"
     "DP-2, 5120x1440@120, 0x0, 1"
     # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
