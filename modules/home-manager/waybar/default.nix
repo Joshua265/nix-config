@@ -7,8 +7,8 @@
   style = import ./styles.nix;
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
-    layout=$(hyprctl active | grep -oP 'Layout: \K\w+')
-    echo $layout
+    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "razer-razer-ornata-chroma") | .active_keymap')
+    echo layout
   '';
 in {
   programs.waybar = {
@@ -53,7 +53,7 @@ in {
         "custom/keyboard_layout" = {
           exec = "${getKeyboardLayoutScript}/bin/getKeyboardLayout";
           interval = 5;
-          format = "Layout: {}";
+          format = " {}";
         };
         clock = {
           format-alt = "{:%Y-%m-%d}";
@@ -97,9 +97,9 @@ in {
           format-icons = ["" "" ""];
         };
         "custom/wlogout" = {
-          format = " ";
-          interval = "once";
-          on-click = "wlogout";
+          format = " ⏻ ";
+          tooltip = false;
+          on-click = "wlogout --protocol layer-shell";
         };
       }
     ];

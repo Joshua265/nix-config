@@ -125,6 +125,7 @@
     tmux
     which
     fd
+    jq
     python3
     glib
     libgcc
