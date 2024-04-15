@@ -8,7 +8,7 @@
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
     layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "razer-razer-ornata-chroma") | .active_keymap')
-    echo layout
+    echo $layout
   '';
 in {
   programs.waybar = {
