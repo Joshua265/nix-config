@@ -11,6 +11,7 @@
     firefox
     chromium
     vlc
+    libsForQt5.plasma-systemmonitor
 
     # utils
     spotify
@@ -72,7 +73,7 @@
     extra-cmake-modules
 
     ## unity
-    unityhub
+    unstable.unityhub
 
     # gaming
     openhmd
