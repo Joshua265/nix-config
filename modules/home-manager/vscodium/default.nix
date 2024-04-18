@@ -52,6 +52,7 @@ in {
         enkia.tokyo-night
         arrterian.nix-env-selector
         mkhl.direnv
+        hashicorp.terraform
       ]
       ++ [
         pkgs.personal.vscode-extensions.zaaack.markdown-editor
