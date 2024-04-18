@@ -30,7 +30,7 @@
 
     # 2D
     krita
-    personal.comfyui # comfyui-cuda
+    personal.comfyui # -cuda # comfyui-cuda
     # personal.comfyui-custom-nodes # not sure how to install, seems to be an override
 
     # UI
@@ -43,6 +43,7 @@
     # coding
     # vscodium from modules
     # personal.zed-editor
+    unstable.terraform
 
     # dart
     flutter
