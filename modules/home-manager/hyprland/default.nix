@@ -23,8 +23,6 @@ in {
     polkit-kde-agent # auth agent
     xdg-desktop-portal
     dolphin # file manager
-    wayland-protocols # hyprlock dependency
-    mesa # hyprlock dependency
     iwgtk # wifi management
     blueberry # bluetooth management
     pavucontrol # audio management
@@ -44,9 +42,6 @@ in {
 
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
-
-  # enable hyprlock
-  programs.hyprlock.enable = true;
 
   gtk = {
     enable = true;

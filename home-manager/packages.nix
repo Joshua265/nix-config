@@ -89,5 +89,6 @@
     .run
     flatpak
     gnome.gnome-software
+    unstable.minecraft
   ];
 }

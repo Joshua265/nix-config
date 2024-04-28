@@ -53,6 +53,7 @@ in {
         arrterian.nix-env-selector
         mkhl.direnv
         hashicorp.terraform
+        james-yu.latex-workshop
       ]
       ++ [
         pkgs.personal.vscode-extensions.zaaack.markdown-editor
