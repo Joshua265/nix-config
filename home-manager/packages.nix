@@ -30,7 +30,7 @@
 
     # 2D
     krita
-    personal.comfyui # -cuda # comfyui-cuda
+    # personal.comfyui # -cuda # comfyui-cuda
     # personal.comfyui-custom-nodes # not sure how to install, seems to be an override
 
     # UI
@@ -38,7 +38,9 @@
     # waybar from modules
 
     # music & DAW
-    bitwig-studio
+    ardour
+    audacity
+    qjackctl
 
     # coding
     # vscodium from modules
@@ -89,6 +91,5 @@
     .run
     flatpak
     gnome.gnome-software
-    unstable.minecraft
   ];
 }

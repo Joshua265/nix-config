@@ -23,7 +23,6 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
-    hyprlock.url = "github:hyprwm/Hyprlock";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,9 +32,8 @@
     };
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
+    # musnix audio enhancements
+    musnix = {url = "github:musnix/musnix";};
 
     # tree wide formatter
     treefmt-nix = {
@@ -120,6 +118,7 @@
           ./nixos/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
+          inputs.musnix.nixosModules.musnix
           {
             home-manager.users.user = import ./home-manager/home.nix;
             home-manager.extraSpecialArgs = {
