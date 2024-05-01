@@ -170,19 +170,19 @@ in {
   monitor = [
     "HDMI-A-3, 1920x1080@60, 0x1440, 1"
     # "HDMI-A-4, 2560x1440@60, 5120x0, 1, transform, 3"
-    "DP-2, 5120x1440@120, 0x0, 1"
-    # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
+    "DP-3, 5120x1440@120, 0x0, 1"
+    # "DP-3, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
 
   workspace = [
-    "1, monitor:DP-2"
-    "2, monitor:DP-2"
-    "3, monitor:DP-2"
-    "4, monitor:DP-2"
-    "5, monitor:DP-2"
-    "6, monitor:DP-2"
-    "7, monitor:DP-2"
-    "8, monitor:DP-2"
+    "1, monitor:DP-3"
+    "2, monitor:DP-3"
+    "3, monitor:DP-3"
+    "4, monitor:DP-3"
+    "5, monitor:DP-3"
+    "6, monitor:DP-3"
+    "7, monitor:DP-3"
+    "8, monitor:DP-3"
     # "9, monitor:HDMI-A-4"
     "10, monitor:HDMI-A-3"
   ];
