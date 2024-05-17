@@ -3,6 +3,7 @@
   vscodium = import ./vscodium;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
+  hyprland-surface = import ./hyprland-surface;
   nextcloud-client = import ./nextcloud-client;
   keepassxc = import ./keepassxc;
   waybar = import ./waybar;

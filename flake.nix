@@ -15,7 +15,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
@@ -115,17 +115,34 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
-          ./nixos/configuration.nix
+          ./nixos/desktop/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
           inputs.musnix.nixosModules.musnix
           {
-            home-manager.users.user = import ./home-manager/home.nix;
+            home-manager.users.user = import ./home-manager/desktop/home.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs;
             };
           }
           nixpkgs-xr.nixosModules.nixpkgs-xr
+        ];
+      };
+      nixos-surface = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main nixos configuration file <
+          ./nixos/surface/configuration.nix
+          # > Our main home-manager configuration file <
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.users.user = import ./home-manager/surface/home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs pkgs;
+            };
+          }
+          nixos-hardware.nixosModules.microsoft-surface
         ];
       };
     };
