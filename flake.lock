@@ -381,6 +381,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1715881912,
+        "narHash": "sha256-e4LJk5uV1wvrRkffGFZekPWvFUx29NnnOahBlLaq8Ek=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "ff1be1e3cdf884df0935ab28745ab13c3c26d828",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1713714899,
@@ -578,6 +593,7 @@
         "musnix": "musnix",
         "nix-gaming": "nix-gaming",
         "nix-vscode-extensions": "nix-vscode-extensions",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-personal": "nixpkgs-personal",
         "nixpkgs-unstable": "nixpkgs-unstable",

@@ -12,4 +12,6 @@
   fonts = import ./fonts.nix;
   xp-pen = import ./xp-pen.nix;
   musnix = import ./musnix.nix;
+  main-user = import ./main-user.nix;
+  usb-automount = import ./usb-automount.nix;
 }

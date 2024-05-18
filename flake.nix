@@ -118,6 +118,7 @@
           ./nixos/desktop/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           inputs.musnix.nixosModules.musnix
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
@@ -125,7 +126,6 @@
               inherit inputs outputs pkgs;
             };
           }
-          nixpkgs-xr.nixosModules.nixpkgs-xr
         ];
       };
       nixos-surface = nixpkgs.lib.nixosSystem {
@@ -136,13 +136,13 @@
           ./nixos/surface/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
+          inputs.nixos-hardware.nixosModules.microsoft-surface
           {
             home-manager.users.user = import ./home-manager/surface/home.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs;
             };
           }
-          nixos-hardware.nixosModules.microsoft-surface
         ];
       };
     };

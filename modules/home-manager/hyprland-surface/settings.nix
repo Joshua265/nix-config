@@ -65,10 +65,7 @@ in {
     active_opacity = 0.9;
 
     blur = {
-      enabled = true;
-      size = 3;
-      passes = 1;
-      vibrancy = 0.1696;
+      enabled = false;
     };
 
     drop_shadow = true;
@@ -80,6 +77,7 @@ in {
   misc = {
     disable_hyprland_logo = true; # we have swww for that
     focus_on_activate = true; # focus on window when it's activated
+    vfr = true; # variable frame rate
   };
 
   animations = {

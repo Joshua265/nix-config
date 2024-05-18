@@ -21,19 +21,18 @@
     outputs.nixosModules.fonts
     outputs.nixosModules.xp-pen
     outputs.nixosModules.musnix
+    outputs.nixosModules.main-user
+    outputs.nixosModules.usb-automount
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    ./main-user.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
     # cachix
-    ../cachix.nix
+    ../../cachix.nix
   ];
 
   # This will add each flake input as a registry
@@ -112,6 +111,11 @@
       useOSProber = true;
     };
   };
+
+  # auto detect disks and usb devices
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   main-user.enable = true;
   main-user.userName = "user";
