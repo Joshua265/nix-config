@@ -61,8 +61,8 @@ in {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
     rounding = 8;
-    inactive_opacity = 1.0;
-    active_opacity = 0.9;
+    inactive_opacity = 0.9;
+    active_opacity = 0.99;
 
     blur = {
       enabled = false;

@@ -7,7 +7,7 @@
   style = import ./styles.nix;
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
-    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "razer-razer-ornata-chroma") | .active_keymap')
+    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "microsoft-surface-type-cover-keyboard") | .active_keymap')
     echo $layout
   '';
 in {
@@ -30,6 +30,7 @@ in {
           "cpu"
           "memory"
           "temperature"
+          "battery"
           "clock"
           "tray"
           "custom/wlogout"
