@@ -18,7 +18,7 @@ in ''
 
   window#waybar {
     color: #f5f5f5;
-    background: ${bg}55;
+    background: ${bg}00;
     transition-property: background-color;
     transition-duration: 0.5s;
   }
