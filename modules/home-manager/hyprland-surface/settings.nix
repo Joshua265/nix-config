@@ -174,7 +174,7 @@ in {
   bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
   monitor = [
-    "eDP-1, 2736x1824@60, 0x0, 1.5"
+    "eDP-1, 2736x1824@60, 0x0, 1.25"
     # "DP-2, 5120x1440@120, 0x0, 1"
     # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
