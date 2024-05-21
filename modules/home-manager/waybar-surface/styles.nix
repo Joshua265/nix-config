@@ -13,18 +13,14 @@ in ''
     font-family: "JetBrainsMono Nerd Font", "Hack Nerd Font", FontAwesome, Roboto,
       Helvetica, Arial, sans-serif;
     font-size: 18px;
-    /* background-color: #04142d; */
+    background-color: #04142d;
   }
 
   window#waybar {
     color: #f5f5f5;
-    background: ${bg}00;
+    background: ${bg}55;
     transition-property: background-color;
     transition-duration: 0.5s;
-  }
-
-  window#waybar.empty {
-    opacity: 0.3;
   }
 
   .modules-left {
