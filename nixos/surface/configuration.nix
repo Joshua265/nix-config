@@ -93,6 +93,8 @@
     #media-session.enable = true;
   };
 
+  services.xserver.videoDrivers = ["intel"];
+
   # WIFI
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
