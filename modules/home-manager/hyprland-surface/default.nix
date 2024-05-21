@@ -25,7 +25,7 @@ in {
     dolphin # file manager
     wayland-protocols # hyprlock dependency
     mesa # hyprlock dependency
-    iwgtk # wifi management
+    iwgtk # wifi manager
     blueberry # bluetooth management
     pavucontrol # audio management
     grim # screenshot
@@ -35,7 +35,7 @@ in {
   wayland.windowManager.hyprland = {
     inherit settings;
     enable = true;
-    enableNvidiaPatches = true;
+    enableNvidiaPatches = false;
     xwayland.enable = true;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
@@ -44,9 +44,6 @@ in {
 
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
-
-  # enable hyprlock
-  programs.hyprlock.enable = true;
 
   gtk = {
     enable = true;

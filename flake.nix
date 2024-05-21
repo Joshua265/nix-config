@@ -15,11 +15,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Add any other flake you might need
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware = {url = "github:NixOS/nixos-hardware/master";};
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
+      url = "git+https://github.com/hyprwm/hyprland-plugins?submodules=1";
       inputs.hyprland.follows = "hyprland";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -136,7 +136,7 @@
           ./nixos/surface/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
-          inputs.nixos-hardware.nixosModules.microsoft-surface
+          inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
           {
             home-manager.users.user = import ./home-manager/surface/home.nix;
             home-manager.extraSpecialArgs = {

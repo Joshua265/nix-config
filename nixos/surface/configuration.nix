@@ -16,7 +16,7 @@
     outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
     outputs.nixosModules.fonts
-    outputs.nixosModules.musnix
+    # outputs.nixosModules.musnix
     outputs.nixosModules.main-user
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -33,6 +33,8 @@
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+
+  nixpkgs.config.allowUnfree = true;
 
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
@@ -91,6 +93,18 @@
     #media-session.enable = true;
   };
 
+  # WIFI
+  networking.wireless.iwd.enable = true;
+  networking.wireless.iwd.settings = {
+    IPv6 = {
+      Enabled = true;
+    };
+    Settings = {
+      AutoConnect = true;
+    };
+  };
+  networking.networkmanager.wifi.backend = "iwd";
+
   # Bluetooth
   hardware.bluetooth.enable = true;
 
@@ -140,6 +154,9 @@
     unzip
     ntfs3g # NTFS disk support
   ];
+
+  # Enable OpenGL support
+  hardware.opengl.enable = true;
 
   services.flatpak.enable = false; # only for games
   xdg.portal.enable = false; # only for games

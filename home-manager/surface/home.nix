@@ -23,7 +23,7 @@ in {
     # outputs.homeManagerModules.eww
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.wlogout
-    inputs.hyprlock.homeManagerModules.hyprlock
+    outputs.homeManagerModules.hyprlock
   ];
 
   nixpkgs = {
