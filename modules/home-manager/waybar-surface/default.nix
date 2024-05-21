@@ -11,6 +11,10 @@
     echo $layout
   '';
 in {
+  home.packages = with pkgs; [
+    jq
+  ];
+
   programs.waybar = {
     enable = true;
     systemd.enable = false; # start with hyprland
