@@ -35,6 +35,7 @@ in {
   wayland.windowManager.hyprland = {
     inherit settings;
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     enableNvidiaPatches = false;
     xwayland.enable = true;
     plugins = [
