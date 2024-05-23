@@ -95,6 +95,11 @@
 
   services.xserver.videoDrivers = ["intel"];
 
+  environment.sessionVariables = {
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
   # WIFI
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {

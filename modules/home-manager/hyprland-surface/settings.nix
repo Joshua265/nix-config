@@ -179,6 +179,10 @@ in {
     # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
 
+  xwayland = {
+    force_zero_scaling = true;
+  };
+
   #workspace = [
   #  "1, monitor:DP-2"
   #  "2, monitor:DP-2"
