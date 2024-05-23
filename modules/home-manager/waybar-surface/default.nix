@@ -10,9 +10,26 @@
     layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "microsoft-surface-type-cover-keyboard") | .active_keymap')
     echo $layout
   '';
+  brightnessScript = pkgs.writeScriptBin "brightness" ''
+    #!${pkgs.bash}/bin/bash
+
+    case "$1" in
+        "get")
+            brightnessctl g | awk '{print int($1*100/255)}'
+            ;;
+        "set")
+            brightnessctl s $2%
+            ;;
+        *)
+            current_brightness=$(brightnessctl g | awk '{print int($1*100/255)}')
+            echo "$current_brightness"
+            ;;
+    esac
+  '';
 in {
   home.packages = with pkgs; [
     jq
+    brightnessctl
   ];
 
   programs.waybar = {
@@ -29,6 +46,7 @@ in {
         modules-left = ["hyprland/workspaces"];
         modules-right = [
           "custom/keyboard_layout"
+          "custom/brightness"
           "pulseaudio"
           "network"
           "cpu"
@@ -59,6 +77,16 @@ in {
           exec = "${getKeyboardLayoutScript}/bin/getKeyboardLayout";
           interval = 5;
           format = " {}";
+        };
+        "custom/brightness" = {
+          format = "{value}%";
+          interval = 5;
+          exec = "${brightnessScript}/bin/brightnessScript get";
+          tooltip = false;
+          "exec-if" = "type brightnessctl";
+          "on-click" = "${brightnessScript}/bin/brightnessScript set 50"; # Example for setting brightness to 50%
+          "on-scroll-up" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) + 5))";
+          "on-scroll-down" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) - 5))";
         };
         clock = {
           format-alt = "{:%Y-%m-%d}";
