@@ -18,7 +18,6 @@ in {
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland
     outputs.homeManagerModules.keepassxc
-    outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.alacritty
     # outputs.homeManagerModules.eww
     outputs.homeManagerModules.waybar
@@ -73,6 +72,11 @@ in {
 
   home.sessionVariables = {
     EDITOR = "codium";
+  };
+
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
   };
 
   # Shell Aliases
