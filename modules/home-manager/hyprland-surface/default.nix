@@ -38,7 +38,7 @@ in {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     enableNvidiaPatches = false;
-    xwayland.enable = false;
+    xwayland.enable = true;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];

@@ -15,13 +15,13 @@
 
     case "$1" in
         "get")
-            brightnessctl g | awk '{print int($1*100/255)}'
+            brightnessctl g | awk '{print int($1*100/7500)}'
             ;;
         "set")
             brightnessctl s $2%
             ;;
         *)
-            current_brightness=$(brightnessctl g | awk '{print int($1*100/255)}')
+            current_brightness=$(brightnessctl g | awk '{print int($1*100/7500)}')
             echo "$current_brightness"
             ;;
     esac

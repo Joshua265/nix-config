@@ -128,6 +128,7 @@ in ''
   #idle_inhibitor,
   #scratchpad,
   #custom-power,
+  #custom-brightness,
   #mpd {
     padding: 0px 5px;
     padding-right: 10px;
