@@ -11,6 +11,7 @@
     firefox
     chromium
     vlc
+    nextcloud-client
 
     # utils
     spotify

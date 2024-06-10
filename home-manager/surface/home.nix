@@ -18,7 +18,6 @@ in {
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland-surface
     outputs.homeManagerModules.keepassxc
-    outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.alacritty
     # outputs.homeManagerModules.eww
     outputs.homeManagerModules.waybar-surface
@@ -69,6 +68,11 @@ in {
   programs.git = {
     userEmail = "Joshua_Noel@gmx.de";
     userName = "Joshua265";
+  };
+
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
   };
 
   home.sessionVariables = {
