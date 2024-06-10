@@ -1,4 +1,5 @@
 {
+  adour = import ./adour;
   git = import ./git;
   vscodium = import ./vscodium;
   hyprland = import ./hyprland;

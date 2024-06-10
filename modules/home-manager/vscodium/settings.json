@@ -82,12 +82,7 @@
   "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nil": {
-      "nix": {
-        "flake": {
-          "autoArchive": true,
-          "autoEvalInputs": true
-        }
-      }
+      "formatting": { "command": ["alejandra"] }
     }
   },
   "notebook.consolidatedRunButton": true,

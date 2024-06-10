@@ -39,9 +39,8 @@
     # waybar from modules
 
     # music & DAW
-    ardour
     audacity
-    qjackctl
+    # adour from modules
 
     # coding
     # vscodium from modules

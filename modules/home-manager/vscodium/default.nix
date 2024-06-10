@@ -6,84 +6,84 @@
   lib,
   ...
 }: let
-  settings-directory =
-    if pkgs.stdenv.hostPlatform.isDarwin
-    then "$HOME/Library/Application Support/VSCodium/User"
-    else "$HOME/.config/VSCodium/User";
-  userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
-  keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
+  settings-directory = "${config.home.homeDirectory}/.config/VSCodium/User";
+  # userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
+  # keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
 in {
+  home.packages = with pkgs; [
+    nil
+  ];
   programs.direnv.enable = true;
   programs.vscode = {
-    inherit userSettings keybindings;
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.unstable.vscodium;
-    extensions = with pkgs.unstable.vscode-extensions;
-      [
-        dbaeumer.vscode-eslint
-        esbenp.prettier-vscode
-        github.copilot
-        github.vscode-github-actions
-        github.vscode-pull-request-github
-        jnoortheen.nix-ide
-        mikestead.dotenv
-        ms-azuretools.vscode-docker
-        ms-python.black-formatter
-        ms-python.isort
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-toolsai.jupyter
-        ms-toolsai.vscode-jupyter-slideshow
-        ms-vscode-remote.remote-containers
-        ms-vscode-remote.remote-ssh
-        ms-vscode.cmake-tools
-        ms-vscode.makefile-tools
-        ms-vscode.live-server
-        pkief.material-icon-theme
-        redhat.vscode-yaml
-        rust-lang.rust-analyzer
-        stkb.rewrap
-        tamasfe.even-better-toml
-        tomoki1207.pdf
-        twxs.cmake
-        kamadorueda.alejandra
-        dart-code.flutter
-        enkia.tokyo-night
-        arrterian.nix-env-selector
-        mkhl.direnv
-        hashicorp.terraform
-        james-yu.latex-workshop
-      ]
-      ++ [
-        pkgs.personal.vscode-extensions.zaaack.markdown-editor
-      ];
+    extensions = with pkgs.unstable.vscode-extensions; [
+      dbaeumer.vscode-eslint
+      esbenp.prettier-vscode
+      github.copilot
+      github.vscode-github-actions
+      github.vscode-pull-request-github
+      jnoortheen.nix-ide
+      mikestead.dotenv
+      ms-azuretools.vscode-docker
+      ms-python.black-formatter
+      ms-python.isort
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-toolsai.jupyter
+      ms-toolsai.vscode-jupyter-slideshow
+      ms-vscode-remote.remote-containers
+      ms-vscode-remote.remote-ssh
+      ms-vscode.cmake-tools
+      ms-vscode.makefile-tools
+      ms-vscode.live-server
+      pkief.material-icon-theme
+      redhat.vscode-yaml
+      rust-lang.rust-analyzer
+      stkb.rewrap
+      tamasfe.even-better-toml
+      tomoki1207.pdf
+      twxs.cmake
+      kamadorueda.alejandra
+      dart-code.flutter
+      enkia.tokyo-night
+      arrterian.nix-env-selector
+      mkhl.direnv
+      hashicorp.terraform
+      james-yu.latex-workshop
+    ];
+  };
+
+  home.file = {
+    "${settings-directory}/settings.json".source = ./settings.json;
+    "${settings-directory}/keybindings.json".source = ./keybindings.json;
   };
 
   # Copy VS Code settings into the default location as a mutable copy.
-  home.activation = {
-    beforeCheckLinkTargets = {
-      after = [];
-      before = ["checkLinkTargets"];
-      data = ''
-        if [ -f "${settings-directory}/settings.json" ]; then
-          rm "${settings-directory}/settings.json"
-        fi
-        if [ -f "${settings-directory}/keybindings.json" ]; then
-          rm "${settings-directory}/keybindings.json"
-        fi
-      '';
-    };
+  # home.activation = {
+  #   beforeCheckLinkTargets = {
+  #     after = [];
+  #     before = ["checkLinkTargets"];
+  #     data = ''
+  #       if [ -f "${settings-directory}/settings.json" ]; then
+  #         rm "${settings-directory}/settings.json"
+  #       fi
+  #       if [ -f "${settings-directory}/keybindings.json" ]; then
+  #         rm "${settings-directory}/keybindings.json"
+  #       fi
+  #     '';
+  #   };
 
-    afterWriteBoundary = {
-      after = ["writeBoundary"];
-      before = [];
-      data = ''
-        cat ${(pkgs.formats.json {}).generate "settings.json" userSettings} > "${settings-directory}/settings.json"
-        cat ${(pkgs.formats.json {}).generate "keybindings.json" keybindings} > "${settings-directory}/keybindings.json"
-      '';
-    };
-  };
+  #   afterWriteBoundary = {
+  #     after = ["writeBoundary"];
+  #     before = [];
+  #     data = ''
+  #       cat ${(pkgs.formats.json {}).generate "settings.json" userSettings} > "${settings-directory}/settings.json"
+  #       cat ${(pkgs.formats.json {}).generate "keybindings.json" keybindings} > "${settings-directory}/keybindings.json"
+  #     '';
+  #   };
+  # };
 
   # vscode server
   imports = [

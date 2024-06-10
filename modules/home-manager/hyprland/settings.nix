@@ -57,7 +57,8 @@ in {
     kb_options = "grp:alt_shift_toggle";
   };
 
-  "device:ugee-21.5-inch-pendisplay-stylus" = {
+  device = {
+    name = "ugee-21.5-inch-pendisplay-stylus";
     output = "HDMI-A-3";
   };
 

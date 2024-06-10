@@ -33,7 +33,6 @@ in {
   wayland.windowManager.hyprland = {
     inherit settings;
     enable = true;
-    enableNvidiaPatches = true;
     xwayland.enable = true;
     # plugins = [
     #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
