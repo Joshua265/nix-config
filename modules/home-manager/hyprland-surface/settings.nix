@@ -10,7 +10,7 @@
     # ${pkgs.eww}/bin/eww deamon &
     ${pkgs.waybar}/bin/waybar &
     sleep 1
-    ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
+    ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &
     # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.dunst}/bin/dunst init &
     nm-applet --indicator &

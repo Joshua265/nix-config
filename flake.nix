@@ -137,6 +137,7 @@
           inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
           {
             home-manager.users.user = import ./home-manager/surface/home.nix;
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs;
             };
