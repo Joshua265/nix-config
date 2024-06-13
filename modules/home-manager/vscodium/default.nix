@@ -52,6 +52,7 @@ in {
       mkhl.direnv
       hashicorp.terraform
       james-yu.latex-workshop
+      vscodevim.vim
     ];
   };
 
