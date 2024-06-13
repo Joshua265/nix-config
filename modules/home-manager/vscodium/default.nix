@@ -55,9 +55,16 @@ in {
     ];
   };
 
+  # Standard Settings
+  # home.file = {
+  #   "${settings-directory}/settings.json".source = ./settings.json;
+  #   "${settings-directory}/keybindings.json".source = ./keybindings.json;
+  # };
+
+  # VIM Settings
   home.file = {
-    "${settings-directory}/settings.json".source = ./settings.json;
-    "${settings-directory}/keybindings.json".source = ./keybindings.json;
+    "${settings-directory}/settings.json".source = ./vim_settings/settings.json;
+    "${settings-directory}/keybindings.json".source = ./vim_settings/keybindings.json;
   };
 
   # Copy VS Code settings into the default location as a mutable copy.

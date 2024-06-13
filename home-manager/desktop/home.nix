@@ -9,7 +9,9 @@
   self,
   ...
 }: let
-  packages = import ./packages.nix;
+  packages = import ./packages.nix {
+    inherit inputs outputs lib config pkgs self;
+  };
 in {
   # Import home-manager modules here
   imports = [

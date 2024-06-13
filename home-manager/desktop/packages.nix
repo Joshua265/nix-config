@@ -1,8 +1,4 @@
-{
-  home,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # essentials
     # essentials defined in configuration.nix
