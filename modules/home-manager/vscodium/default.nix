@@ -53,6 +53,7 @@ in {
       hashicorp.terraform
       james-yu.latex-workshop
       vscodevim.vim
+      catppuccin.catppuccin-vsc-icons
     ];
   };
 
