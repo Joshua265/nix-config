@@ -62,6 +62,7 @@
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
+  "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
   "editor.suggestSelection": "first",
