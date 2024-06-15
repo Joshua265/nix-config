@@ -54,6 +54,7 @@ in {
       james-yu.latex-workshop
       vscodevim.vim
       catppuccin.catppuccin-vsc-icons
+      carrie999.cyberpunk-2020
     ];
   };
 
