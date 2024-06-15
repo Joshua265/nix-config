@@ -134,6 +134,7 @@
   "window.zoomLevel": 0,
   "workbench.editor.editorActionsLocation": "titleBar",
   "workbench.colorTheme": "Cyberpunk",
+  "workbench.preferredDarkColorTheme": "Cyberpunk",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.excludeDirty": true,
   "workbench.editor.limit.value": 5,
