@@ -21,7 +21,7 @@
     thunderbird # email client
     whatsapp-for-linux
     unstable.obsidian
-
+    xwaylandvideobridge
     # 2D
     krita
 

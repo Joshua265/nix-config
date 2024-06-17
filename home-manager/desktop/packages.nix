@@ -19,6 +19,7 @@
     webex
     whatsapp-for-linux
     unstable.obsidian
+    xwaylandvideobridge
 
     # 3D
     blender
