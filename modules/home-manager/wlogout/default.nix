@@ -19,7 +19,7 @@ in {
     layout = [
       {
         label = "lock";
-        action = "hyprctl dispatch dpms off; hyprlock";
+        action = "loginctl lock-session";
         text = "Lock";
         keybind = "l";
       }
