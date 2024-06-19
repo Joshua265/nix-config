@@ -9,6 +9,7 @@
     ${pkgs.swww}/bin/swww init &
     # ${pkgs.eww}/bin/eww deamon &
     ${pkgs.waybar}/bin/waybar &
+    ${pkgs.unstable.hypridle}/bin/hypridle &
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &
     # ${pkgs.eww}/bin/eww open bar &
