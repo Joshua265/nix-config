@@ -11,4 +11,5 @@
   eww = import ./eww;
   alacritty = import ./alacritty.nix;
   wlogout = import ./wlogout;
+  hypridle = import ./hypridle;
 }
