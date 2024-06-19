@@ -78,6 +78,8 @@ in {
     disable_hyprland_logo = true; # we have swww for that
     focus_on_activate = true; # focus on window when it's activated
     vfr = true; # variable frame rate
+    mouse_move_enables_dpms = false; #prevents accidental wake up
+    key_press_enables_dpms = true;
   };
 
   animations = {
@@ -126,6 +128,7 @@ in {
   "$mod" = "SUPER";
   bind =
     [
+      "$mainMod, L, exec, hyprlock; hyprctl dispatch dpms off"
       "$mod, F, exec, firefox"
       ", Print, exec, grimblast copy area"
       "$mod, space, exec, rofi -show drun -show-icons || rofi" # rofi
