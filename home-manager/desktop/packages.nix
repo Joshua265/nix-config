@@ -73,7 +73,7 @@
     extra-cmake-modules
 
     ## unity
-    unstable.unityhub
+    unityhub
 
     # gaming
     openhmd
