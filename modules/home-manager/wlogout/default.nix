@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{...}: let
   bg = "rgba(4, 20, 45, 0.50)";
   bg-alt = "#252428";
   fg = " #f5f5f5";
@@ -12,6 +8,12 @@
   highlight = "#FBD47F";
   activegreen = "#8fb666";
 in {
+  home.file.".config/wlogout/hibernate.svg".source = ./assets/hibernate.svg;
+  home.file.".config/wlogout/lock.svg".source = ./assets/lock.svg;
+  home.file.".config/wlogout/logout.svg".source = ./assets/logout.svg;
+  home.file.".config/wlogout/reboot.svg".source = ./assets/reboot.svg;
+  home.file.".config/wlogout/shutdown.svg".source = ./assets/shutdown.svg;
+  home.file.".config/wlogout/suspend.svg".source = ./assets/suspend.svg;
   programs.wlogout = {
     enable = true;
     layout = [
@@ -81,27 +83,27 @@ in {
       }
 
       #lock {
-          background-image: image(url("./lock.svg"), url("/usr/local/share/wlogout/icons/lock.svg"));
+          background-image: image(url("./lock.svg"));
       }
 
       #logout {
-          background-image: image(url("./logout.svg"), url("/usr/local/share/wlogout/icons/logout.svg"));
+          background-image: image(url("./logout.svg));
       }
 
       #suspend {
-          background-image: image(url("./suspend.svg"), url("/usr/local/share/wlogout/icons/suspend.svg"));
+          background-image: image(url("./suspend.svg));
       }
 
       #hibernate {
-          background-image: image(url("./hibernate.svg"), url("/usr/local/share/wlogout/icons/hibernate.svg"));
+          background-image: image(url("./hibernate.svg));
       }
 
       #shutdown {
-          background-image: image(url("./shutdown.svg"), url("/usr/local/share/wlogout/icons/shutdown.svg"));
+          background-image: image(url("./shutdown.svg));
       }
 
       #reboot {
-          background-image: image(url("./reboot.svg"), url("/usr/local/share/wlogout/icons/reboot.svg"));
+          background-image: image(url("./reboot.svg));
       }
     '';
   };
