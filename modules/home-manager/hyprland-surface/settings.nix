@@ -128,7 +128,7 @@ in {
   "$mod" = "SUPER";
   bind =
     [
-      "$mod, L, exec, hyprlock; hyprctl dispatch dpms off"
+      "$mod, L, exec, hyprctl dispatch dpms off; hyprlock"
       "$mod, F, exec, firefox"
       ", Print, exec, grimblast copy area"
       "$mod, space, exec, rofi -show drun -show-icons || rofi" # rofi
