@@ -46,7 +46,7 @@ in {
         modules-left = ["hyprland/workspaces"];
         modules-right = [
           "custom/keyboard_layout"
-          "custom/brightness"
+          "backlight"
           "pulseaudio"
           "network"
           "cpu"
@@ -78,16 +78,21 @@ in {
           interval = 5;
           format = " {}";
         };
-        "custom/brightness" = {
-          format = "{value}%";
-          interval = 5;
-          exec = "${brightnessScript}/bin/brightnessScript get";
-          tooltip = false;
-          "exec-if" = "type brightnessctl";
-          "on-click" = "${brightnessScript}/bin/brightnessScript set 50"; # Example for setting brightness to 50%
-          "on-scroll-up" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) + 5))";
-          "on-scroll-down" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) - 5))";
+        backlight = {
+          device = "intel_backlight";
+          format = "{percent}% {icon}";
+          format-icons = ["" ""];
         };
+        # "custom/brightness" = {
+        #   format = "{value}%";
+        #   interval = 5;
+        #   exec = "${brightnessScript}/bin/brightnessScript get";
+        #   tooltip = false;
+        #   "exec-if" = "type brightnessctl";
+        #   "on-click" = "${brightnessScript}/bin/brightnessScript set 50"; # Example for setting brightness to 50%
+        #   "on-scroll-up" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) + 5))";
+        #   "on-scroll-down" = "${brightnessScript}/bin/brightnessScript set $(($( ${brightnessScript}/bin/brightnessScript get) - 5))";
+        # };
         clock = {
           format-alt = "{:%Y-%m-%d}";
           tooltip-format = "{:%Y-%m-%d | %H:%M}";

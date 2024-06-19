@@ -61,7 +61,7 @@ in {
       }
 
       window {
-        background-color: ${bg};
+        background-color: ${bg}00;
       }
 
       button {

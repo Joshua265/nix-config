@@ -147,7 +147,6 @@
   "update.showReleaseNotes": false,
   "zenMode.centerLayout": false,
   "zenMode.showTabs": "none",
-  "zenMode.hideTabs": false,
   "zenMode.hideLineNumbers": false,
   // VIM SETTINGS
   "vim.leader": "<Space>",
