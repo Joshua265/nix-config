@@ -29,6 +29,17 @@
   "[nix]": {
     "editor.defaultFormatter": "kamadorueda.alejandra"
   },
+  "[tf]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "breadcrumbs.enabled": false,
   "cloudcode.autoDependencies": "off",
   "cloudcode.enableTelemetry": false,
   "cmake.configureOnOpen": true,
@@ -50,8 +61,12 @@
   "editor.fontSize": 14,
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
   "editor.suggestSelection": "first",
+  "editor.suggest.insertMode": "replace",
   "explorer.autoReveal": false,
   "extensions.autoUpdate": false,
   "files.insertFinalNewline": true,
@@ -74,7 +89,7 @@
   "github.gitProtocol": "ssh",
   "githubPullRequests.pullBranch": "always",
   "githubPullRequests.pushBranch": "always",
-  "githubPullRequests.setAutoMerge": true,
+  "githubPullRequests.defaultCreateOption": true,
   "jupyter.askForKernelRestart": false,
   "jupyter.debugJustMyCode": false,
   "jupyter.runStartupCommands": ["%load_ext autoreload", "%autoreload 2"],
@@ -98,11 +113,13 @@
   "python.analysis.inlayHints.variableTypes": false,
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "none",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "redhat.telemetry.enabled": false,
   "remote.downloadExtensionsLocally": true,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.enableMultiLinePasteWarning": true,
   "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "MesloLGS NF",
   "terminal.integrated.profiles.osx": {
     "tmux-workspace": {
       "path": "tmux",
@@ -115,18 +132,83 @@
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "window.zoomLevel": 0,
-  "workbench.colorTheme": "Andromeda Italic",
   "workbench.editor.editorActionsLocation": "titleBar",
+  "workbench.colorTheme": "Cyberpunk",
+  "workbench.preferredDarkColorTheme": "Cyberpunk",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.excludeDirty": true,
   "workbench.editor.limit.value": 5,
   "workbench.enableExperiments": false,
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "catppuccin-vsc-icons",
   "workbench.layoutControl.enabled": true,
-  "workbench.preferredDarkColorTheme": "Tokyo Night",
-  "workbench.preferredLightColorTheme": "Light Modern",
   "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.statusBar.visible": true,
   "workbench.startupEditor": "readme",
+  "update.showReleaseNotes": false,
   "zenMode.centerLayout": false,
-  "zenMode.showTabs": "none"
+  "zenMode.showTabs": "none",
+  "zenMode.hideLineNumbers": false,
+  // VIM SETTINGS
+  "vim.leader": "<Space>",
+  "vim.hlsearch": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // NAVIGATION
+    // switch b/w buffers
+    { "before": ["<S-h>"], "commands": [":bprevious"] },
+    { "before": ["<S-l>"], "commands": [":bnext"] },
+
+    // splits
+    { "before": ["leader", "v"], "commands": [":vsplit"] },
+    { "before": ["leader", "s"], "commands": [":split"] },
+
+    // panes
+    {
+      "before": ["leader", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["leader", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["leader", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["leader", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    // NICE TO HAVE
+    { "before": ["leader", "w"], "commands": [":w!"] },
+    { "before": ["leader", "q"], "commands": [":q!"] },
+    { "before": ["leader", "x"], "commands": [":x!"] },
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.quickFix"]
+    },
+    { "before": ["leader", "f"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["leader", "p"], "commands": ["editor.action.formatDocument"] },
+    {
+      "before": ["g", "h"],
+      "commands": ["editor.action.showDefinitionPreviewHover"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    // Stay in visual mode while indenting
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    // Move selected lines while staying in visual mode
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+    // toggle comment selection
+    { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+  ]
 }
