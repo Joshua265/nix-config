@@ -12,4 +12,5 @@
   alacritty = import ./alacritty.nix;
   wlogout = import ./wlogout;
   hypridle = import ./hypridle;
+  nextcloud-client = import ./nextcloud-client;
 }

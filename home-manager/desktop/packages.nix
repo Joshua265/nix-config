@@ -8,7 +8,6 @@
     chromium
     vlc
     libsForQt5.plasma-systemmonitor
-    nextcloud-client
 
     # utils
     spotify

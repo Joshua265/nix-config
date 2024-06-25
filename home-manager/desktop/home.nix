@@ -26,6 +26,7 @@ in {
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.wlogout
     outputs.homeManagerModules.hyprlock
+    outputs.homeManagerModules.nextcloud-client
   ];
 
   nixpkgs = {
