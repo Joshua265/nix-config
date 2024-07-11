@@ -6,6 +6,7 @@
     # essentials
     firefox
     chromium
+    ladybird
     vlc
     libsForQt5.plasma-systemmonitor
 
@@ -40,7 +41,7 @@
 
     # coding
     # vscodium from modules
-    # personal.zed-editor
+    zed-editor
     unstable.terraform
 
     # dart
