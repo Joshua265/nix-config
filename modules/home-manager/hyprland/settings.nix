@@ -71,9 +71,8 @@ in {
 
     blur = {
       enabled = true;
-      size = 3;
+      size = 8;
       passes = 1;
-      vibrancy = 0.1696;
     };
 
     drop_shadow = true;
