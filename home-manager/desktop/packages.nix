@@ -41,7 +41,7 @@
 
     # coding
     # vscodium from modules
-    zed-editor
+    unstable.zed-editor
     unstable.terraform
 
     # dart
