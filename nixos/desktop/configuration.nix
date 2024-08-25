@@ -23,6 +23,7 @@
     outputs.nixosModules.musnix
     outputs.nixosModules.main-user
     outputs.nixosModules.usb-automount
+    outputs.nixosModules.flipper-zero
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
