@@ -29,6 +29,7 @@ in {
     grim # screenshot
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch
+    xwayland # xwayland
   ];
   wayland.windowManager.hyprland = {
     inherit settings;

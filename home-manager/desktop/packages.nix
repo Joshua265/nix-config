@@ -88,5 +88,6 @@
     .run
     flatpak
     gnome.gnome-software
+    lutris
   ];
 }

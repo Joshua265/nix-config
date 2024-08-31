@@ -9,6 +9,10 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    package32 = pkgs.pkgsi686Linux.mesa.drivers;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+    ];
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -19,6 +23,10 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GDK_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
   };
 
   hardware.nvidia = {

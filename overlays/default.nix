@@ -11,8 +11,6 @@
       patches =
         (o.patches or [])
         ++ [
-          ./patches/warp.patch
-          ./patches/1391.patch
         ];
     });
     kwin = prev.kwin.overrideAttrs (o: {
