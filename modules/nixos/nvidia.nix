@@ -10,9 +10,9 @@
     driSupport = true;
     driSupport32Bit = true;
     package32 = pkgs.pkgsi686Linux.mesa.drivers;
-    extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-    ];
+    # extraPackages = with pkgs; [
+    #   nvidia-vaapi-driver
+    # ];
   };
 
   # Load nvidia driver for Xorg and Wayland
