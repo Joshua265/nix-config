@@ -40,13 +40,6 @@ in {
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      (final: prev: {
-        neovim = final.neovim.override {
-          package = inputs.custom-nvim.packages.${pkgs.system}.default;
-        };
-      })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -60,6 +53,9 @@ in {
       #   "steam-original"
       #   "steam"
       # ];
+      packageOverrides = {
+        neovim = inputs.custom-nvim.packages.${pkgs.system}.default;
+      };
     };
   };
 
