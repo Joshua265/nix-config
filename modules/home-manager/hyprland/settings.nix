@@ -4,15 +4,20 @@
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    /usr/lib/polkit-kde-authentication-agent-1 &
     killall -q waybar &
+    systemctl --user start plasma-polkit-agent
+    hyprctl setcursor catppuccin-frappe-blue-cursors 24
+    gsettings set org.gnome.desktop.interface cursor-theme catppuccin-frappe-blue-cursor
     ${pkgs.swww}/bin/swww init &
     # ${pkgs.eww}/bin/eww deamon &
     ${pkgs.waybar}/bin/waybar &
+    swayidle -w timeout 300 'swaylock -f -c 000000' \
+            timeout 600 'systemctl suspend' \
+            before-sleep 'swaylock -f -c 000000' &
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
     # ${pkgs.eww}/bin/eww open bar &
-    ${pkgs.dunst}/bin/dunst init &
+    ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
@@ -131,9 +136,18 @@ in {
       "$mod, W, killactive,"
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
+      "$mod, L, exec, swaylock -f -c 000000"
       ''$mod, F10, exec, ${gameModeScript}/bin/gameModeScript''
       '', Print, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       ''$mod, s, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
+      '', XF86AudioRaiseVolume, exec, pamixer -i 5''
+      '', XF86AudioLowerVolume, exec, pamixer -d 5 ''
+      '', XF86AudioMicMute, exec, pamixer --default-source -m''
+      '', XF86AudioMute, exec, pamixer -t''
+      '', XF86AudioPlay, exec, playerctl play-pause''
+      '', XF86AudioPause, exec, playerctl play-pause''
+      '', XF86AudioNext, exec, playerctl next''
+      '', XF86AudioPrev, exec, playerctl previous''
     ]
     ++ (
       # workspaces

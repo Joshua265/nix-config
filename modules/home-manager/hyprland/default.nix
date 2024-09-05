@@ -13,7 +13,7 @@ in {
     wl-clipboard # Cliphist dependency
     go # Required for cliphist
     xdg-utils # mimetypes
-    dunst
+    mako
     swww
     kitty
     alacritty
@@ -21,7 +21,6 @@ in {
     networkmanager
     networkmanagerapplet
     polkit-kde-agent # auth agent
-    xdg-desktop-portal-hyprland
     dolphin # file manager
     iwgtk # wifi management
     blueberry # bluetooth management
@@ -36,9 +35,12 @@ in {
     enable = true;
     xwayland.enable = true;
     # plugins = [
-    #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+    #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprcursor
     # ];
   };
+
+  # add hyprcursor themes to env
+  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-frappe-blue-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-frappe-blue-cursors;XCURSOR_SIZE=24";
 
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
@@ -47,6 +49,16 @@ in {
     enable = true;
     theme.name = "Nordic";
     theme.package = pkgs.nordic;
+
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "IBM Plex Mono";
+      size = 11;
+    };
   };
 
   ## Essential Utilities

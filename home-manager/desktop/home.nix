@@ -74,8 +74,18 @@ in {
     userName = "Joshua265";
   };
 
+  home.packages = [
+    inputs.custom-nvim.packages.${pkgs.system}.default
+  ];
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
   home.sessionVariables = {
-    EDITOR = "codium";
+    EDITOR = "nvim";
   };
 
   services.nextcloud-client = {

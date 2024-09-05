@@ -31,6 +31,10 @@
     };
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
+    custom-nvim = {
+      url = "github:Joshua265/neovim";
+    };
+
     # musnix audio enhancements
     musnix = {url = "github:musnix/musnix";};
 
