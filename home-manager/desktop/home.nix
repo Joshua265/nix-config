@@ -53,7 +53,7 @@ in {
       #   "steam-original"
       #   "steam"
       # ];
-      packageOverrides = {
+      packageOverrides = pkgs: {
         neovim = inputs.custom-nvim.packages.${pkgs.system}.default;
       };
     };
