@@ -42,11 +42,11 @@ in {
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      (final: prev: {
+        neovim = final.neovim.override {
+          package = inputs.custom-nvim.packages.${pkgs.system}.default;
+        };
+      })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -74,9 +74,9 @@ in {
     userName = "Joshua265";
   };
 
-  home.packages = [
-    inputs.custom-nvim.packages.${pkgs.system}.default
-  ];
+  # home.packages = [
+  #   inputs.custom-nvim.packages.${pkgs.system}.default
+  # ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
