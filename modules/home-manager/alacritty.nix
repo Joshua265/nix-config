@@ -20,6 +20,7 @@
       };
 
       font = {
+        name = "IBM Plex Mono";
         size = 12;
       };
 

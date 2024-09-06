@@ -53,9 +53,6 @@ in {
       #   "steam-original"
       #   "steam"
       # ];
-      packageOverrides = pkgs: {
-        neovim = inputs.custom-nvim.packages.${pkgs.system}.default;
-      };
     };
   };
 
@@ -70,16 +67,6 @@ in {
     userName = "Joshua265";
   };
 
-  # home.packages = [
-  #   inputs.custom-nvim.packages.${pkgs.system}.default
-  # ];
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -89,8 +76,9 @@ in {
     startInBackground = true;
   };
 
-  # Shell Aliases
+  programs.bash.enable = true;
   home.shellAliases = {
+    nvim = "nix run github:Joshua265/neovim --";
     cdnix = "cd ~/Documents/nixos-config && codium ~/Documents/nixos-config";
     rebuild = "~/Documents/nixos-config/rebuild.sh";
     code = "codium";
