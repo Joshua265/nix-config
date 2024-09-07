@@ -40,11 +40,11 @@
         "telescope-recent-files-src": "telescope-recent-files-src"
       },
       "locked": {
-        "lastModified": 1725705233,
-        "narHash": "sha256-UaDvmvaPNn3DMTRo3oy3Ky9W6F2SNxEoLfooe0O6QzU=",
+        "lastModified": 1725705759,
+        "narHash": "sha256-CWvdw8s4KyAjfspsOquoaWrcIBePEh/cFAqTLciJUmA=",
         "owner": "Joshua265",
         "repo": "neovim",
-        "rev": "635d1bf926ef23333842e35a629a094b0c41cbca",
+        "rev": "d2f64aa38b37cc474a53ca822e7cf0faab1d58d4",
         "type": "github"
       },
       "original": {

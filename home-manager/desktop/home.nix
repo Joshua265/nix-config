@@ -80,9 +80,7 @@ in {
   home.shellAliases = {
     nvim = "nix run github:Joshua265/neovim --";
     cdnix = "cd ~/Documents/nix-config && nvim .";
-    rebuild = "~/Documents/nixos-config/rebuild.sh";
     code = "codium";
-    nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     gparted = "sudo -E gparted"; # wayland workaround
   };
 
