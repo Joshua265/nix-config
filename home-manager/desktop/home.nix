@@ -79,7 +79,7 @@ in {
   programs.bash.enable = true;
   home.shellAliases = {
     nvim = "nix run github:Joshua265/neovim --";
-    cdnix = "cd ~/Documents/nixos-config && codium ~/Documents/nixos-config";
+    cdnix = "cd ~/Documents/nix-config && nvim .";
     rebuild = "~/Documents/nixos-config/rebuild.sh";
     code = "codium";
     nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
