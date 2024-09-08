@@ -119,7 +119,7 @@ in {
   # windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this. # error
 
   # Set programs that you use
-  "$terminal" = "kitty";
+  "$terminal" = "alacritty";
   "$fileManager" = "dolphin";
   "$menu" = "rofi --show drun";
 

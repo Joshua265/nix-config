@@ -9,7 +9,7 @@
   waybar = import ./waybar;
   waybar-surface = import ./waybar-surface;
   eww = import ./eww;
-  alacritty = import ./alacritty.nix;
+  alacritty = import ./alacritty;
   wlogout = import ./wlogout;
   hypridle = import ./hypridle;
   nextcloud-client = import ./nextcloud-client;
