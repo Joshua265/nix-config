@@ -14,4 +14,5 @@
   musnix = import ./musnix.nix;
   main-user = import ./main-user.nix;
   usb-automount = import ./usb-automount.nix;
+  flipper-zero = import ./flipper-zero.nix;
 }

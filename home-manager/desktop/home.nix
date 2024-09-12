@@ -40,13 +40,6 @@ in {
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -75,7 +68,7 @@ in {
   };
 
   home.sessionVariables = {
-    EDITOR = "codium";
+    EDITOR = "nvim";
   };
 
   services.nextcloud-client = {
@@ -83,12 +76,11 @@ in {
     startInBackground = true;
   };
 
-  # Shell Aliases
+  programs.bash.enable = true;
   home.shellAliases = {
-    cdnix = "cd ~/Documents/nixos-config && codium ~/Documents/nixos-config";
-    rebuild = "~/Documents/nixos-config/rebuild.sh";
+    nvim = "nix run github:Joshua265/neovim --";
+    cdnix = "cd ~/Documents/nix-config && nvim .";
     code = "codium";
-    nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     gparted = "sudo -E gparted"; # wayland workaround
   };
 

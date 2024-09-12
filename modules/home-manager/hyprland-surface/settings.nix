@@ -13,7 +13,7 @@
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &
     # ${pkgs.eww}/bin/eww open bar &
-    ${pkgs.dunst}/bin/dunst init &
+    ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &

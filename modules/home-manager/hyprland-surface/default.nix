@@ -13,7 +13,7 @@ in {
     wl-clipboard # Cliphist dependency
     go # Required for cliphist
     xdg-utils # mimetypes
-    dunst
+    mako
     swww
     kitty
     alacritty
@@ -21,7 +21,6 @@ in {
     networkmanager
     networkmanagerapplet
     polkit-kde-agent # auth agent
-    xdg-desktop-portal-hyprland
     dolphin # file manager
     wayland-protocols # hyprlock dependency
     mesa # hyprlock dependency
