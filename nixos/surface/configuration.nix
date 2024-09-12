@@ -125,7 +125,7 @@
       enable = true;
       devices = ["nodev"];
       efiSupport = true;
-      useOSProber = true;
+      useOSProber = false;
     };
   };
 
@@ -192,8 +192,26 @@
     HandlePowerKey=hibernate
   '';
 
+  # intel fixes
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+    "nvme.noacpi=1"
+    "i915.enable_psr=1"
+  ];
+  # boot.kernelPackages = pkgs.linuxPackages_6_0;
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override {
+      enableHybridCodec = true;
+    };
+  };  
+
   # Enable OpenGL support
   hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+#    vaapiIntel
+    libvdpau-va-gl
+    intel-media-driver
+  ];
 
   services.flatpak.enable = false; # only for games
   xdg.portal.enable = false; # only for games
