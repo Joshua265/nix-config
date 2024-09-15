@@ -4,7 +4,9 @@
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    /usr/lib/polkit-kde-authentication-agent-1 &
+    systemctl --user start plasma-polkit-agent
+    hyprctl setcursor catppuccin-frappe-blue-cursors 24
+    gsettings set org.gnome.desktop.interface cursor-theme catppuccin-frappe-blue-cursor
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
     # ${pkgs.eww}/bin/eww deamon &
@@ -107,22 +109,22 @@ in {
     workspace_swipe = false;
   };
 
-#  plugin.hyprbars = {
-#   # example config
-#    bar_height = 20;
-#
-#    # example buttons (R -> L)
-#    # hyprbars-button = color, size, on-click
-#    hyprbars-button = [
-#      "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-#      "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-#    ];
-#  };
+  #  plugin.hyprbars = {
+  #   # example config
+  #    bar_height = 20;
+  #
+  #    # example buttons (R -> L)
+  #    # hyprbars-button = color, size, on-click
+  #    hyprbars-button = [
+  #      "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
+  #      "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
+  #    ];
+  #  };
 
   # windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this. # error
 
   # Set programs that you use
-  "$terminal" = "kitty";
+  "$terminal" = "alacritty";
   "$fileManager" = "dolphin";
   "$menu" = "rofi --show drun";
 
@@ -143,6 +145,14 @@ in {
       ''$mod, F10, exec, ${gameModeScript}/bin/start''
       '', Print, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       ''$mod, s, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
+      '', XF86AudioRaiseVolume, exec, pamixer -i 5''
+      '', XF86AudioLowerVolume, exec, pamixer -d 5 ''
+      '', XF86AudioMicMute, exec, pamixer --default-source -m''
+      '', XF86AudioMute, exec, pamixer -t''
+      '', XF86AudioPlay, exec, playerctl play-pause''
+      '', XF86AudioPause, exec, playerctl play-pause''
+      '', XF86AudioNext, exec, playerctl next''
+      '', XF86AudioPrev, exec, playerctl previous''
     ]
     ++ (
       # workspaces

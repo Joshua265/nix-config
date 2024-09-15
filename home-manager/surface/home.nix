@@ -51,7 +51,7 @@ in {
       # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
+      # allowUnfreePredicate = _: true;
       # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       #   "discord"
       #   "spotify"
@@ -78,15 +78,16 @@ in {
   };
 
   home.sessionVariables = {
-    EDITOR = "codium";
+    EDITOR = "nvim";
   };
 
+  programs.bash.enable = true;
   # Shell Aliases
   home.shellAliases = {
-    cdnix = "cd ~/Documents/nixos-config && codium ~/Documents/nixos-config";
-    rebuild = "~/Documents/nixos-config/rebuild.sh";
+    cdnix = "cd ~/Documents/nix-config";
+    rebuild = "~/Documents/nix-config/rebuild-surface.sh";
     code = "codium";
-    nix-profile-ls = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+    nvim = "nix run github:Joshua256/neovim --";
     gparted = "sudo -E gparted"; # wayland workaround
   };
 

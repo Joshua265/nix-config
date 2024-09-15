@@ -27,10 +27,10 @@ in {
       jnoortheen.nix-ide
       mikestead.dotenv
       ms-azuretools.vscode-docker
-      ms-python.black-formatter
-      ms-python.isort
-      ms-python.python
-      ms-python.vscode-pylance
+#      ms-python.black-formatter
+#      ms-python.isort
+#      ms-python.python
+#      ms-python.vscode-pylance
       ms-toolsai.jupyter
       ms-toolsai.vscode-jupyter-slideshow
       ms-vscode-remote.remote-containers

@@ -37,10 +37,13 @@ in {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
-#    plugins = [
-#      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-#    ];
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+    ];
   };
+
+  # add hyprcursor themes to env
+  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-frappe-blue-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-frappe-blue-cursors;XCURSOR_SIZE=24";
 
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
@@ -49,6 +52,16 @@ in {
     enable = true;
     theme.name = "Nordic";
     theme.package = pkgs.nordic;
+
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "IBM Plex Mono";
+      size = 11;
+    };
   };
 
   ## Essential Utilities

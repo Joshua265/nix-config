@@ -7,7 +7,11 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+let 
+pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
+in
+{
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -164,26 +168,26 @@
     powertop # battery consumption monitoring
   ];
 
-  services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+#  services.thermald.enable = true;
+#  services.tlp = {
+#    enable = true;
+#    settings = {
+#      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+#      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";#
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+#      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+#      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 80;
+#      CPU_MIN_PERF_ON_AC = 0;
+#      CPU_MAX_PERF_ON_AC = 100;
+#      CPU_MIN_PERF_ON_BAT = 0;
+#      CPU_MAX_PERF_ON_BAT = 80;
 
       #Optional helps save long term battery health
       # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
       # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-    };
-  };
+#   };
+#  };
 
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
@@ -199,19 +203,20 @@
     "i915.enable_psr=1"
   ];
   # boot.kernelPackages = pkgs.linuxPackages_6_0;
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override {
-      enableHybridCodec = true;
-    };
-  };  
+#  nixpkgs.config.packageOverrides = pkgs: {
+ #   vaapiIntel = pkgs.vaapiIntel.override {
+  #    enableHybridCodec = true;
+#    };
+ # };  
 
   # Enable OpenGL support
   hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.opengl.package = pkgs-hyprland.mesa.drivers;
+#  hardware.opengl.extraPackages = with pkgs; [
 #    vaapiIntel
-    libvdpau-va-gl
-    intel-media-driver
-  ];
+#    libvdpau-va-gl
+#    intel-media-driver
+#  ];
 
   services.flatpak.enable = false; # only for games
   xdg.portal.enable = false; # only for games
