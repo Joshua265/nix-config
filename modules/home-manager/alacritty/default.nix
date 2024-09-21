@@ -27,6 +27,10 @@
           family = "JetBrains Mono Nerd Font";
           style = "Italic";
         };
+        bold_italic = {
+          family = "JetBrains Mono Nerd Font";
+          style = "Bold Italic";
+        };
         size = 14;
       };
     };
