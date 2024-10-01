@@ -57,6 +57,25 @@ in {
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
   };
+  
+  # Enable Remote Builds
+  nix.buildMachines = [ {
+	 hostName = "82.165.117.30";
+	 system = "x86_64-linux";
+   protocol = "ssh-ng";
+	 # if the builder supports building for multiple architectures, 
+	 # replace the previous line by, e.g.
+	 # systems = ["x86_64-linux" "aarch64-linux"];
+	 maxJobs = 1;
+	 speedFactor = 2;
+	 supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+	 mandatoryFeatures = [ ];
+	}] ;
+	nix.distributedBuilds = true;
+	# optional, useful when the builder has a faster internet connection than yours
+	nix.extraOptions = ''
+	  builders-use-substitutes = true
+	'';
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
