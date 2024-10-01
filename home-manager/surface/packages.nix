@@ -18,6 +18,7 @@
     xournalpp
     onlyoffice-bin # office suite
     thunderbird # email client
+    teams-for-linux
     whatsapp-for-linux
     unstable.obsidian
     xwaylandvideobridge

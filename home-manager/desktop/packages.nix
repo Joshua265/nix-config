@@ -17,6 +17,7 @@
     onlyoffice-bin # office suite
     thunderbird # email client
     webex
+    teams-for-linux
     whatsapp-for-linux
     unstable.obsidian
     xwaylandvideobridge
