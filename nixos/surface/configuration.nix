@@ -171,7 +171,7 @@ in {
   ];
 
   # Enable Sensor Data Reading
-  services.iio-sensor-proxy.enable = true;
+  hardware.sensor.iio.enable = true;
 
   #  services.thermald.enable = true;
   #  services.tlp = {
