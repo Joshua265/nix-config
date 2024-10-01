@@ -27,10 +27,10 @@ in {
       jnoortheen.nix-ide
       mikestead.dotenv
       ms-azuretools.vscode-docker
-#      ms-python.black-formatter
-#      ms-python.isort
-#      ms-python.python
-#      ms-python.vscode-pylance
+      ms-python.black-formatter
+      ms-python.isort
+      ms-python.python
+      ms-python.vscode-pylance
       ms-toolsai.jupyter
       ms-toolsai.vscode-jupyter-slideshow
       ms-vscode-remote.remote-containers
@@ -66,8 +66,8 @@ in {
 
   # VIM Settings
   home.file = {
-    "${settings-directory}/settings.json".source = ./vim_settings/settings.json;
-    "${settings-directory}/keybindings.json".source = ./vim_settings/keybindings.json;
+    "${settings-directory}/settings.json".source = ./settings.json;
+    "${settings-directory}/keybindings.json".source = ./keybindings.json;
   };
 
   # Copy VS Code settings into the default location as a mutable copy.

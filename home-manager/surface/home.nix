@@ -87,7 +87,7 @@ in {
     cdnix = "cd ~/Documents/nix-config";
     rebuild = "~/Documents/nix-config/rebuild-surface.sh";
     code = "codium";
-    nvim = "nix run github:Joshua256/neovim --";
+    nvim = "nix run github:Joshua265/neovim --";
     gparted = "sudo -E gparted"; # wayland workaround
   };
 

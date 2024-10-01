@@ -7,11 +7,9 @@
   config,
   pkgs,
   ...
-}: 
-let 
-pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
-in
-{
+}: let
+  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
+in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -22,6 +20,8 @@ in
     outputs.nixosModules.fonts
     # outputs.nixosModules.musnix
     outputs.nixosModules.main-user
+    outputs.nixosModules.auto-rotate
+    outputs.nixosModules.usb-automount
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -166,28 +166,33 @@ in
     ntfs3g # NTFS disk support
     tlp # battery saving
     powertop # battery consumption monitoring
+    wlr-randr
+    jq
   ];
 
-#  services.thermald.enable = true;
-#  services.tlp = {
-#    enable = true;
-#    settings = {
-#      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-#      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";#
+  # Enable Sensor Data Reading
+  services.iio-sensor-proxy.enable = true;
 
-#      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-#      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  #  services.thermald.enable = true;
+  #  services.tlp = {
+  #    enable = true;
+  #    settings = {
+  #      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";#
 
-#      CPU_MIN_PERF_ON_AC = 0;
-#      CPU_MAX_PERF_ON_AC = 100;
-#      CPU_MIN_PERF_ON_BAT = 0;
-#      CPU_MAX_PERF_ON_BAT = 80;
+  #      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-      #Optional helps save long term battery health
-      # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-      # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-#   };
-#  };
+  #      CPU_MIN_PERF_ON_AC = 0;
+  #      CPU_MAX_PERF_ON_AC = 100;
+  #      CPU_MIN_PERF_ON_BAT = 0;
+  #      CPU_MAX_PERF_ON_BAT = 80;
+
+  #Optional helps save long term battery health
+  # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+  # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+  #   };
+  #  };
 
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
@@ -203,20 +208,20 @@ in
     "i915.enable_psr=1"
   ];
   # boot.kernelPackages = pkgs.linuxPackages_6_0;
-#  nixpkgs.config.packageOverrides = pkgs: {
- #   vaapiIntel = pkgs.vaapiIntel.override {
+  #  nixpkgs.config.packageOverrides = pkgs: {
+  #   vaapiIntel = pkgs.vaapiIntel.override {
   #    enableHybridCodec = true;
-#    };
- # };  
+  #    };
+  # };
 
   # Enable OpenGL support
   hardware.opengl.enable = true;
   hardware.opengl.package = pkgs-hyprland.mesa.drivers;
-#  hardware.opengl.extraPackages = with pkgs; [
-#    vaapiIntel
-#    libvdpau-va-gl
-#    intel-media-driver
-#  ];
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    libvdpau-va-gl
+  ];
 
   services.flatpak.enable = false; # only for games
   xdg.portal.enable = false; # only for games

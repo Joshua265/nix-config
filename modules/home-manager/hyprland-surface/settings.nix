@@ -13,6 +13,7 @@
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.unstable.hypridle}/bin/hypridle &
     sleep 1
+    auto-rotate &
     ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &
     # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.mako}/bin/mako init &

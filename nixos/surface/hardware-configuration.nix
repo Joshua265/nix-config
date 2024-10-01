@@ -14,7 +14,12 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = ["i915"];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = [
+    "kvm-intel"
+    "hid_sensor_hub"
+    "hid_sensor_accel_3d"
+    "hid_sensor_gyro_3d"
+  ];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
