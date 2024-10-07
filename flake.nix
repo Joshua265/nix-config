@@ -15,11 +15,18 @@
 
     # Add any other flake you might need
     nixos-hardware = {url = "github:NixOS/nixos-hardware/master";};
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions";
+    #   input.nixpkgs.follows = "nixpkgs-unstable";
+    # };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
       url = "git+https://github.com/hyprwm/hyprland-plugins?submodules=1";
       inputs.hyprland.follows = "hyprland";
+    };
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland"; # IMPORTANT
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
 

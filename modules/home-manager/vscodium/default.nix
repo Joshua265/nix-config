@@ -18,7 +18,7 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.unstable.vscodium;
-    extensions = with pkgs.unstable.vscode-extensions; [
+    extensions = with pkgs.vscode-extensions; [
       dbaeumer.vscode-eslint
       esbenp.prettier-vscode
       github.copilot

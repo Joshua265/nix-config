@@ -31,7 +31,9 @@ in {
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch
     libglvnd
+    glm
     gtk3
+    catppuccin-cursors
   ];
   wayland.windowManager.hyprland = {
     inherit settings;
@@ -40,6 +42,7 @@ in {
     xwayland.enable = true;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      inputs.hyprgrass.packages.${pkgs.system}.default
     ];
   };
 
@@ -61,7 +64,7 @@ in {
 
     font = {
       name = "IBM Plex Mono";
-      size = 11;
+      size = 14;
     };
   };
 

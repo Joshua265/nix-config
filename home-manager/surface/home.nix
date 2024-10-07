@@ -72,11 +72,6 @@ in {
     userName = "Joshua265";
   };
 
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
-  };
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };

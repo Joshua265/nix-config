@@ -4,18 +4,17 @@
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
     systemctl --user start plasma-polkit-agent
     hyprctl setcursor catppuccin-frappe-blue-cursors 24
     gsettings set org.gnome.desktop.interface cursor-theme catppuccin-frappe-blue-cursor
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
-    # ${pkgs.eww}/bin/eww deamon &
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.unstable.hypridle}/bin/hypridle &
     sleep 1
     auto-rotate &
     ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &
-    # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
@@ -72,7 +71,7 @@ in {
       enabled = false;
     };
 
-    drop_shadow = true;
+    drop_shadow = false;
     shadow_range = 4;
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
@@ -107,20 +106,21 @@ in {
 
   gestures = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
-    workspace_swipe = false;
+    workspace_swipe = true;
+    workspace_swipe_cancel_ratio = 0.15;
   };
 
-  #  plugin.hyprbars = {
-  #   # example config
-  #    bar_height = 20;
-  #
-  #    # example buttons (R -> L)
-  #    # hyprbars-button = color, size, on-click
-  #    hyprbars-button = [
-  #      "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-  #      "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-  #    ];
-  #  };
+  plugin.hyprbars = {
+    # example config
+    bar_height = 20;
+
+    # example buttons (R -> L)
+    # hyprbars-button = color, size, on-click
+    hyprbars-button = [
+      "rgb(ff4040), 20, 󰖭, hyprctl dispatch killactive"
+      "rgb(eeee11), 20, , hyprctl dispatch fullscreen 1"
+    ];
+  };
 
   # windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this. # error
 
@@ -181,10 +181,16 @@ in {
     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   ];
   bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-
+  "plugin:touch_gestures" = {
+    hyprgrass-bindm = [
+      ", tap:3, exec, rofi -show drun -show-icons || rofi"
+      ", longpress:2, movewindow"
+      ", longpress:3, resizewindow"
+    ];
+  };
   monitor = [
     "eDP-1, 2736x1824@60, 0x0, 1.2"
-    # ",preferred,auto,1,mirror,eDP-1"
+    ",preferred,auto,1,mirror,eDP-1"
     # "DP-2, 5120x1440@120, 0x0, 1"
     # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];

@@ -57,25 +57,27 @@ in {
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
   };
-  
+
   # Enable Remote Builds
-  nix.buildMachines = [ {
-	 hostName = "82.165.117.30";
-	 system = "x86_64-linux";
-   protocol = "ssh-ng";
-	 # if the builder supports building for multiple architectures, 
-	 # replace the previous line by, e.g.
-	 # systems = ["x86_64-linux" "aarch64-linux"];
-	 maxJobs = 1;
-	 speedFactor = 2;
-	 supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-	 mandatoryFeatures = [ ];
-	}] ;
-	nix.distributedBuilds = true;
-	# optional, useful when the builder has a faster internet connection than yours
-	nix.extraOptions = ''
-	  builders-use-substitutes = true
-	'';
+  nix.buildMachines = [
+    {
+      hostName = "82.165.117.30";
+      system = "x86_64-linux";
+      protocol = "ssh";
+      # if the builder supports building for multiple architectures,
+      # replace the previous line by, e.g.
+      # systems = ["x86_64-linux" "aarch64-linux"];
+      maxJobs = 1;
+      speedFactor = 2;
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      mandatoryFeatures = [];
+    }
+  ];
+  nix.distributedBuilds = true;
+  # optional, useful when the builder has a faster internet connection than yours
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -192,26 +194,26 @@ in {
   # Enable Sensor Data Reading
   hardware.sensor.iio.enable = true;
 
-  #  services.thermald.enable = true;
-  #  services.tlp = {
-  #    enable = true;
-  #    settings = {
-  #      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-  #      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";#
+  services.thermald.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "low-power"; #
 
-  #      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-  #      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-  #      CPU_MIN_PERF_ON_AC = 0;
-  #      CPU_MAX_PERF_ON_AC = 100;
-  #      CPU_MIN_PERF_ON_BAT = 0;
-  #      CPU_MAX_PERF_ON_BAT = 80;
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 80;
 
-  #Optional helps save long term battery health
-  # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-  # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-  #   };
-  #  };
+      #Optional helps save long term battery health
+      # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+      # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+    };
+  };
 
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
