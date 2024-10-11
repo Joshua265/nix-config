@@ -8,88 +8,17 @@
   pkgs,
   self,
   ...
-}: let
-  packages = import ./packages.nix {
-    inherit inputs outputs lib config pkgs self;
-  };
-in {
+}: {
   # Import home-manager modules here
   imports = [
-    packages
+    ../common
+    ./packages.nix
     outputs.homeManagerModules.adour
-    outputs.homeManagerModules.git
-    outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.hyprland
-    outputs.homeManagerModules.keepassxc
-    outputs.homeManagerModules.alacritty
-    # outputs.homeManagerModules.eww
     outputs.homeManagerModules.waybar
-    outputs.homeManagerModules.wlogout
-    outputs.homeManagerModules.hyprlock
-    outputs.homeManagerModules.nextcloud-client
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-      outputs.overlays.personal-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      #   "discord"
-      #   "spotify"
-      #   "steam-original"
-      #   "steam"
-      # ];
-    };
-  };
-
-  # Username
-  home = {
-    username = "user";
-    homeDirectory = "/home/user";
-  };
-
-  programs.git = {
-    userEmail = "Joshua_Noel@gmx.de";
-    userName = "Joshua265";
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
-  };
-
-  programs.bash.enable = true;
   home.shellAliases = {
-    nvim = "nix run github:Joshua265/neovim --";
-    cdnix = "cd ~/Documents/nix-config && nvim .";
-    code = "codium";
-    gparted = "sudo -E gparted"; # wayland workaround
+    rebuild = "~/Documents/nix-config/rebuild-desktop.sh";
   };
-
-  # Enable home-manager
-  programs.home-manager.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
 }
