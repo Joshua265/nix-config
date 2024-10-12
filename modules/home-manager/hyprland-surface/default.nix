@@ -30,7 +30,7 @@ in {
     grim # screenshot
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch
-    # libglvnd
+    xwayland
     glm
     gtk3
     catppuccin-cursors

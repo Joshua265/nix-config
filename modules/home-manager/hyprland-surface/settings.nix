@@ -189,7 +189,7 @@ in {
     ];
   };
   monitor = [
-    "eDP-1, 2736x1824@60, 0x0, 1.2"
+    "eDP-1, 2736x1824@60, 0x0, 1.5"
     ",preferred,auto,1,mirror,eDP-1"
     # "DP-2, 5120x1440@120, 0x0, 1"
     # "DP-2, addreserved, 0, 0, 52, 0" # for eww sidebar
