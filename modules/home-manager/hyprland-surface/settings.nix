@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -11,7 +12,7 @@
     killall -q waybar &
     ${pkgs.swww}/bin/swww init &
     ${pkgs.waybar}/bin/waybar &
-    ${pkgs.unstable.hypridle}/bin/hypridle &
+    ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
     sleep 1
     auto-rotate &
     ${pkgs.swww}/bin/swww img ${./wallpaper/702408.png} &

@@ -22,6 +22,7 @@ in {
     outputs.nixosModules.main-user
     outputs.nixosModules.auto-rotate
     outputs.nixosModules.usb-automount
+    outputs.nixosModules.suspend-on-power-key
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -217,10 +218,6 @@ in {
 
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
-  services.logind.lidSwitch = "hibernate";
-  services.logind.extraConfig = ''
-    HandlePowerKey=hibernate
-  '';
 
   # intel fixes
   boot.kernelParams = [
@@ -228,6 +225,12 @@ in {
     "nvme.noacpi=1"
     "i915.enable_psr=1"
   ];
+  # surface wireplumber workaround
+  # https://github.com/NixOS/nixos-hardware/issues/970
+  boot.blacklistedKernelModules = [
+    "ipu3_imgu"
+  ];
+
   # boot.kernelPackages = pkgs.linuxPackages_6_0;
   #  nixpkgs.config.packageOverrides = pkgs: {
   #   vaapiIntel = pkgs.vaapiIntel.override {

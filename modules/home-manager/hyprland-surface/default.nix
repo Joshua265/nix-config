@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  settings = import ./settings.nix {inherit config pkgs;};
+  settings = import ./settings.nix {inherit config pkgs inputs;};
 in {
   home.packages = with pkgs; [
     libnotify # Required for dunst
@@ -15,7 +15,6 @@ in {
     xdg-utils # mimetypes
     mako
     swww
-    kitty
     alacritty
     rofi-wayland
     networkmanager
@@ -33,8 +32,12 @@ in {
     xwayland
     glm
     gtk3
-    catppuccin-cursors
+    catppuccin-cursors.mochaMauve
+    inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
   ];
+
+  programs.kitty.enable = true;
+
   wayland.windowManager.hyprland = {
     inherit settings;
     enable = true;
@@ -47,8 +50,10 @@ in {
   };
 
   # add hyprcursor themes to env
-  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-frappe-blue-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-frappe-blue-cursors;XCURSOR_SIZE=24";
-
+  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-frappe-blue-cursors;HYPRCURSOR_SIZE=32;XCURSOR=catppuccin-frappe-blue-cursors;XCURSOR_SIZE=32";
+  home.sessionVariables = {
+    GDK_SCALE = 2;
+  };
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
@@ -68,17 +73,16 @@ in {
     };
   };
 
-  ## Essential Utilities
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
-    };
+  # xdg.portal = {
+  #   enable = true;
+  #   xdgOpenUsePortal = true;
+  #   config = {
+  #     common.default = ["gtk"];
+  #     hyprland.default = ["gtk" "hyprland"];
+  #   };
 
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-  };
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #   ];
+  # };
 }

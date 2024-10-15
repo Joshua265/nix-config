@@ -1,13 +1,12 @@
 {
-  config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: {
   home.packages = with pkgs; [
     wayland-protocols
     mesa
-    unstable.hyprlock
+    inputs.hyprlock.packages.${pkgs.system}.hyprlock
   ];
 
   home.file.".config/hypr/hyprlock.conf".text = ''
@@ -64,7 +63,7 @@
 
     # USER
     label {
-        monitor = P-2
+        monitor =
         text = Hi there, $USER
         color = $foreground
         #color = rgba(255, 255, 255, 0.6)
@@ -77,7 +76,7 @@
 
     # CURRENT SONG
     label {
-        monitor = DP-2
+        monitor =
         text = cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"
         color = $foreground
         #color = rgba(255, 255, 255, 0.6)

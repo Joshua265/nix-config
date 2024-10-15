@@ -20,6 +20,14 @@
     #   input.nixpkgs.follows = "nixpkgs-unstable";
     # };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hypridle = {
+      url = "git+https://github.com/hyprwm/hypridle?submodules=1";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprlock = {
+      url = "git+https://github.com/hyprwm/hyprlock?submodules=1";
+      inputs.hyprland.follows = "hyprland";
+    };
     hyprland-plugins = {
       url = "git+https://github.com/hyprwm/hyprland-plugins?submodules=1";
       inputs.hyprland.follows = "hyprland";
