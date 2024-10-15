@@ -140,7 +140,7 @@
   "workbench.editor.limit.excludeDirty": true,
   "workbench.editor.limit.value": 5,
   "workbench.enableExperiments": false,
-  "workbench.iconTheme": "catppuccin-vsc-icons",
+  "workbench.iconTheme": "catppuccin-mocha",
   "workbench.layoutControl.enabled": true,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.statusBar.visible": true,

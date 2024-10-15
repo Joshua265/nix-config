@@ -15,7 +15,7 @@
             timeout 600 'systemctl suspend' \
             before-sleep 'swaylock -f -c 000000' &
     sleep 1
-    ${pkgs.swww}/bin/swww img ${./wallpaper/anime-girl-in-scifi-world-5k-pk-5120x2880.jpg} &
+    ${pkgs.swww}/bin/swww img ${./wallpaper/hhma415rpztb1.jpg} &
     # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
