@@ -22,7 +22,7 @@ in {
     outputs.nixosModules.main-user
     outputs.nixosModules.auto-rotate
     outputs.nixosModules.usb-automount
-    outputs.nixosModules.disable-power-key-suspend
+    outputs.nixosModules.surface-io-key
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
