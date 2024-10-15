@@ -43,6 +43,23 @@
           timeout = 1800                                # 30min
           on-timeout = systemctl suspend                # suspend pc
       }
+
+      # Lock screen on lid close and power button press
+      listener {
+          event = lid_close                             # Event for lid close
+          on-event = loginctl lock-session              # Lock screen on lid close
+      }
+
+      listener {
+          event = power_button                          # Event for power button press
+          on-event = loginctl lock-session              # Lock screen on power button
+      }
+
+      # Optionally, lock screen before sleep
+      listener {
+          event = before_sleep                          # Event before system sleep
+          on-event = loginctl lock-session              # Lock screen before sleep
+      }
     '';
   };
 }

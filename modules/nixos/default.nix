@@ -16,5 +16,5 @@
   main-user = import ./main-user.nix;
   usb-automount = import ./usb-automount.nix;
   flipper-zero = import ./flipper-zero.nix;
-  suspend-on-power-key = import ./suspend-on-power-key.nix;
+  disable-power-key-suspend = import ./disable-power-key-suspend.nix;
 }
