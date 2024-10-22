@@ -72,6 +72,7 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "platformio-ide.useBuiltinPIOCore": false,
   "git.allowNoVerifyCommit": true,
   "git.autofetch": true,
   "git.autoStash": true,

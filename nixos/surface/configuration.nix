@@ -126,6 +126,12 @@ in {
     NIXOS_OZONE_WL = "1";
   };
 
+  # Udev for PlatformIO
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
+
   # WIFI
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
