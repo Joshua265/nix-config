@@ -15,8 +15,14 @@
     zathura
 
     # utils
-    spotify
+    (pkgs.writeShellScriptBin "spotify" ''
+      exec ${pkgs.spotify}/bin/spotify --disable-gpu "$@"
+    '')
+
+    # obs and dependencies
     obs-studio
+    slurp # for screen recording
+
     xournalpp
     onlyoffice-bin # office suite
     thunderbird # email client

@@ -34,8 +34,8 @@
       extraPkgs = pkgs: [monado openhmd];
     })
     .run
-    flatpak
-    gnome.gnome-software
+    # flatpak
+    # gnome.gnome-software
     lutris
   ];
 }

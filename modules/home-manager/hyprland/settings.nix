@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -6,17 +7,11 @@
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     killall -q waybar &
     systemctl --user start plasma-polkit-agent
-    hyprctl setcursor catppuccin-frappe-blue-cursors 24
-    gsettings set org.gnome.desktop.interface cursor-theme catppuccin-frappe-blue-cursor
     ${pkgs.swww}/bin/swww init &
-    # ${pkgs.eww}/bin/eww deamon &
     ${pkgs.waybar}/bin/waybar &
-    swayidle -w timeout 300 'swaylock -f -c 000000' \
-            timeout 600 'systemctl suspend' \
-            before-sleep 'swaylock -f -c 000000' &
+    ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
     sleep 1
     ${pkgs.swww}/bin/swww img ${./wallpaper/hhma415rpztb1.jpg} &
-    # ${pkgs.eww}/bin/eww open bar &
     ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
