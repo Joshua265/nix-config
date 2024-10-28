@@ -44,7 +44,7 @@ in {
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
   };
