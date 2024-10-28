@@ -96,6 +96,18 @@
     #media-session.enable = true;
   };
 
+  # Automatic Garbage Collection
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 10d";
+  };
+
+  # Udev for PlatformIO
+  services.udev.packages = [
+    pkgs.platformio-core.udev
+    pkgs.openocd
+  ];
   # Bluetooth
   hardware.bluetooth.enable = true;
 
@@ -110,6 +122,7 @@
       devices = ["nodev"];
       efiSupport = true;
       useOSProber = true;
+      configurationLimit = 25;
     };
   };
 
