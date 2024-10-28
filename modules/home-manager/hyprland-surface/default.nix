@@ -33,7 +33,7 @@ in {
     glm
     gtk3
     catppuccin-cursors.mochaMauve
-    inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    xdg-desktop-portal
   ];
 
   programs.kitty.enable = true;
@@ -48,12 +48,22 @@ in {
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
   };
+  # manually set env variables
+  home.sessionVariables = {
+    # XDG
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    # QT
+    QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+  };
 
   # add hyprcursor themes to env
-  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-frappe-blue-cursors;HYPRCURSOR_SIZE=32;XCURSOR=catppuccin-frappe-blue-cursors;XCURSOR_SIZE=32";
-  home.sessionVariables = {
-    GDK_SCALE = 2;
-  };
+  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-mocha-mauve-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-mocha-mauve-cursors;XCURSOR_SIZE=24";
+
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
@@ -69,20 +79,44 @@ in {
 
     font = {
       name = "IBM Plex Mono";
-      size = 14;
+      size = 11;
     };
   };
 
-  # xdg.portal = {
-  #   enable = true;
-  #   xdgOpenUsePortal = true;
-  #   config = {
-  #     common.default = ["gtk"];
-  #     hyprland.default = ["gtk" "hyprland"];
-  #   };
+  ## Essential Utilities
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+      pantheon = {
+        default = [
+          "pantheon"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+      x-cinnamon = {
+        default = [
+          "xapp"
+          "gtk"
+        ];
+      };
+    };
 
-  #   extraPortals = [
-  #     pkgs.xdg-desktop-portal-gtk
-  #   ];
-  # };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    ];
+  };
+
+  # use KDE filepicker
+  # home.file.".config/xdg-desktop-portal/hyprland-portals.conf".source = ''
+  #   [preferred]
+  #   default = hyprland;gtk
+  #   org.freedesktop.impl.portal.FileChooser = kde
+  # '';
 }
