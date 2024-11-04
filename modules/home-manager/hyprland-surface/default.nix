@@ -43,7 +43,7 @@ in {
     inherit settings;
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland.override {
-      legacyRenderer = true;
+      legacyRenderer = false;
     };
     xwayland.enable = true;
     plugins = [

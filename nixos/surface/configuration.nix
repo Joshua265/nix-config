@@ -245,13 +245,18 @@ in {
   # };
 
   # Enable OpenGL support
-  hardware.opengl.enable = true;
-  hardware.opengl.package = pkgs-hyprland.mesa.drivers;
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver # LIBVA_DRIVER_NAME=iHD
-    # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-    libvdpau-va-gl
-  ];
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    package32 = pkgs.pkgsi686Linux.mesa.drivers;
+    package = pkgs-hyprland.mesa.drivers;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      libvdpau-va-gl
+    ];
+  };
 
   services.flatpak.enable = false; # only for games
   xdg.portal.enable = false; # only for games
