@@ -29,7 +29,7 @@ in {
     grim # screenshot
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch
-    qt6ct
+    kdePackages.qt6ct
     xwayland
     glm
     gtk3
