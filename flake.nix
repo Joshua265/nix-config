@@ -9,6 +9,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
+    nixGL.url = "github:guibou/nixGL";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +21,10 @@
     #   url = "github:nix-community/nix-vscode-extensions";
     #   input.nixpkgs.follows = "nixpkgs-unstable";
     # };
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     hypridle = {
       url = "git+https://github.com/hyprwm/hypridle?submodules=1";
     };
@@ -69,13 +74,18 @@
     # Supported systems for your flake packages, shell, etc.
     system = "x86_64-linux";
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+    openglWrappedOverlay = final: prev:
+      prev.lib.genAttrs ["kitty" "alacritty"]
+      (name: final.wrapWithNixGLIntel prev.${name});
+    overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
       overlays = [
         overlays.unstable-packages
         overlays.additions
+        overlays.nixGLOverlay
+        openglWrappedOverlay
       ];
     };
     lib = nixpkgs.lib;

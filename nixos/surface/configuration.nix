@@ -124,6 +124,7 @@ in {
   environment.sessionVariables = {
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
+    LIBVA_DRIVER_NAME = "i965";
   };
 
   # Udev for PlatformIO
@@ -237,29 +238,18 @@ in {
     "ipu3_imgu"
   ];
 
-  # boot.kernelPackages = pkgs.linuxPackages_6_0;
-  #  nixpkgs.config.packageOverrides = pkgs: {
-  #   vaapiIntel = pkgs.vaapiIntel.override {
-  #    enableHybridCodec = true;
-  #    };
-  # };
-
   # Enable OpenGL support
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    package32 = pkgs.pkgsi686Linux.mesa.drivers;
     package = pkgs-hyprland.mesa.drivers;
     extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      # intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      # intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
     ];
   };
-
-  services.flatpak.enable = false; # only for games
-  xdg.portal.enable = false; # only for games
 
   # Spotify track sync with other devices
   # TODO: move

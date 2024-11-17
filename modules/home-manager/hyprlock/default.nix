@@ -5,7 +5,6 @@
 }: {
   home.packages = with pkgs; [
     wayland-protocols
-    mesa
     inputs.hyprlock.packages.${pkgs.system}.hyprlock
   ];
 

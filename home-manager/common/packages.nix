@@ -7,6 +7,11 @@
     # essentials
     # essentials defined in configuration.nix
 
+    # 3D
+    blender
+    freecad
+    cura
+
     # essentials
     firefox
     chromium

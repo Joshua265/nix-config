@@ -22,7 +22,6 @@ in {
     polkit-kde-agent # auth agent
     dolphin # file manager
     wayland-protocols # hyprlock dependency
-    mesa # hyprlock dependency
     iwgtk # wifi manager
     blueberry # bluetooth management
     pavucontrol # audio management
@@ -35,9 +34,13 @@ in {
     gtk3
     catppuccin-cursors.mochaMauve
     xdg-desktop-portal
+    glfw-wayland
   ];
 
-  programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+    package = pkgs.kitty;
+  };
 
   wayland.windowManager.hyprland = {
     inherit settings;
