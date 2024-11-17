@@ -16,19 +16,19 @@
       window.decorations = "none";
       font = {
         normal = {
-          family = "JetBrains Mono Nerd Font";
+          family = "GeistMono Nerd Font";
           style = "Regular";
         };
         bold = {
-          family = "JetBrains Mono Nerd Font";
+          family = "GeistMono Nerd Font";
           style = "Bold";
         };
         italic = {
-          family = "JetBrains Mono Nerd Font";
+          family = "GeistMono Nerd Font";
           style = "Italic";
         };
         bold_italic = {
-          family = "JetBrains Mono Nerd Font";
+          family = "GeistMono Nerd Font";
           style = "Bold Italic";
         };
         size = 14;

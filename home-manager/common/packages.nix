@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     # essentials
     # essentials defined in configuration.nix
+    discord
 
     # 3D
     blender
