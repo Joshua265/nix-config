@@ -5,14 +5,14 @@
 }: {
   home.packages = [
     pkgs.ardour
-    pkgs.distrho
+    pkgs.distrho-ports
     pkgs.helm
     # Include other plugins here as they are added
   ];
 
   # Set environment variables for plugin paths if necessary
   home.sessionVariables = {
-    VST_PATH = "${pkgs.distrho}/lib/vst:${pkgs.helm}/lib/vst";
+    VST_PATH = "${pkgs.distrho-ports}/lib/vst:${pkgs.helm}/lib/vst";
     # Add other plugin paths here
   };
 

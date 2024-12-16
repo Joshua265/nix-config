@@ -10,8 +10,8 @@
 
     # 3D
     blender
-    freecad
-    cura
+    freecad-wayland
+    legacy.cura
 
     # essentials
     firefox
@@ -59,6 +59,6 @@
     ## unity
     unityhub
 
-    gnome3.adwaita-icon-theme
+    adwaita-icon-theme
   ];
 }

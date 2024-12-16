@@ -7,7 +7,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      import = ["~/.config/alacritty/cyberdream.toml"];
+      general.import = ["~/.config/alacritty/cyberdream.toml"];
       env.TERM = "xterm-256color";
       window.padding = {
         x = 10;

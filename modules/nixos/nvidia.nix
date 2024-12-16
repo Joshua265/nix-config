@@ -5,11 +5,10 @@
   ...
 }: {
   # Enable OpenGL
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    package32 = pkgs.pkgsi686Linux.mesa.drivers;
+    # enable32Bit = true;
+    # extraPackages32 = pkgs.pkgsi686Linux.mesa.drivers;
     # extraPackages = with pkgs; [
     #   nvidia-vaapi-driver
     # ];
@@ -29,9 +28,9 @@
     NVD_BACKEND = "direct";
   };
 
-  environment.variables = {
-    VK_DRIVER_FILES = /run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json;
-  };
+  # environment.variables = {
+  #   VK_DRIVER_FILES = "${pkgs.nvidia}/lib/vulkan/icd.d/nvidia_icd.x86_64.json";
+  # };
 
   hardware.nvidia = {
     # Modesetting is required.

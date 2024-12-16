@@ -3,16 +3,26 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
+    nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-24.05";
+
+    nix-matlab = {
+      # nix-matlab's Nixpkgs input follows Nixpkgs' nixos-unstable branch. However
+      # your Nixpkgs revision might not follow the same branch. You'd want to
+      # match your Nixpkgs and nix-matlab to ensure fontconfig related
+      # compatibility.
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-matlab";
+    };
 
     nixGL.url = "github:guibou/nixGL";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Add any other flake you might need
@@ -75,23 +85,21 @@
     system = "x86_64-linux";
     # Your custom packages and modifications, exported as overlays
     openglWrappedOverlay = final: prev:
-      prev.lib.genAttrs ["kitty" "alacritty"]
+      prev.lib.genAttrs ["kitty" "alacritty" "blender" "freecad-wayland" "spotify"]
       (name: final.wrapWithNixGLIntel prev.${name});
     overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
       overlays = [
+        overlays.legacy-packages
         overlays.unstable-packages
         overlays.additions
         overlays.nixGLOverlay
         openglWrappedOverlay
+        inputs.nix-matlab.overlay
       ];
     };
-    lib = nixpkgs.lib;
-    # dev shells
-    pythonEnv = import ./shells/python-env.nix;
-    nodeEnv = import ./shells/node-env.nix;
   in {
     # format pre commit hooks
     pre-commit = {
@@ -125,12 +133,6 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
-
-    # dev shells
-    devShells.x86_64-linux = {
-      # pythonEnv = pythonEnv;
-      nodeEnv = nodeEnv;
-    };
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

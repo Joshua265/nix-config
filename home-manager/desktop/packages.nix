@@ -4,6 +4,8 @@
     # personal.comfyui # -cuda # comfyui-cuda
     # personal.comfyui-custom-nodes # not sure how to install, seems to be an override
 
+    matlab
+
     # coding
     # vscodium from modules
     unstable.zed-editor
@@ -23,7 +25,7 @@
     monado
     openvr
     wine
-    gnome3.adwaita-icon-theme
+    adwaita-icon-theme
     steam
     (steam.override {
       extraPkgs = pkgs: [monado openhmd];

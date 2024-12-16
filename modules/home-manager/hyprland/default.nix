@@ -58,7 +58,7 @@ in {
   systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-mocha-mauve-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-mocha-mauve-cursors;XCURSOR_SIZE=24";
 
   # enable hyprctl
-  systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+  systemd.user.services.waybar.Service.Environment = "PATH=${pkgs.hyprland}/bin";
 
   gtk = {
     enable = true;
@@ -66,7 +66,7 @@ in {
     theme.package = pkgs.nordic;
 
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 

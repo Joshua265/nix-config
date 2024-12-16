@@ -58,6 +58,8 @@
     auto-optimise-store = true;
   };
 
+  programs.noisetorch.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
   time.hardwareClockInLocalTime = true;
@@ -81,7 +83,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -167,5 +168,5 @@
   networking.firewall.allowedTCPPorts = [57621];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

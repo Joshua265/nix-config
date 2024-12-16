@@ -39,6 +39,13 @@
     };
   };
 
+  legacy-packages = final: _prev: {
+    legacy = import inputs.nixpkgs-legacy {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+
   personal-packages = final: _prev: {
     personal = import inputs.nixpkgs-personal {
       system = final.system;
