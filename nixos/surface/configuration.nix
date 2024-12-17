@@ -18,6 +18,7 @@ in {
     outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
     outputs.nixosModules.fonts
+    outputs.nixosModules.docker
     # outputs.nixosModules.musnix
     outputs.nixosModules.main-user
     outputs.nixosModules.auto-rotate

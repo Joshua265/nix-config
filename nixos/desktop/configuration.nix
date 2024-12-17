@@ -14,6 +14,7 @@
     outputs.nixosModules.nvidia
     outputs.nixosModules.cuda
     outputs.nixosModules.discord
+    outputs.nixosModules.docker
     outputs.nixosModules.display-manager
     outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
