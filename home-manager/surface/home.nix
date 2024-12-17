@@ -13,10 +13,13 @@
   imports = [
     ../common
     ./packages.nix
-    outputs.homeManagerModules.hyprland-surface
-    outputs.homeManagerModules.waybar-surface
   ];
   home.shellAliases = {
     rebuild = "~/Documents/nix-config/rebuild-surface.sh";
   };
+
+  wayland.windowManager.hyprland.settings.monitor = [
+    "eDP-1, 2736x1824@60, 0x0, 1.5"
+    ",preferred,auto,1,mirror,eDP-1"
+  ];
 }

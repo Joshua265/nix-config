@@ -2,9 +2,10 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: let
-  settings = import ./settings.nix {inherit inputs config pkgs;};
+  settings = import ./settings.nix {inherit inputs config pkgs lib;};
 in {
   home.packages = with pkgs; [
     libnotify # Required for dunst
@@ -17,7 +18,6 @@ in {
     swww
     kitty
     alacritty
-    rofi-wayland
     networkmanager
     networkmanagerapplet
     polkit-kde-agent # auth agent
@@ -31,14 +31,15 @@ in {
     xwayland # xwayland
     catppuccin-cursors.mochaMauve
     xdg-desktop-portal
+    brightnessctl
   ];
   wayland.windowManager.hyprland = {
     inherit settings;
     enable = true;
     xwayland.enable = true;
-    # plugins = [
-    #   inputs.hyprland-plugins.packages.${pkgs.system}.hyprcursor
-    # ];
+    plugins = [
+      inputs.hyprgrass.packages.${pkgs.system}.default
+    ];
   };
 
   # manually set env variables
@@ -55,7 +56,7 @@ in {
   };
 
   # add hyprcursor themes to env
-  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-mocha-mauve-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-mocha-mauve-cursors;XCURSOR_SIZE=24";
+  systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-mocha-mauve-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-mocha-mauve-cursors;XCURSOR_SIZE=24;WLR_NO_HARDWARE_CURSORS=1;_JAVA_AWT_WM_NONREPARENTING=1";
 
   # enable hyprctl
   systemd.user.services.waybar.Service.Environment = "PATH=${pkgs.hyprland}/bin";

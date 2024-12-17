@@ -10,7 +10,7 @@
 
     # 3D
     blender
-    freecad-wayland
+    unstable.freecad-wayland
     legacy.cura
 
     # essentials

@@ -13,6 +13,9 @@
     outputs.homeManagerModules.hypridle
     outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.keepassxc
+    outputs.homeManagerModules.hyprland
+    outputs.homeManagerModules.waybar
+    outputs.homeManagerModules.rofi
   ];
   nixpkgs = {
     # You can add overlays here

@@ -7,7 +7,7 @@
   hyprland-surface = import ./hyprland-surface;
   keepassxc = import ./keepassxc;
   waybar = import ./waybar;
-  waybar-surface = import ./waybar-surface;
+  rofi = import ./rofi;
   eww = import ./eww;
   alacritty = import ./alacritty;
   wlogout = import ./wlogout;

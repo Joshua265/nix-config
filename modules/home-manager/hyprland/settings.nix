@@ -1,12 +1,12 @@
 {
   inputs,
-  config,
+  lib,
   pkgs,
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    killall -q waybar &
-    systemctl --user start plasma-polkit-agent
+    # killall -q waybar &
+    systemctl --user start plasma-polkit-agent &
     ${pkgs.swww}/bin/swww init &
     ${pkgs.waybar}/bin/waybar &
     ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
@@ -17,35 +17,25 @@
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
   '';
-  gameModeScript = pkgs.pkgs.writeShellScriptBin "gameModeScript" ''
-    HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
-    if [ "$HYPRGAMEMODE" = 1 ] ; then
-        hyprctl --batch "\
-            keyword animations:enabled 0;\
-            keyword decoration:drop_shadow 0;\
-            keyword decoration:blur:enabled 0;\
-            keyword general:gaps_in 0;\
-            keyword general:gaps_out 0;\
-            keyword general:border_size 1;\
-            keyword decoration:rounding 0"
-        exit
-    fi
-    hyprctl reload
-  '';
 in {
   general = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-    gaps_in = 5;
-    gaps_out = 20;
+    gaps_in = 4;
+    gaps_out = 5;
     border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-    "col.inactive_border" = "rgba(595959aa)";
+    "col.active_border" = "rgba(471868FF)";
+    "col.inactive_border" = "rgba(4f4256CC)";
 
     layout = "dwindle";
 
     # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false;
+  };
+
+  dwindle = {
+    preserve_split = true;
+    smart_resizing = false;
   };
 
   input = {
@@ -71,8 +61,14 @@ in {
 
     blur = {
       enabled = true;
-      size = 8;
-      passes = 1;
+      xray = true;
+      special = false;
+      new_optimizations = true;
+      size = 5;
+      passes = 4;
+      brightness = 1;
+      noise = 1.0e-2;
+      contrast = 1;
     };
 
     shadow = {
@@ -80,34 +76,83 @@ in {
     };
   };
 
+  windowrule = [
+    "noblur,.*" # Disables blur for windows. Substantially improves performance.
+    "float, ^(steam)$"
+    "pin, ^(showmethekey-gtk)$"
+    "float,title:^(Open File)(.*)$"
+    "float,title:^(Select a File)(.*)$"
+    "float,title:^(Choose wallpaper)(.*)$"
+    "float,title:^(Open Folder)(.*)$"
+    "float,title:^(Save As)(.*)$"
+    "float,title:^(Library)(.*)$ "
+  ];
+  layerrule = [
+    "xray 1, .*"
+    "noanim, selection"
+    "noanim, overview"
+    "noanim, anyrun"
+    "blur, swaylock"
+    "blur, eww"
+    "ignorealpha 0.8, eww"
+    "noanim, noanim"
+    "blur, noanim"
+    "blur, gtk-layer-shell"
+    "ignorezero, gtk-layer-shell"
+    "blur, launcher"
+    "ignorealpha 0.5, launcher"
+    "blur, notifications"
+    "ignorealpha 0.69, notifications"
+    "blur, session"
+    "noanim, sideright"
+    "noanim, sideleft"
+  ];
+
   misc = {
-    disable_hyprland_logo = true; # we have swww for that
-    focus_on_activate = true; # focus on window when it's activated
+    vfr = 1;
+    vrr = 1;
+    # layers_hog_mouse_focus = true;
+    focus_on_activate = true;
+    animate_manual_resizes = false;
+    animate_mouse_windowdragging = false;
+    enable_swallow = false;
+    swallow_regex = "(foot|kitty|allacritty|Alacritty)";
+
+    disable_hyprland_logo = true;
+    new_window_takes_over_fullscreen = 2;
   };
 
   animations = {
     enabled = true;
     # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-    bezier = ["myBezier, 0.05, 0.9, 0.1, 1.05"];
+    bezier = [
+      "md3_decel, 0.05, 0.7, 0.1, 1"
+      "md3_accel, 0.3, 0, 0.8, 0.15"
+      "overshot, 0.05, 0.9, 0.1, 1.1"
+      "crazyshot, 0.1, 1.5, 0.76, 0.92"
+      "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
+      "fluent_decel, 0.1, 1, 0, 1"
+      "easeInOutCirc, 0.85, 0, 0.15, 1"
+      "easeOutCirc, 0, 0.55, 0.45, 1"
+      "easeOutExpo, 0.16, 1, 0.3, 1"
+    ];
 
     animation = [
-      "windows, 1, 7, myBezier"
-      "windowsOut, 1, 7, default, popin 80%"
+      "windows, 1, 3, md3_decel, popin 60%"
       "border, 1, 10, default"
-      "borderangle, 1, 8, default"
-      "fade, 1, 7, default"
-      "workspaces, 1, 6, default"
+      "fade, 1, 2.5, md3_decel"
+      # "workspaces, 1, 3.5, md3_decel, slide"
+      "workspaces, 1, 7, fluent_decel, slide"
+      # "workspaces, 1, 7, fluent_decel, slidefade 15%"
+      # "specialWorkspace, 1, 3, md3_decel, slidefadevert 15%"
+      "specialWorkspace, 1, 3, md3_decel, slidevert"
     ];
-  };
-  dwindle = {
-    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-    pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true; # you probably want this
   };
 
   gestures = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
     workspace_swipe = false;
+    workspace_swipe_cancel_ratio = 0.15;
   };
 
   # windowrulev2 = ["suppressevent maximize, class:.*"]; # You'll probably like this. # error
@@ -131,9 +176,8 @@ in {
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
       "$mod, L, exec, swaylock -f -c 000000"
-      ''$mod, F10, exec, ${gameModeScript}/bin/gameModeScript''
-      '', Print, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
-      ''$mod, s, exec, filename="$HOME/Pictures/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
+      '', Print, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
+      ''$mod, s, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       '', XF86AudioRaiseVolume, exec, pamixer -i 5''
       '', XF86AudioLowerVolume, exec, pamixer -d 5 ''
       '', XF86AudioMicMute, exec, pamixer --default-source -m''
@@ -168,14 +212,18 @@ in {
     ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   ];
-  bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-  monitor = [
-    "HDMI-A-3, 1920x1080@60, 0x1440, 1"
-    # "HDMI-A-4, 2560x1440@60, 5120x0, 1, transform, 3"
-    "DP-3, 5120x1440@120, 0x0, 1"
-    # "DP-3, addreserved, 0, 0, 52, 0" # for eww sidebar
-  ];
+  "plugin:touch_gestures" = {
+    hyprgrass-bindm = [
+      ", tap:3, exec, rofi -show drun -show-icons || rofi"
+      ", longpress:2, movewindow"
+      ", longpress:3, resizewindow"
+    ];
+  };
+
+  xwayland = {
+    force_zero_scaling = true;
+  };
 
   workspace = [
     "1, monitor:DP-3"
