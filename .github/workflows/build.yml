@@ -28,7 +28,8 @@ jobs:
           push: true # Allows pushing to the cache
 
       - name: Build NixOS system
-        run: nix build .#nixosConfigurations.nixos-surface.config.system
+        run: nix build .#nixosConfigurations.nixos-surface.config.system.build.toplevel
+
         # ^ Adjust flake reference to match your configuration path
 
       # Optionally, you can push more paths if needed (e.g., other derivations)
