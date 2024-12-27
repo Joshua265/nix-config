@@ -26,4 +26,6 @@
     "DP-3, 5120x1440@120, 0x0, 1"
     # "DP-3, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
+
+  waybar.keyboard-name = "razer-razer-ornata-chroma";
 }

@@ -22,4 +22,6 @@
     "eDP-1, 2736x1824@60, 0x0, 1.5"
     ",preferred,auto,1,mirror,eDP-1"
   ];
+
+  waybar.keyboard-name = "microsoft-surface-type-cover-keyboard";
 }
