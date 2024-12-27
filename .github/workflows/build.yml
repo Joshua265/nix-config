@@ -21,7 +21,7 @@ jobs:
       - name: Authenticate with Cachix
         uses: cachix/cachix-action@v12
         with:
-          name: my-cachix-cache # Replace with your cache name
+          name: joshua256 # Replace with your cache name
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           push: true # Allows pushing to the cache
 
