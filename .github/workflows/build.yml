@@ -21,7 +21,7 @@ jobs:
           extra_nix_config: experimental-features = nix-command flakes
 
       - name: Authenticate with Cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v15
         with:
           name: joshua256 # Replace with your cache name
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
