@@ -8,29 +8,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-push-kernels:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device:
+          - nixos-desktop
+          - nixos-surface
 
     steps:
-      - name: Check out the repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v20
+        uses: cachix/install-nix-action@v22
         with:
-          extra_nix_config: experimental-features = nix-command flakes
+          install_url: https://nixos.org/nix/install
 
-      - name: Authenticate with Cachix
+      - name: Setup Cachix
         uses: cachix/cachix-action@v15
         with:
-          name: joshua256 # Replace with your cache name
+          name: joshua256 # Replace with your Cachix cache name
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          push: true # Allows pushing to the cache
 
-      - name: Build NixOS system
-        run: nix build .#nixosConfigurations.nixos-surface.config.system.build.toplevel
+      - name: Build Kernel for ${{ matrix.device }}
+        run: |
+          nix build .#nixosConfigurations.${{ matrix.device }}.config.system.build.kernel
+          echo "Built kernel for ${{ matrix.device }}"
 
-        # ^ Adjust flake reference to match your configuration path
+      - name: Push Kernel to Cachix for ${{ matrix.device }}
+        run: |
+          cachix push joshua256 ./result
+          echo "Pushed kernel for ${{ matrix.device }} to Cachix"
 
-      # Optionally, you can push more paths if needed (e.g., other derivations)
-      # - run: cachix push my-cachix-cache $(nix path-info .#nixosConfigurations.myLaptop.config.system)
+      # Optional: Clean up the Nix store symlink
+      - name: Clean up Nix store symlink
+        run: rm -rf ./result
