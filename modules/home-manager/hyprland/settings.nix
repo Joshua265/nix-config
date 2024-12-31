@@ -151,7 +151,7 @@ in {
 
   gestures = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
-    workspace_swipe = false;
+    workspace_swipe = true;
     workspace_swipe_cancel_ratio = 0.15;
   };
 
