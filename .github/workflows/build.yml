@@ -1,4 +1,4 @@
-name: Build and cache NixOS system
+name: Build and cache kernels
 
 on:
   push:
@@ -20,6 +20,7 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
+          root-reserve-mb: 4096
           swap-size-mb: 1024
           remove-dotnet: "true"
 
