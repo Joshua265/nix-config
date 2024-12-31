@@ -84,6 +84,14 @@ in {
             format = "{icon}";
             "on-scroll-up" = "hyprctl dispatch workspace e+1";
             "on-scroll-down" = "hyprctl dispatch workspace e-1";
+            "move-to-monitor" = true;
+            "format-icons" = {
+              "active" = "";
+              "default" = "";
+            };
+            "persistent-workspaces" = {
+              "*" = 5;
+            };
           };
           "custom/keyboard_layout" = {
             exec = "${getKeyboardLayoutScript}/bin/getKeyboardLayout";

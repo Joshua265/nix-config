@@ -181,29 +181,35 @@ in {
   # Enable Sensor Data Reading
   hardware.sensor.iio.enable = true;
 
-  services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "low-power"; #
+  services = {
+    thermald.enable = true;
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # More conservative
+        CPU_SCALING_GOVERNOR_ON_BAT = "low-power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "balance-performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
 
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 80;
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100; # or lower if desired
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 70; # lower from 80 to 70 or even less
 
-      #Optional helps save long term battery health
-      # START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-      # STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+        # If your hardware supports it:
+        START_CHARGE_THRESH_BAT0 = 40;
+        STOP_CHARGE_THRESH_BAT0 = 80;
+
+        USB_AUTOSUSPEND = 1; # Auto-suspend USB
+      };
+    };
+
+    upower = {
+      enable = true;
+      criticalPowerAction = "Hibernate";
     };
   };
-
-  services.upower.enable = true;
-  services.upower.criticalPowerAction = "Hibernate";
 
   # intel fixes
   boot.kernelParams = [
