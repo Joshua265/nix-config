@@ -92,9 +92,9 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
+        overlays.additions
         overlays.legacy-packages
         overlays.unstable-packages
-        overlays.additions
         overlays.nixGLOverlay
         openglWrappedOverlay
         inputs.nix-matlab.overlay

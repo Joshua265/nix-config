@@ -164,6 +164,8 @@
     pkgs.openocd
   ];
 
+  hardware.keyboard.zsa.enable = true;
+
   # Spotify track sync with other devices
   # TODO: move
   networking.firewall.allowedTCPPorts = [57621];

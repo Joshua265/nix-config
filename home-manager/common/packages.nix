@@ -10,7 +10,13 @@
 
     # 3D
     blender
-    unstable.freecad-wayland
+    (freecad-wayland.overrideAttrs (final: prev: {
+      postFixup = prev.postFixup;
+      # ''
+      # ./configure CXXFLAGS="-D_OCC64"
+      # ''
+      # + prev.postFixup;
+    }))
     legacy.cura
 
     # essentials
@@ -21,9 +27,7 @@
     zathura
 
     # utils
-    (pkgs.writeShellScriptBin "spotify" ''
-      exec ${pkgs.spotify}/bin/spotify --disable-gpu "$@"
-    '')
+    spotify
 
     # obs and dependencies
     obs-studio

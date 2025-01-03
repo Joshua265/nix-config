@@ -183,6 +183,9 @@ in {
   ];
   bindl = ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
   "plugin:touch_gestures" = {
+    sensitivity = 1.0;
+    workspace_swipe_fingers = 3;
+    long_press_delay = 400;
     hyprgrass-bindm = [
       ", tap:3, exec, rofi -show drun -show-icons || rofi"
       ", longpress:2, movewindow"

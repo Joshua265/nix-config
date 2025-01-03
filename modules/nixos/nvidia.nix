@@ -7,7 +7,7 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
-    # enable32Bit = true;
+    enable32Bit = true;
     # extraPackages32 = pkgs.pkgsi686Linux.mesa.drivers;
     # extraPackages = with pkgs; [
     #   nvidia-vaapi-driver
@@ -66,7 +66,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];

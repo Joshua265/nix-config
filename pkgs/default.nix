@@ -3,4 +3,5 @@
 {pkgs, ...}: {
   # example = pkgs.callPackage ./example { };
   # zed-editor = pkgs.callPackage ./zed-editor {};
+  freecad-local = pkgs.callPackage ./freecad-local {};
 }
