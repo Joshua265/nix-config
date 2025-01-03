@@ -25,6 +25,7 @@
     vlc
     libsForQt5.plasma-systemmonitor
     zathura
+    keymapp
 
     # utils
     spotify
