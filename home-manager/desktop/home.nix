@@ -27,5 +27,5 @@
     # "DP-3, addreserved, 0, 0, 52, 0" # for eww sidebar
   ];
 
-  waybar.keyboard-name = "razer-razer-ornata-chroma";
+  waybar.keyboard-name = "zsa-technology-labs-moonlander-mark-i-keyboard";
 }

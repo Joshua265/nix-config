@@ -20,9 +20,13 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 20480
+          root-reserve-mb: 24576 
           swap-size-mb: 1024
           remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,6 +52,10 @@ jobs:
           cachix push joshua256 ./result
           echo "Pushed kernel for ${{ matrix.device }} to Cachix"
 
+      - name: Show storage space
+        run: |
+          echo "Available storage"
+          sudo df -h
       # Optional: Clean up the Nix store symlink
       - name: Clean up Nix store symlink
         run: rm -rf ./result
