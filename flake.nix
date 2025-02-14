@@ -63,6 +63,11 @@
       url = "github:Joshua265/neovim";
     };
 
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # musnix audio enhancements
     musnix = {url = "github:musnix/musnix";};
 
@@ -85,7 +90,7 @@
     system = "x86_64-linux";
     # Your custom packages and modifications, exported as overlays
     openglWrappedOverlay = final: prev:
-      prev.lib.genAttrs ["kitty" "alacritty" "blender" "spotify"]
+      prev.lib.genAttrs ["kitty" "alacritty" "blender" "spotify" "zen-browser"]
       (name: final.wrapWithNixGLIntel prev.${name});
     overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {

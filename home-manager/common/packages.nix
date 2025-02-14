@@ -1,5 +1,5 @@
 {
-  home,
+  inputs,
   pkgs,
   ...
 }: {
@@ -18,10 +18,12 @@
       # + prev.postFixup;
     }))
     legacy.cura
+    orca-slicer
 
     # essentials
     firefox
     chromium
+    inputs.zen-browser.packages.${pkgs.system}.default
     vlc
     libsForQt5.plasma-systemmonitor
     zathura

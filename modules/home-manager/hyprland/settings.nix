@@ -16,6 +16,7 @@
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
+    hyprctl reload &
   '';
 in {
   general = {
