@@ -54,7 +54,7 @@
 
     # coding
     # vscodium from modules
-    unstable.zed-editor
+    # unstable.zed-editor
     unstable.terraform
 
     ## nix
@@ -63,8 +63,9 @@
     ## c
     extra-cmake-modules
 
-    ## unity
+    ## Game Development
     unityhub
+    godot_4
 
     adwaita-icon-theme
   ];

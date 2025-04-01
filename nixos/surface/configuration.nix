@@ -8,20 +8,20 @@
   pkgs,
   ...
 }: let
-  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system};
+  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
     outputs.nixosModules.discord
     outputs.nixosModules.display-manager
-    outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
     outputs.nixosModules.fonts
     outputs.nixosModules.docker
     # outputs.nixosModules.musnix
     outputs.nixosModules.main-user
     outputs.nixosModules.auto-rotate
+    outputs.nixosModules.auto-brightness
     outputs.nixosModules.usb-automount
     outputs.nixosModules.surface-io-key
 
@@ -113,6 +113,8 @@ in {
   ];
 
   # WIFI
+  # networking.wireless.enable = true;
+
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
     IPv6 = {
@@ -227,10 +229,11 @@ in {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    package = pkgs-hyprland.mesa.drivers;
-    extraPackages = with pkgs; [
-      # intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    package = pkgs-hyprland.mesa;
+    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
+    extraPackages = with pkgs-hyprland; [
+      mesa
+      libgbm
       libvdpau-va-gl
     ];
   };

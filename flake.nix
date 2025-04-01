@@ -32,7 +32,7 @@
     #   input.nixpkgs.follows = "nixpkgs-unstable";
     # };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      url = "github:hyprwm/Hyprland?ref=pull/9612/head";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hypridle = {

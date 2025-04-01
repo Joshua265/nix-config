@@ -55,7 +55,9 @@ in {
       vscodevim.vim
       catppuccin.catppuccin-vsc-icons
       carrie999.cyberpunk-2020
-    ];
+    ] ++ [
+     pkgs.unstable.vscode-extensions.geequlim.godot-tools
+     ];
   };
 
   # Standard Settings

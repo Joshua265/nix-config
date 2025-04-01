@@ -7,6 +7,8 @@
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     # killall -q waybar &
     systemctl --user start plasma-polkit-agent &
+    # auto-brighness &
+    # auto-rotate &
     ${pkgs.swww}/bin/swww init &
     ${pkgs.waybar}/bin/waybar &
     ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
