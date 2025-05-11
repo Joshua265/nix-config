@@ -182,6 +182,24 @@
           }
         ];
       };
+      nixos-framework = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main nixos configuration file <
+          ./nixos/framework/configuration.nix
+          # > Our main home-manager configuration file <
+          home-manager.nixosModules.home-manager
+          inputs.nixos-hardware.nixosModules.framework."13-inch".intel-core-ultra-series1
+          {
+            home-manager.users.user = import ./home-manager/framework/home.nix;
+            home-manager.backupFileExtension = "hm-backup";
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs pkgs;
+            };
+          }
+        ];
+      };
     };
   };
 }
