@@ -13,6 +13,7 @@ in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
+    outputs.nixosModules.clamav
     outputs.nixosModules.discord
     outputs.nixosModules.display-manager
     outputs.nixosModules.security

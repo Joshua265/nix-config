@@ -82,16 +82,14 @@ in {
           };
           "hyprland/workspaces" = {
             format = "{icon}";
-            "on-scroll-up" = "hyprctl dispatch workspace e+1";
-            "on-scroll-down" = "hyprctl dispatch workspace e-1";
-            "move-to-monitor" = true;
             "format-icons" = {
-              "active" = "";
-              "default" = "";
+              "urgent" = "";
+              "active" = "";
+              "visible" = "";
+              "default" = "";
+              "empty" = "";
             };
-            "persistent-workspaces" = {
-              "*" = 5;
-            };
+            "all-outputs" = false;
           };
           "custom/keyboard_layout" = {
             exec = "${getKeyboardLayoutScript}/bin/getKeyboardLayout";

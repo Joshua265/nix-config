@@ -28,6 +28,7 @@
     libsForQt5.plasma-systemmonitor
     zathura
     keymapp
+    eduvpn-client
 
     # utils
     spotify
@@ -65,7 +66,7 @@
 
     ## Game Development
     unityhub
-    godot_4
+    unstable.godot_4
 
     adwaita-icon-theme
   ];

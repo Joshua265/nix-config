@@ -38,13 +38,12 @@ in {
 
   dwindle = {
     preserve_split = true;
-    smart_resizing = false;
+    smart_resizing = true;
   };
 
   input = {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
     follow_mouse = 1;
+    mouse_refocus = false;
     numlock_by_default = true;
     kb_layout = "us,de";
     kb_options = "grp:alt_shift_toggle";
@@ -60,7 +59,7 @@ in {
 
     rounding = 8;
     inactive_opacity = 0.8;
-    active_opacity = 0.9;
+    active_opacity = 0.95;
 
     blur = {
       enabled = true;
@@ -89,6 +88,15 @@ in {
     "float,title:^(Open Folder)(.*)$"
     "float,title:^(Save As)(.*)$"
     "float,title:^(Library)(.*)$ "
+    "opacity 1.0 override, floating:1"
+    "minsize 230 200, initialTitle:(UnityEditor.Rendering.FilterWindow)"
+    "minsize 300 200, initialTitle:(UnityEditor.LayerVisibilityWindow)"
+    "minsize 230 500, initialTitle:(UnityEditor.AnnotationWindow)"
+    "minsize 150 300, initialTitle:(UnityEditor.PopupWindow)"
+    "minsize 500 350, initialTitle:(Select Preset...)"
+    "minsize 300 100, initialTitle:(UnityEditor.Snap.GridSettingsWindow)"
+    "minsize 500 500, initialTitle:(UnityEngine.InputSystem.Editor.AdvancedDropdownWindow)"
+    "suppressevent maximize, class:.*"
   ];
   layerrule = [
     "xray 1, .*"
@@ -144,16 +152,11 @@ in {
       "windows, 1, 3, md3_decel, popin 60%"
       "border, 1, 10, default"
       "fade, 1, 2.5, md3_decel"
-      # "workspaces, 1, 3.5, md3_decel, slide"
       "workspaces, 1, 7, fluent_decel, slide"
-      # "workspaces, 1, 7, fluent_decel, slidefade 15%"
-      # "specialWorkspace, 1, 3, md3_decel, slidefadevert 15%"
-      "specialWorkspace, 1, 3, md3_decel, slidevert"
     ];
   };
 
   gestures = {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
     workspace_swipe = true;
     workspace_swipe_cancel_ratio = 0.15;
   };
@@ -228,18 +231,18 @@ in {
     force_zero_scaling = true;
   };
 
-  workspace = [
-    "1, monitor:DP-3"
-    "2, monitor:DP-3"
-    "3, monitor:DP-3"
-    "4, monitor:DP-3"
-    "5, monitor:DP-3"
-    "6, monitor:DP-3"
-    "7, monitor:DP-3"
-    "8, monitor:DP-3"
-    # "9, monitor:HDMI-A-4"
-    "10, monitor:HDMI-A-3"
-  ];
+  # workspace = [
+  #   "1, monitor:DP-3"
+  #   "2, monitor:DP-3"
+  #   "3, monitor:DP-3"
+  #   "4, monitor:DP-3"
+  #   "5, monitor:DP-3"
+  #   "6, monitor:DP-3"
+  #   "7, monitor:DP-3"
+  #   "8, monitor:DP-3"
+  #   # "9, monitor:HDMI-A-4"
+  #   "10, monitor:HDMI-A-3"
+  # ];
 
   exec-once = ''${startupScript}/bin/start'';
 }

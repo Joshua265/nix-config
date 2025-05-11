@@ -14,9 +14,9 @@
     # ];
   };
 
+  hardware.nvidia-container-toolkit.enable = true;
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia" "intel"]; # or "nvidiaLegacy470 etc.
-  virtualisation.docker.enableNvidia = true;
   environment.sessionVariables = {
     # If your cursor becomes invisible
     WLR_NO_HARDWARE_CURSORS = "1";

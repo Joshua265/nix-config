@@ -12,6 +12,7 @@
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
     outputs.nixosModules.nvidia
+    outputs.nixosModules.clamav
     outputs.nixosModules.cuda
     outputs.nixosModules.discord
     outputs.nixosModules.docker
@@ -97,6 +98,18 @@
     #media-session.enable = true;
   };
 
+  networking.wireless.iwd.enable = true;
+  networking.wireless.iwd.settings = {
+    IPv6 = {
+      Enabled = true;
+    };
+    Settings = {
+      AutoConnect = true;
+    };
+  };
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.networkmanager.enable = true;
+
   # Automatic Garbage Collection
   nix.gc = {
     automatic = true;
@@ -109,6 +122,7 @@
 
   # hostname
   networking.hostName = "nixos-desktop";
+  networking.hostId = "8374973e";
 
   # Bootloader
   boot.loader = {
@@ -153,6 +167,7 @@
     gparted
     unzip
     ntfs3g # NTFS disk support
+    zfs
   ];
 
   # services.flatpak.enable = true; # only for games
@@ -172,4 +187,7 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
+
+  # Temp zfs setup
+  boot.kernelModules = ["zfs"];
 }

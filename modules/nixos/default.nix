@@ -4,6 +4,7 @@
   # List your module files here
   auto-rotate = import ./auto-rotate.nix;
   auto-brightness = import ./auto-brightness.nix;
+  clamav = import ./clamav.nix;
   cuda = import ./cuda.nix;
   nvidia = import ./nvidia.nix;
   discord = import ./discord.nix;
