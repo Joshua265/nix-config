@@ -108,17 +108,10 @@
   # WIFI
   # networking.wireless.enable = true;
 
-  networking.wireless.iwd.enable = true;
-  networking.wireless.iwd.settings = {
-    IPv6 = {
-      Enabled = true;
-    };
-    Settings = {
-      AutoConnect = true;
-    };
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
   };
-  networking.networkmanager.wifi.backend = "iwd";
-  networking.networkmanager.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
