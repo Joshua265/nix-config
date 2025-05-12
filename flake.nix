@@ -33,7 +33,6 @@
     # };
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hypridle = {
       url = "git+https://github.com/hyprwm/hypridle?submodules=1";
@@ -190,7 +189,7 @@
           ./nixos/framework/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
-          inputs.nixos-hardware.nixosModules.framework."13-inch".intel-core-ultra-series1
+          inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series1
           {
             home-manager.users.user = import ./home-manager/framework/home.nix;
             home-manager.backupFileExtension = "hm-backup";

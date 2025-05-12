@@ -7,9 +7,7 @@
   config,
   pkgs,
   ...
-}: let
-  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -24,10 +22,6 @@ in {
     # outputs.nixosModules.auto-rotate
     # outputs.nixosModules.auto-brightness
     outputs.nixosModules.usb-automount
-
-    # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -98,6 +92,13 @@ in {
     #media-session.enable = true;
   };
 
+  # Automatic Garbage Collection
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 10d";
+  };
+
   # Udev for PlatformIO
   services.udev.packages = [
     pkgs.platformio-core.udev
@@ -117,6 +118,7 @@ in {
     };
   };
   networking.networkmanager.wifi.backend = "iwd";
+  networking.networkmanager.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -139,6 +141,9 @@ in {
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  # firmware-updates
+  services.fwupd.enable = true;
 
   # User accounts
   main-user.enable = true;
@@ -205,29 +210,12 @@ in {
     };
   };
 
-  # intel fixes
-  boot.kernelParams = [
-    "mem_sleep_default=deep"
-    "nvme.noacpi=1"
-    "i915.enable_psr=1"
-  ];
-  # surface wireplumber workaround
-  # https://github.com/NixOS/nixos-hardware/issues/970
-  boot.blacklistedKernelModules = [
-    "ipu3_imgu"
-  ];
-
   # Enable OpenGL support
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    package = pkgs-hyprland.mesa;
-    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
-    extraPackages = with pkgs-hyprland; [
-      mesa
-      libgbm
-      libvdpau-va-gl
-    ];
+    #    package = pkgs-hyprland.mesa;
+    #    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
   };
 
   # Spotify track sync with other devices
