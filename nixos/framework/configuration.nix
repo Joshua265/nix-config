@@ -106,8 +106,6 @@
   ];
 
   # WIFI
-  # networking.wireless.enable = true;
-
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;
