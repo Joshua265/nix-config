@@ -31,14 +31,6 @@ in {
     };
   };
 
-  # Make sure our session still runs the xrandr rotation (just in case)
-  home.sessionCommands = [
-    ''
-      ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --rotate left
-    ''
-    "${touchScript} &"
-  ];
-
   # Ensure GDM’s greeter also has the on-screen keyboard turned on
   # by adding a small systemd service that writes the dconf key as the gdm user
   systemd.user.services.gdm-onboard = {
@@ -50,6 +42,16 @@ in {
       Type = "oneshot";
     };
     wantedBy = ["default.target"];
+  };
+
+  # turn on HM’s X session
+  xsession = {
+    enable = true;
+    windowManager.command = "gnome-session";
+    initExtra = ''
+      ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --rotate left &
+      ${touchScript} &
+    '';
   };
 
   # 2) Zathura config
