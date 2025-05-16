@@ -25,14 +25,14 @@ in {
 
   # Ensure GDM’s greeter also has the on-screen keyboard turned on
   # by adding a small systemd service that writes the dconf key as the gdm user
-  systemd.user.services.gdm-onboard = {
-    description = "Enable GNOME on-screen keyboard for GDM";
-    serviceConfig = {
-      User = "gdm";
-      ExecStart = "${pkgs.dconf}/bin/dconf write /org/gnome/desktop/a11y/applications/screen-keyboard-enabled true";
-      Type = "oneshot";
-    };
-  };
+  # systemd.user.services.gdm-onboard = {
+  #   description = "Enable GNOME on-screen keyboard for GDM";
+  #   serviceConfig = {
+  #     User = "gdm";
+  #     ExecStart = "${pkgs.dconf}/bin/dconf write /org/gnome/desktop/a11y/applications/screen-keyboard-enabled true";
+  #     Type = "oneshot";
+  #   };
+  # };
 
   # turn on HM’s X session
   xsession = {
