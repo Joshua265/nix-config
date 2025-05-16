@@ -13,16 +13,10 @@ in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
-    outputs.nixosModules.clamav
-    outputs.nixosModules.discord
     outputs.nixosModules.display-manager
     outputs.nixosModules.security
     outputs.nixosModules.fonts
-    outputs.nixosModules.docker
-    # outputs.nixosModules.musnix
     outputs.nixosModules.main-user
-    outputs.nixosModules.auto-rotate
-    outputs.nixosModules.auto-brightness
     outputs.nixosModules.usb-automount
     outputs.nixosModules.surface-io-key
 
@@ -99,6 +93,12 @@ in {
     #media-session.enable = true;
   };
 
+  # Standard GNOME desktop
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = false;
+  services.xserver.displayManager.gdm.wayland = false;
+
   services.xserver.videoDrivers = ["intel"];
 
   environment.sessionVariables = {
@@ -107,25 +107,26 @@ in {
     LIBVA_DRIVER_NAME = "i965";
   };
 
-  # Udev for PlatformIO
-  services.udev.packages = [
-    pkgs.platformio-core.udev
-    pkgs.openocd
-  ];
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --rotate left
+  '';
+
+  # Enable the built-in GNOME on-screen keyboard via a dconf override
+  # This runs at session start to turn on “screen-keyboard-enabled”
+  # (you can also do this manually with
+  #  gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true)
+  system.activationScripts.enableOnScreenKeyboard = {
+    text = ''
+      ${pkgs.dconf}/bin/dconf write \
+        /org/gnome/desktop/a11y/applications/screen-keyboard-enabled true
+    '';
+  };
 
   # WIFI
-  # networking.wireless.enable = true;
-
-  networking.wireless.iwd.enable = true;
-  networking.wireless.iwd.settings = {
-    IPv6 = {
-      Enabled = true;
-    };
-    Settings = {
-      AutoConnect = true;
-    };
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
   };
-  networking.networkmanager.wifi.backend = "iwd";
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -226,17 +227,12 @@ in {
     "ipu3_imgu"
   ];
 
+  services.iptssd.enable = true;
+
   # Enable OpenGL support
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    package = pkgs-hyprland.mesa;
-    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
-    extraPackages = with pkgs-hyprland; [
-      mesa
-      libgbm
-      libvdpau-va-gl
-    ];
   };
 
   # Spotify track sync with other devices
