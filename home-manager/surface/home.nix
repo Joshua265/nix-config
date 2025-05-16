@@ -74,4 +74,36 @@ in {
   '';
   # Make it executable
   home.file."${touchScript}".mode = "0755";
+
+  # Username
+  home = {
+    username = "user";
+    homeDirectory = "/home/user";
+  };
+  programs.git = {
+    userEmail = "Joshua_Noel@gmx.de";
+    userName = "Joshua265";
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  programs.bash.enable = true;
+  # Shell Aliases
+  home.shellAliases = {
+    cdnix = "cd ~/Documents/nix-config";
+    code = "codium";
+    nvim = "nix run github:Joshua265/neovim --";
+    gparted = "sudo -E gparted"; # wayland workaround
+  };
+
+  # Enable home-manager
+  programs.home-manager.enable = true;
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  home.stateVersion = "24.11";
 }
