@@ -6,7 +6,7 @@
   home.packages = with pkgs; [
     xournalpp
 
-    python3Packages.python-evdev
+    python312Packages.evdev
     xdotool
     zathura
     zathura-ps
