@@ -227,8 +227,6 @@ in {
     "ipu3_imgu"
   ];
 
-  services.iptssd.enable = true;
-
   # Enable OpenGL support
   hardware.graphics = {
     enable = true;
