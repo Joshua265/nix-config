@@ -73,7 +73,7 @@ in {
               if x and x > WIDTH:
                   subprocess.run(['xdotool', 'key', 'ctrl+d'])
     '';
-    mode = "0755";
+    executable = true;
   };
 
   # Username
