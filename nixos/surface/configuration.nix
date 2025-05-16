@@ -7,9 +7,7 @@
   config,
   pkgs,
   ...
-}: let
-  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -110,6 +108,13 @@ in {
     ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --rotate left
   '';
 
+  services.xserver.xrandrHeads = [
+    {
+      monitorConfig = ''Option "Rotate" "left"'';
+      output = "eDP-1";
+    }
+  ];
+
   # Enable the built-in GNOME on-screen keyboard via a dconf override
   # This runs at session start to turn on “screen-keyboard-enabled”
   # (you can also do this manually with
@@ -120,6 +125,11 @@ in {
         /org/gnome/desktop/a11y/applications/screen-keyboard-enabled true
     '';
   };
+
+  services.libinput.enable = true;
+
+  # multi-touch gesture recognizer
+  services.touchegg.enable = true;
 
   # WIFI
   networking.networkmanager = {
