@@ -87,11 +87,4 @@ in {
   '';
   # Make it executable
   home.file."${touchScript}".mode = "0755";
-
-  # 4) Ensure xdotool & evdev are installed
-  environment.systemPackages = with pkgs; [
-    python3Packages.python-evdev
-    xdotool
-    zathura
-  ];
 }
