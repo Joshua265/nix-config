@@ -23,14 +23,6 @@ in {
     rebuild = "~/Documents/nix-config/rebuild-surface.sh";
   };
 
-  programs.gnome = {
-    enable = true;
-    # enable Accessibility → on-screen keyboard
-    extraSettings = {
-      "/org/gnome/desktop/a11y/applications/screen-keyboard-enabled" = true;
-    };
-  };
-
   # Ensure GDM’s greeter also has the on-screen keyboard turned on
   # by adding a small systemd service that writes the dconf key as the gdm user
   systemd.user.services.gdm-onboard = {
