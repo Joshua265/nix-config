@@ -195,31 +195,31 @@ in {
   services = {
     thermald.enable = true;
 
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # More conservative
-        CPU_SCALING_GOVERNOR_ON_BAT = "low-power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance-performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
+    #   tlp = {
+    #     enable = true;
+    #     settings = {
+    #       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # More conservative
+    #       CPU_SCALING_GOVERNOR_ON_BAT = "low-power";
+    #       CPU_ENERGY_PERF_POLICY_ON_AC = "balance-performance";
+    #       CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
 
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100; # or lower if desired
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 70; # lower from 80 to 70 or even less
+    #       CPU_MIN_PERF_ON_AC = 0;
+    #       CPU_MAX_PERF_ON_AC = 100; # or lower if desired
+    #       CPU_MIN_PERF_ON_BAT = 0;
+    #       CPU_MAX_PERF_ON_BAT = 70; # lower from 80 to 70 or even less
 
-        # If your hardware supports it:
-        START_CHARGE_THRESH_BAT0 = 40;
-        STOP_CHARGE_THRESH_BAT0 = 80;
+    #       # If your hardware supports it:
+    #       START_CHARGE_THRESH_BAT0 = 40;
+    #       STOP_CHARGE_THRESH_BAT0 = 80;
 
-        USB_AUTOSUSPEND = 1; # Auto-suspend USB
-      };
-    };
+    #       USB_AUTOSUSPEND = 1; # Auto-suspend USB
+    #     };
+    #   };
 
-    upower = {
-      enable = true;
-      criticalPowerAction = "Hibernate";
-    };
+    #   upower = {
+    #     enable = true;
+    #     criticalPowerAction = "Hibernate";
+    #   };
   };
 
   # intel fixes
