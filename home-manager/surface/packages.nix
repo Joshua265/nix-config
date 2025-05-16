@@ -9,7 +9,6 @@
     python312Packages.evdev
     xdotool
     zathura
-    zathura-ps
 
     nautilus
 
