@@ -185,6 +185,13 @@ in {
   # Enable Sensor Data Reading
   hardware.sensor.iio.enable = true;
 
+  # 0) udev hwdb for pedal - this is system config:
+  services.udev.extraHwdb = ''
+    evdev:input:b*v3552pb001*
+     KEYBOARD_KEY_90000=f14
+  '';
+  services.udev.packages = [pkgs.systemd]; # for systemd-hwdb
+
   services = {
     thermald.enable = true;
 

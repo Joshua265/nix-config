@@ -52,13 +52,6 @@ in {
     wantedBy = ["default.target"];
   };
 
-  # 1) udev hwdb for pedal - this is system config:
-  hardware.udev.extraHwdb = ''
-    evdev:input:b*v3553pb001*
-     KEYBOARD_KEY_90001=f14
-  '';
-  services.udev.packages = [pkgs.systemd]; # for systemd-hwdb
-
   # 2) Zathura config
   home.file."/.config/zathura/zathurarc".text = ''
     map <F14> feedkeys "<C-d>"
