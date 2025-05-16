@@ -51,29 +51,30 @@ in {
     map <F14> feedkeys "<C-d>"
   '';
 
-  home.file."${touchScript}".text = ''
-    #!/usr/bin/env python3
-    import evdev, subprocess
+  home.file."${touchScript}" = {
+    text = ''
+      #!/usr/bin/env python3
+      import evdev, subprocess
 
-    # Adjust to match your touchscreen event node (run `ls /dev/input/by-path/`)
-    dev = evdev.InputDevice('/dev/input/event6')
+      # Adjust to match your touchscreen event node (run `ls /dev/input/by-path/`)
+      dev = evdev.InputDevice('/dev/input/event6')
 
-    # Rightmost 10% threshold (e.g. 2736 px wide in portrait)
-    WIDTH = dev.capabilities().get(evdev.ecodes.EV_ABS, {})\
-            .get(evdev.ecodes.ABS_X, (0, 2736))[1] * 0.90
+      # Rightmost 10% threshold (e.g. 2736 px wide in portrait)
+      WIDTH = dev.capabilities().get(evdev.ecodes.EV_ABS, {})\
+              .get(evdev.ecodes.ABS_X, (0, 2736))[1] * 0.90
 
-    x = None
-    for e in dev.read_loop():
-        if e.type == evdev.ecodes.EV_ABS and e.code == evdev.ecodes.ABS_X:
-            x = e.value
-        elif e.type == evdev.ecodes.EV_KEY \
-             and e.code == evdev.ecodes.BTN_TOUCH \
-             and e.value == 1:
-            if x and x > WIDTH:
-                subprocess.run(['xdotool', 'key', 'ctrl+d'])
-  '';
-  # Make it executable
-  home.file."${touchScript}".mode = "0755";
+      x = None
+      for e in dev.read_loop():
+          if e.type == evdev.ecodes.EV_ABS and e.code == evdev.ecodes.ABS_X:
+              x = e.value
+          elif e.type == evdev.ecodes.EV_KEY \
+               and e.code == evdev.ecodes.BTN_TOUCH \
+               and e.value == 1:
+              if x and x > WIDTH:
+                  subprocess.run(['xdotool', 'key', 'ctrl+d'])
+    '';
+    mode = "0755";
+  };
 
   # Username
   home = {
