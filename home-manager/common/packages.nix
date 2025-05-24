@@ -37,6 +37,7 @@
     obs-studio
     slurp # for screen recording
 
+    marp-cli
     xournalpp
     onlyoffice-bin # office suite
     thunderbird # email client

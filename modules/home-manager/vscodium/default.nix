@@ -18,46 +18,49 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
-      dbaeumer.vscode-eslint
-      esbenp.prettier-vscode
-      github.copilot
-      github.vscode-github-actions
-      github.vscode-pull-request-github
-      jnoortheen.nix-ide
-      mikestead.dotenv
-      ms-azuretools.vscode-docker
-      ms-python.black-formatter
-      ms-python.isort
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-toolsai.jupyter
-      ms-toolsai.vscode-jupyter-slideshow
-      ms-vscode-remote.remote-containers
-      ms-vscode-remote.remote-ssh
-      ms-vscode.cmake-tools
-      ms-vscode.makefile-tools
-      ms-vscode.live-server
-      pkief.material-icon-theme
-      redhat.vscode-yaml
-      rust-lang.rust-analyzer
-      stkb.rewrap
-      tamasfe.even-better-toml
-      tomoki1207.pdf
-      twxs.cmake
-      kamadorueda.alejandra
-      dart-code.flutter
-      enkia.tokyo-night
-      arrterian.nix-env-selector
-      mkhl.direnv
-      hashicorp.terraform
-      james-yu.latex-workshop
-      vscodevim.vim
-      catppuccin.catppuccin-vsc-icons
-      carrie999.cyberpunk-2020
-    ] ++ [
-     pkgs.unstable.vscode-extensions.geequlim.godot-tools
-     ];
+    extensions = with pkgs.vscode-extensions;
+      [
+        dbaeumer.vscode-eslint
+        esbenp.prettier-vscode
+        github.copilot
+        github.vscode-github-actions
+        github.vscode-pull-request-github
+        jnoortheen.nix-ide
+        marp-team.marp-vscode
+        mikestead.dotenv
+        ms-azuretools.vscode-docker
+        ms-python.black-formatter
+        ms-python.isort
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-toolsai.jupyter
+        ms-toolsai.vscode-jupyter-slideshow
+        ms-vscode-remote.remote-containers
+        ms-vscode-remote.remote-ssh
+        ms-vscode.cmake-tools
+        ms-vscode.makefile-tools
+        ms-vscode.live-server
+        pkief.material-icon-theme
+        redhat.vscode-yaml
+        rust-lang.rust-analyzer
+        stkb.rewrap
+        tamasfe.even-better-toml
+        tomoki1207.pdf
+        twxs.cmake
+        kamadorueda.alejandra
+        dart-code.flutter
+        enkia.tokyo-night
+        arrterian.nix-env-selector
+        mkhl.direnv
+        hashicorp.terraform
+        james-yu.latex-workshop
+        vscodevim.vim
+        catppuccin.catppuccin-vsc-icons
+        carrie999.cyberpunk-2020
+      ]
+      ++ [
+        pkgs.unstable.vscode-extensions.geequlim.godot-tools
+      ];
   };
 
   # Standard Settings
