@@ -10,13 +10,6 @@
 
     # 3D
     blender
-    (freecad-wayland.overrideAttrs (final: prev: {
-      postFixup = prev.postFixup;
-      # ''
-      # ./configure CXXFLAGS="-D_OCC64"
-      # ''
-      # + prev.postFixup;
-    }))
     legacy.cura
     orca-slicer
 
@@ -31,7 +24,8 @@
     eduvpn-client
 
     # utils
-    spotify
+    unstable.spotify-qt
+    librespot
 
     # obs and dependencies
     obs-studio

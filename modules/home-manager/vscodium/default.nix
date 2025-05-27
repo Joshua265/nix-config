@@ -7,8 +7,6 @@
   ...
 }: let
   settings-directory = "${config.home.homeDirectory}/.config/VSCodium/User";
-  # userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
-  # keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
 in {
   home.packages = with pkgs; [
     nil
@@ -20,13 +18,16 @@ in {
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions;
       [
+        catppuccin.catppuccin-vsc-icons
+        carrie999.cyberpunk-2020
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
         github.copilot
         github.vscode-github-actions
         github.vscode-pull-request-github
+        golang.go
         jnoortheen.nix-ide
-        marp-team.marp-vscode
+        llvm-vs-code-extensions.vscode-clangd
         mikestead.dotenv
         ms-azuretools.vscode-docker
         ms-python.black-formatter
@@ -34,13 +35,17 @@ in {
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
+        ms-toolsai.jupyter-keymap
+        ms-toolsai.vscode-jupyter-cell-tags
         ms-toolsai.vscode-jupyter-slideshow
+        ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-containers
         ms-vscode-remote.remote-ssh
         ms-vscode.cmake-tools
         ms-vscode.makefile-tools
         ms-vscode.live-server
         pkief.material-icon-theme
+        mechatroner.rainbow-csv
         redhat.vscode-yaml
         rust-lang.rust-analyzer
         stkb.rewrap
@@ -54,20 +59,16 @@ in {
         mkhl.direnv
         hashicorp.terraform
         james-yu.latex-workshop
+        usernamehw.errorlens
         vscodevim.vim
-        catppuccin.catppuccin-vsc-icons
-        carrie999.cyberpunk-2020
+        yoavbls.pretty-ts-errors
+        ziglang.vscode-zig
       ]
       ++ [
         pkgs.unstable.vscode-extensions.geequlim.godot-tools
+        pkgs.unstable.vscode-extensions.rooveterinaryinc.roo-cline
       ];
   };
-
-  # Standard Settings
-  # home.file = {
-  #   "${settings-directory}/settings.json".source = ./settings.json;
-  #   "${settings-directory}/keybindings.json".source = ./keybindings.json;
-  # };
 
   # VIM Settings
   home.file = {
