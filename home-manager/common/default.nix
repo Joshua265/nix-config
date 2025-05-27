@@ -17,6 +17,7 @@
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.rofi
     outputs.homeManagerModules.ghostty
+    outputs.homeManagerModules.yazi
   ];
   nixpkgs = {
     # You can add overlays here

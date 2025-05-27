@@ -2,11 +2,13 @@
   programs.ghostty = {
     enable = true;
     enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
     installVimSyntax = true;
     package = pkgs.ghostty;
     settings = {
       theme = "catppuccin-mocha";
-      font-size = 10;
+      font-size = 14;
       keybind = [
         "ctrl+h=goto_split:left"
         "ctrl+l=goto_split:right"
