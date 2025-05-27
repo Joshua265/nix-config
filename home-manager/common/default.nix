@@ -16,6 +16,7 @@
     outputs.homeManagerModules.hyprland
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.rofi
+    outputs.homeManagerModules.ghostty
   ];
   nixpkgs = {
     # You can add overlays here

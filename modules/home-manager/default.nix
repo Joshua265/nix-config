@@ -2,6 +2,7 @@
   adour = import ./adour;
   git = import ./git;
   vscodium = import ./vscodium;
+  ghostty = import ./ghostty;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
   hyprland-surface = import ./hyprland-surface;
