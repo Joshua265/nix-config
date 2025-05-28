@@ -19,41 +19,36 @@
           monitor = null; # empty means all monitors
           path = "$HOME/.config/hypr/wallpaper.jpg";
           blur_passes = 3;
-          contrast = 0.8916;
-          brightness = 0.8172;
-          vibrancy = 0.1696;
-          vibrancy_darkness = 0.0;
+          blur_size = 8;
         }
       ];
 
       general = {
-        no_fade_in = false;
-        grace = 0;
         disable_loading_bar = true;
+        grace = 300;
+        hide_cursor = true;
+        no_fade_in = false;
       };
+
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          placeholder_text = "<i><span foreground=\"#cdd6f4\">Input Password...</span></i>";
+          shadow_passes = 2;
+        }
+      ];
 
       auth = {
         pam.enabled = true;
         fingerprint.enabled = true;
-      };
-
-      input_field = {
-        monitor = null;
-        size = "[250 60]";
-        outline_thickness = 2;
-        dots_size = 0.2;
-        dots_spacing = 0.2;
-        dots_center = true;
-        outer_color = "rgba(0, 0, 0, 0)";
-        inner_color = "rgba(0, 0, 0, 0.5)";
-        font_color = "rgb(200, 200, 200)";
-        fade_on_empty = false;
-        font_family = "JetBrains Mono Nerd Font Mono";
-        placeholder_text = "<i><span foreground=\"#cdd6f4\">Input Password...</span></i>";
-        hide_input = false;
-        position = "[0 -120]";
-        halign = "center";
-        valign = "center";
       };
 
       label = [
