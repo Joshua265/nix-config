@@ -15,7 +15,7 @@ in {
     settings = {
       default_session = {
         command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet --asteriks --remember --remember-session --remember-user-session --time --time-format '%I:%M %p | %a • %h | %F' --cmd "Hyprland"
+          ${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --remember-session --time --time-format '%I:%M %p | %a • %h | %F' --cmd "Hyprland"
         '';
         # --theme 'border=#${bordercolor};text=#${foreground};prompt=${highlight};time=#${highlight};action=#${highlight};button=#${foreground};container=#${background};input=${foreground}'
         user = "greeter";
