@@ -16,7 +16,7 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions;
+    profiles.default.extensions = with pkgs.vscode-extensions;
       [
         catppuccin.catppuccin-vsc-icons
         carrie999.cyberpunk-2020

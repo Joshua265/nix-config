@@ -67,7 +67,7 @@
   services.printing.enable = true;
 
   # Sound
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -159,5 +159,5 @@
   networking.firewall.allowedTCPPorts = [57621];
 
   # State version
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

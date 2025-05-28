@@ -12,8 +12,10 @@ in {
   ];
 
   home.file.".config/keepassxc/keepassxc.ini".source = ./keepassxc.ini;
-  home.file.".mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".source = pkgs.substituteAll {
+  home.file.".mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".source = pkgs.replaceVarsWith {
     src = ./nmh.json;
-    inherit (pkgs) keepassxc;
+    replacements = {
+      inherit (pkgs) keepassxc;
+    };
   };
 }

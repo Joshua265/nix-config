@@ -5,12 +5,11 @@
 }: {
   home.packages = with pkgs; [
     # essentials
-    # essentials defined in configuration.nix
     discord
 
     # 3D
     blender
-    legacy.cura
+    cura-appimage
     orca-slicer
 
     # essentials
@@ -19,6 +18,7 @@
     inputs.zen-browser.packages.${pkgs.system}.default
     vlc
     libsForQt5.plasma-systemmonitor
+    kdePackages.dolphin
     zathura
     keymapp
     eduvpn-client
@@ -39,7 +39,7 @@
     whatsapp-for-linux
     webex
     unstable.obsidian
-    xwaylandvideobridge
+    kdePackages.xwaylandvideobridge
 
     # 2D
     krita

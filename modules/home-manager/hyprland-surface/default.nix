@@ -19,8 +19,6 @@ in {
     rofi-wayland
     networkmanager
     networkmanagerapplet
-    polkit-kde-agent # auth agent
-    dolphin # file manager
     wayland-protocols # hyprlock dependency
     iwgtk # wifi manager
     blueberry # bluetooth management

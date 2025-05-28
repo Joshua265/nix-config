@@ -20,8 +20,6 @@ in {
     alacritty
     networkmanager
     networkmanagerapplet
-    polkit-kde-agent # auth agent
-    dolphin # file manager
     iwgtk # wifi management
     blueberry # bluetooth management
     pavucontrol # audio management
@@ -37,6 +35,7 @@ in {
     inherit settings;
     enable = true;
     xwayland.enable = true;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
       inputs.hyprgrass.packages.${pkgs.system}.default
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
@@ -104,7 +103,7 @@ in {
 
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+      # inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     ];
   };
 
