@@ -2,11 +2,12 @@
   inputs,
   config,
   pkgs,
+  nix-colors,
   ...
 }: let
   palette = config.colorScheme.palette;
-  foreground = "#${palette.base05}";
-  background = "#${palette.base00}";
+  foreground = nix-colors.lib.conversions.hexToRGB (palette.base05);
+  background = nix-colors.lib.conversions.hexToRGB (palette.base00);
 in {
   home.packages = with pkgs; [
     wayland-protocols
