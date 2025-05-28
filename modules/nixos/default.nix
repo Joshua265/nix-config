@@ -20,4 +20,5 @@
   usb-automount = import ./usb-automount.nix;
   flipper-zero = import ./flipper-zero.nix;
   surface-io-key = import ./surface-io-key.nix;
+  fingerprint = import ./fingerprint.nix;
 }

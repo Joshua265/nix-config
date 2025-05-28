@@ -13,6 +13,9 @@
     # Common shared configuration
     ../common/configuration.nix
 
+    # NixOS modules
+    outputs.nixosModules.fingerprint
+
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 

@@ -31,6 +31,7 @@
     #   url = "github:nix-community/nix-vscode-extensions";
     #   input.nixpkgs.follows = "nixpkgs-unstable";
     # };
+    nix-colors.url = "github:misterio77/nix-colors";
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
@@ -86,6 +87,7 @@
     nixpkgs,
     nixpkgs-xr,
     home-manager,
+    nix-colors,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -158,7 +160,7 @@
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs;
+              inherit inputs outputs pkgs nix-colors;
             };
           }
         ];
@@ -176,7 +178,7 @@
             home-manager.users.user = import ./home-manager/surface/home.nix;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs;
+              inherit inputs outputs pkgs nix-colors;
             };
           }
         ];
@@ -194,7 +196,7 @@
             home-manager.users.user = import ./home-manager/framework/home.nix;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs;
+              inherit inputs outputs pkgs nix-colors;
             };
           }
         ];

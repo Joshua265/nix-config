@@ -44,8 +44,9 @@
   boot.kernelModules = ["tcp_bbr"];
 
   security = {
+    polkit.enable = true;
     # allow wayland lockers to unlock the screen
-    pam.services.hyprlock.text = "auth include login";
+    pam.services.hyprlock = {};
 
     pam.services.kwallet = {
       name = "kwallet";
@@ -58,6 +59,18 @@
     # don't ask for password for wheel group
     sudo.wheelNeedsPassword = false;
   };
+
+  services.logind.extraConfig = ''
+    IdleAction=lock                       # let hypridle lock first …
+    IdleActionSec=10min
+    HandlePowerKey=suspend-then-hibernate # for laptops with power-button
+    # tweak lid / battery actions here if wanted
+  '';
+
+  systemd.sleep.extraConfig = ''
+    SuspendState=mem                      # use "deep" by default
+    HibernateDelaySec=60min               # convertible into suspend-then-hibernate
+  '';
 
   programs = {
     gnupg.agent = {

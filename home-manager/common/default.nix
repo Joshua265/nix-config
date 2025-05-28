@@ -1,10 +1,15 @@
 {
+  inputs,
   outputs,
+  nix-colors,
   pkgs,
   ...
 }: {
   imports = [
     ./packages.nix
+
+    nix-colors.homeManagerModules.default
+
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.alacritty
@@ -66,7 +71,15 @@
     EDITOR = "nvim";
   };
 
+  colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-medium;
+
   programs.bash.enable = true;
+  programs.fish = {
+    enable = true;
+    generateCompletions = true;
+  };
+  programs.zsh.enable = true;
+  programs.starship.enable = true;
   # Shell Aliases
   home.shellAliases = {
     cdnix = "cd ~/Documents/nix-config";

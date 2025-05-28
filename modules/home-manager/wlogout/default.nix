@@ -1,37 +1,28 @@
-{...}: let
-  bg = "rgba(4, 20, 45, 0.50)";
-  bg-alt = "#252428";
-  fg = " #f5f5f5";
-  alert = "#f53c3c";
-  disabled = "#a5a5a5";
-  bordercolor = "#29c8e5";
-  highlight = "#FBD47F";
-  activegreen = "#8fb666";
+{
+  pkgs,
+  config,
+  ...
+}: let
+  foreground = "#${config.colorScheme.palette.base05}";
+  background = "#${config.colorScheme.palette.base00}";
+  bordercolor = "#${config.colorScheme.palette.base02}";
+  highlight = "#${config.colorScheme.palette.base04}";
 in {
-  home.file.".config/wlogout/hibernate.svg".source = ./assets/hibernate.svg;
-  home.file.".config/wlogout/lock.svg".source = ./assets/lock.svg;
-  home.file.".config/wlogout/logout.svg".source = ./assets/logout.svg;
-  home.file.".config/wlogout/reboot.svg".source = ./assets/reboot.svg;
-  home.file.".config/wlogout/shutdown.svg".source = ./assets/shutdown.svg;
-  home.file.".config/wlogout/suspend.svg".source = ./assets/suspend.svg;
+  home.packages = with pkgs; [
+    wleave # has nicer images that wlogout
+  ];
   programs.wlogout = {
     enable = true;
     layout = [
       {
         label = "lock";
-        action = "loginctl lock-session";
+        action = "hyprlock";
         text = "Lock";
         keybind = "l";
       }
       {
-        label = "hibernate";
-        action = "systemctl hibernate";
-        text = "Hibernate";
-        keybind = "h";
-      }
-      {
         label = "logout";
-        action = "sleep 1; hyprctl dispatch exit";
+        action = "hyprctl dispatch exit";
         text = "Logout";
         keybind = "e";
       }
@@ -42,18 +33,13 @@ in {
         keybind = "s";
       }
       {
-        label = "suspend";
-        action = "systemctl suspend";
-        text = "Suspend";
-        keybind = "u";
-      }
-      {
         label = "reboot";
         action = "systemctl reboot";
         text = "Reboot";
         keybind = "r";
       }
     ];
+
     style = ''
       * {
         background-image: none;
@@ -61,49 +47,42 @@ in {
       }
 
       window {
-        background-color: ${bg}00;
+        background-color: ${background};
       }
 
       button {
-      border-radius: 0;
-      border-color: ${bordercolor};
-      text-decoration-color: #FFFFFF;
-        color: ${fg};
-      background-color: ${highlight};
-      border-style: solid;
-      border-width: 1px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 25%;
+        border-radius: 0;
+        border-color: black;
+        text-decoration-color: ${highlight};
+        color: ${foreground};
+        background-color: ${background};
+        border-color: ${bordercolor};
+        border-style: solid;
+        border-width: 1px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 25%;
       }
 
       button:focus, button:active, button:hover {
-      	background-color: ${bg-alt};
-      	outline-style: none;
+        outline-style: none;
+        background-color: ${highlight};
       }
 
       #lock {
-          background-image: image(url("./lock.svg"));
+        background-image: image(url("${pkgs.wleave}/share/wleave/icons/lock.svg"));
       }
 
       #logout {
-          background-image: image(url("./logout.svg));
-      }
-
-      #suspend {
-          background-image: image(url("./suspend.svg));
-      }
-
-      #hibernate {
-          background-image: image(url("./hibernate.svg));
+        background-image: image(url("${pkgs.wleave}/share/wleave/icons/logout.svg"));
       }
 
       #shutdown {
-          background-image: image(url("./shutdown.svg));
+        background-image: image(url("${pkgs.wleave}/share/wleave/icons/shutdown.svg"));
       }
 
       #reboot {
-          background-image: image(url("./reboot.svg));
+        background-image: image(url("${pkgs.wleave}/share/wleave/icons/reboot.svg"));
       }
     '';
   };

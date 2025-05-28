@@ -1,41 +1,44 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.ghostty = {
     enable = true;
-    enableBashIntegration = true;
     enableFishIntegration = true;
-    enableZshIntegration = true;
     installVimSyntax = true;
     package = pkgs.ghostty;
     settings = {
-      theme = "catppuccin-mocha";
-      font-size = 14;
+      theme = "custom-base16";
+      font-size = 10;
       keybind = [
         "ctrl+h=goto_split:left"
         "ctrl+l=goto_split:right"
       ];
+      custom-shader-animation = true;
     };
     themes = {
-      catppuccin-mocha = {
-        background = "1e1e2e";
-        cursor-color = "f5e0dc";
-        foreground = "cdd6f4";
+      custom-base16 = {
+        background = config.colorScheme.palette.base00;
+        cursor-color = config.colorScheme.palette.base07;
+        foreground = config.colorScheme.palette.base05;
         palette = [
-          "0=#45475a"
-          "1=#f38ba8"
-          "2=#a6e3a1"
-          "3=#f9e2af"
-          "4=#89b4fa"
-          "5=#f5c2e7"
-          "6=#94e2d5"
-          "7=#bac2de"
-          "8=#585b70"
-          "9=#f38ba8"
-          "10=#a6e3a1"
-          "11=#f9e2af"
-          "12=#89b4fa"
-          "13=#f5c2e7"
-          "14=#94e2d5"
-          "15=#a6adc8"
+          "0=#${config.colorScheme.palette.base00}"
+          "1=#${config.colorScheme.palette.base01}"
+          "2=#${config.colorScheme.palette.base02}"
+          "3=#${config.colorScheme.palette.base03}"
+          "4=#${config.colorScheme.palette.base04}"
+          "5=#${config.colorScheme.palette.base05}"
+          "6=#${config.colorScheme.palette.base06}"
+          "7=#${config.colorScheme.palette.base07}"
+          "8=#${config.colorScheme.palette.base08}"
+          "9=#${config.colorScheme.palette.base09}"
+          "10=#${config.colorScheme.palette.base0A}"
+          "11=#${config.colorScheme.palette.base0B}"
+          "12=#${config.colorScheme.palette.base0C}"
+          "13=#${config.colorScheme.palette.base0D}"
+          "14=#${config.colorScheme.palette.base0E}"
+          "15=#${config.colorScheme.palette.base0F}"
         ];
         selection-background = "353749";
         selection-foreground = "cdd6f4";
