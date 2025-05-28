@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  style = import ./styles.nix;
+  style = import ./styles.nix {config = config;};
 
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash

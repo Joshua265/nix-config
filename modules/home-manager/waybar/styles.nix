@@ -1,12 +1,10 @@
-let
-  bg = "rgba(4, 20, 45, 0.50)";
-  bg-alt = "#252428";
-  fg = " #f5f5f5";
-  alert = "#f53c3c";
-  disabled = "#a5a5a5";
-  bordercolor = "#29c8e5";
-  highlight = "#FBD47F";
-  activegreen = "#8fb666";
+{config}: let
+  palette = config.colorScheme.palette;
+  background = "#${palette.base00}";
+  bg-paper = "#${palette.base01}";
+  foreground = "#${palette.base05}";
+  accent = "#${palette.base0E}";
+  accent-alt = "#${palette.base0B}";
 in ''
     * {
       border: none;
@@ -19,7 +17,7 @@ in ''
   }
 
   window#waybar {
-      background: rgba(30, 30, 46, 0.5);
+      background: ${background};
       border-bottom: 1px solid #282828;
       color: #f4d9e1
   }
@@ -64,8 +62,8 @@ in ''
   }
 
   #custom-power {
-  	color: #24283b;
-  	background-color: #db4b4b;
+  	color: ${foreground};
+  	background-color: ${bg-paper};
   	border-radius: 5px;
   	margin-right: 10px;
   	margin-top: 5px;
@@ -75,7 +73,7 @@ in ''
   }
 
   #tray {
-      background: #282828;
+      background: ${bg-paper};
       margin: 5px 5px 5px 5px;
       border-radius: 16px;
       padding: 0px 5px;
@@ -84,7 +82,7 @@ in ''
 
   #clock {
       color: #E6B9C6;
-      background-color: #282828;
+      background-color: ${bg-paper};
       border-radius: 0px 0px 0px 24px;
       padding-left: 13px;
       padding-right: 15px;
@@ -112,7 +110,7 @@ in ''
   }
 
   #backlight {
-      background-color: #24283b;
+      background-color: ${bg-paper};
       color: #db4b4b;
       border-radius: 0px 0px 0px 0px;
       margin: 5px;
@@ -148,7 +146,7 @@ in ''
 
   #custom-launcher {
       color: #e5809e;
-      background-color: #282828;
+      background-color: ${bg-paper};
       border-radius: 0px 24px 0px 0px;
       margin: 0px 0px 0px 0px;
       padding: 0 20px 0 13px;
@@ -165,7 +163,8 @@ in ''
   }
 
   #custom-playerctl {
-  	background: #282828;
+  	background: ${bg-paper};
+    color: ${foreground};
   	padding-left: 15px;
     padding-right: 14px;
   	border-radius: 16px;
@@ -193,7 +192,7 @@ in ''
   }
 
   #window {
-      background: #282828;
+      background: ${background};
       padding-left: 15px;
       padding-right: 15px;
       border-radius: 16px;
@@ -208,11 +207,11 @@ in ''
   #custom-wf-recorder {
       padding: 0 20px;
       color: #e5809e;
-      background-color: #1E1E2E;
+      background-color: ${bg-paper};
   }
 
   #cpu {
-      background-color: #282828;
+      background-color: ${bg-paper};
       /*color: #FABD2D;*/
       border-radius: 16px;
       margin: 5px;
@@ -223,7 +222,7 @@ in ''
   }
 
   #memory {
-      background-color: #282828;
+      background-color: ${bg-paper};
       /*color: #83A598;*/
       border-radius: 16px;
       margin: 5px;
@@ -234,7 +233,7 @@ in ''
   }
 
   #disk {
-      background-color: #282828;
+      background-color: ${bg-paper};
       /*color: #8EC07C;*/
       border-radius: 16px;
       margin: 5px;
@@ -245,7 +244,7 @@ in ''
   }
 
   #custom-hyprpicker {
-      background-color: #282828;
+      background-color: ${bg-paper};
       /*color: #8EC07C;*/
       border-radius: 16px;
       margin: 5px;
@@ -256,8 +255,8 @@ in ''
   }
 
     #language {
-      background: ${fg};
-      color: ${bg-alt};
+      background: ${bg-paper};
+      color: ${foreground};
       padding: 0 5px;
       margin: 0 5px;
       min-width: 16px;
