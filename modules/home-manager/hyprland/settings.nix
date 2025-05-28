@@ -167,11 +167,12 @@ in {
   "$terminal" = "ghostty";
   "$fileManager" = "dolphin";
   "$menu" = "rofi --show drun";
+  "$browser" = "zen";
 
   "$mod" = "SUPER";
   bind =
     [
-      "$mod, F, exec, firefox"
+      "$mod, F, exec, $browser"
       ", Print, exec, grimblast copy area"
       "$mod, space, exec, rofi -show drun -show-icons || rofi" # rofi
       "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy" # clipboard history
