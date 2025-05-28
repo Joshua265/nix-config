@@ -97,6 +97,9 @@
   main-user.enable = true;
   main-user.userName = "user";
 
+  programs.fish.enable = true; # enable fish shell
+  users.users.${config.main-user.userName}.shell = pkgs.fish; # set fish as default shell
+
   # System packages (intersection + superset)
   environment.systemPackages = with pkgs; [
     wget

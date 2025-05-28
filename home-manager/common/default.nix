@@ -73,13 +73,6 @@
 
   colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-medium;
 
-  programs.bash.enable = true;
-  programs.fish = {
-    enable = true;
-    generateCompletions = true;
-  };
-  programs.zsh.enable = true;
-  programs.starship.enable = true;
   # Shell Aliases
   home.shellAliases = {
     cdnix = "cd ~/Documents/nix-config";
