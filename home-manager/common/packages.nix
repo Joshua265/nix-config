@@ -18,10 +18,12 @@
     inputs.zen-browser.packages.${pkgs.system}.default
     vlc
     libsForQt5.plasma-systemmonitor
-    kdePackages.dolphin
     zathura
     keymapp
     eduvpn-client
+
+    kdePackages.kio-admin
+    kdePackages.dolphin
 
     # utils
     unstable.spotify-qt
