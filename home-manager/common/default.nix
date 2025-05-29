@@ -23,6 +23,7 @@
     outputs.homeManagerModules.rofi
     outputs.homeManagerModules.ghostty
     outputs.homeManagerModules.yazi
+    outputs.homeManagerModules.adour
   ];
   nixpkgs = {
     # You can add overlays here
@@ -71,7 +72,7 @@
     EDITOR = "nvim";
   };
 
-  colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-medium;
+  colorScheme = nix-colors.colorSchemes.mellow-purple;
 
   # Shell Aliases
   home.shellAliases = {

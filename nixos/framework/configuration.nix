@@ -15,6 +15,7 @@
 
     # NixOS modules
     outputs.nixosModules.fingerprint
+    outputs.nixosModules.musnix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
