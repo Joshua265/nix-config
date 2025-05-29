@@ -67,14 +67,9 @@
   services.printing.enable = true;
 
   # Sound
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
+  hardware.alsa = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # media-session.enable = true; # default
+    enablePersistence = true;
   };
 
   # Automatic Garbage Collection

@@ -181,10 +181,12 @@ in {
       "$mod, L, exec, swaylock -f -c 000000"
       '', Print, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       ''$mod, s, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
-      '', XF86AudioRaiseVolume, exec, pamixer -i 5''
-      '', XF86AudioLowerVolume, exec, pamixer -d 5 ''
-      '', XF86AudioMicMute, exec, pamixer --default-source -m''
-      '', XF86AudioMute, exec, pamixer -t''
+      '', XF86AudioRaiseVolume, exec, amixer set Master 5%+ && pkill -x -RTMIN+11 waybar''
+      '', XF86AudioLowerVolume, exec, amixer set Master 5%- && pkill -x -RTMIN+11 waybar''
+      # Mic mute/unmute via ALSA
+      '', XF86AudioMicMute, exec, amixer set Capture toggle && pkill -x -RTMIN+11 waybar''
+      # Master mute/unmute via ALSA
+      ''XF86AudioMute, exec, amixer set Master toggle && pkill -x -RTMIN+11 waybar''
       '', XF86AudioPlay, exec, playerctl play-pause''
       '', XF86AudioPause, exec, playerctl play-pause''
       '', XF86AudioNext, exec, playerctl next''
@@ -212,8 +214,8 @@ in {
   ];
 
   bindel = [
-    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    ", XF86AudioRaiseVolume, exec, amixer set Master 5%+ && pkill -x -RTMIN+11 waybar"
+    ", XF86AudioLowerVolume, exec, amixer set Master 5%- && pkill -x -RTMIN+11 waybar"
   ];
 
   # "plugin:touch_gestures" = {

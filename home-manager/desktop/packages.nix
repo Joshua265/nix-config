@@ -11,7 +11,7 @@
       postBuild = ''
         wrapProgram $out/bin/FreeCAD \
         --set __GLX_VENDOR_LIBRARY_NAME mesa \
-        --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json
+        --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json
       '';
       meta.mainProgram = "FreeCAD";
     })

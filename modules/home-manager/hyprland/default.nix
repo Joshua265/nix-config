@@ -22,7 +22,7 @@ in {
     networkmanagerapplet
     iwgtk # wifi management
     blueberry # bluetooth management
-    pavucontrol # audio management
+    alsa-utils
     grim # screenshot
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch

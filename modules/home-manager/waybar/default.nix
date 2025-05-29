@@ -58,7 +58,8 @@ in {
           modules-right = [
             "tray"
             "custom/keyboard_layout"
-            "pulseaudio"
+            # "pulseaudio"
+            "custom/alsa"
             "backlight"
             "network"
             "custom/wlogout"
@@ -121,23 +122,32 @@ in {
             tooltip-format = "{essid}";
             on-click-right = "nm-connection-editor";
           };
-          pulseaudio = {
-            format = "{volume}% {icon} {format_source}";
-            format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = " {icon} {format_source}";
-            format-icons = {
-              car = "";
-              default = ["" "" ""];
-              handsfree = "";
-              headphones = "";
-              headset = "";
-              phone = "";
-              portable = "";
-            };
-            format-muted = " {format_source}";
-            format-source = "{volume}% ";
-            format-source-muted = "";
-            on-click = "pavucontrol";
+          # pulseaudio = {
+          #   format = "{volume}% {icon} {format_source}";
+          #   format-bluetooth = "{volume}% {icon} {format_source}";
+          #   format-bluetooth-muted = " {icon} {format_source}";
+          #   format-icons = {
+          #     car = "";
+          #     default = ["" "" ""];
+          #     handsfree = "";
+          #     headphones = "";
+          #     headset = "";
+          #     phone = "";
+          #     portable = "";
+          #   };
+          #   format-muted = " {format_source}";
+          #   format-source = "{volume}% ";
+          #   format-source-muted = "";
+          #   on-click = "pavucontrol";
+          # };
+          "custom/alsa" = {
+            "exec" = "amixer get Master | sed -nre 's/.*\\[off\\].*/      \n\nmuted/p; s/.*\\[(.*%)\\].*/    \\1/p'";
+            "on-click" = "alsamixer";
+            "on-scroll-up" = "amixer set Master 1+; pkill -x -RTMIN+11 waybar";
+            "on-scroll-down" = "amixer set Master 1-; pkill -x -RTMIN+11 waybar";
+            "signal" = 11;
+            "interval" = 10;
+            "tooltip" = false;
           };
           temperature = {
             critical-threshold = 80;
