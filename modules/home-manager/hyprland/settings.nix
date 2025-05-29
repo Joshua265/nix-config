@@ -186,7 +186,7 @@ in {
       # Mic mute/unmute via ALSA
       '', XF86AudioMicMute, exec, amixer set Capture toggle && pkill -x -RTMIN+11 waybar''
       # Master mute/unmute via ALSA
-      ''XF86AudioMute, exec, amixer set Master toggle && pkill -x -RTMIN+11 waybar''
+      '', XF86AudioMute, exec, amixer set Master toggle && pkill -x -RTMIN+11 waybar''
       '', XF86AudioPlay, exec, playerctl play-pause''
       '', XF86AudioPause, exec, playerctl play-pause''
       '', XF86AudioNext, exec, playerctl next''

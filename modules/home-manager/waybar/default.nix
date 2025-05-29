@@ -141,7 +141,7 @@ in {
           #   on-click = "pavucontrol";
           # };
           "custom/alsa" = {
-            "exec" = "amixer get Master | sed -nre 's/.*\\[off\\].*/      \n\nmuted/p; s/.*\\[(.*%)\\].*/    \\1/p'";
+            "exec" = "amixer get Master | sed -nre 's/.*\\[off\\].*/      muted/p; s/.*\\[(.*%)\\].*/    \\1/p'";
             "on-click" = "alsamixer";
             "on-scroll-up" = "amixer set Master 1+; pkill -x -RTMIN+11 waybar";
             "on-scroll-down" = "amixer set Master 1-; pkill -x -RTMIN+11 waybar";
