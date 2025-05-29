@@ -37,10 +37,11 @@ in {
     xwayland.enable = true;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     plugins = [
-      inputs.hyprgrass.packages.${pkgs.system}.default
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
     ];
   };
+
+  services.hyprpolkitagent.enable = true;
 
   # manually set env variables
   home.sessionVariables = {

@@ -6,9 +6,7 @@
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     # killall -q waybar &
-    systemctl --user start plasma-polkit-agent &
-    # auto-brighness &
-    # auto-rotate &
+    systemctl --user start hyprpolkitagent
     ${pkgs.swww}/bin/swww init &
     ${pkgs.waybar}/bin/waybar &
     ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
@@ -18,7 +16,6 @@
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
     wl-paste --type image --watch cliphist store &
-    hyprctl reload &
   '';
 in {
   general = {
@@ -219,13 +216,13 @@ in {
     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   ];
 
-  "plugin:touch_gestures" = {
-    hyprgrass-bindm = [
-      ", tap:3, exec, rofi -show drun -show-icons || rofi"
-      ", longpress:2, movewindow"
-      ", longpress:3, resizewindow"
-    ];
-  };
+  # "plugin:touch_gestures" = {
+  #   hyprgrass-bindm = [
+  #     ", tap:3, exec, rofi -show drun -show-icons || rofi"
+  #     ", longpress:2, movewindow"
+  #     ", longpress:3, resizewindow"
+  #   ];
+  # };
 
   "plugin:split-monitor-workspaces" = {
     count = 5; # Number of workspaces per monitor
