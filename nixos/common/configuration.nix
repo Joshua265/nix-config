@@ -68,8 +68,18 @@
 
   # Sound
   hardware.alsa = {
-    enable = true;
     enablePersistence = true;
+  };
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true; # if not already enabled
+    alsa = {
+      enable = true;
+      support32Bit = true; # for 32-bit applications
+    };
+    # pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
 
   # Automatic Garbage Collection

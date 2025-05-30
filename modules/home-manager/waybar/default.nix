@@ -38,6 +38,7 @@ in {
   config = {
     home.packages = [
       pkgs.playerctl
+      pkgs.coppwr
     ];
 
     programs.waybar = {
@@ -140,14 +141,17 @@ in {
           #   format-source-muted = "";
           #   on-click = "pavucontrol";
           # };
-          "custom/alsa" = {
-            "exec" = "amixer get Master | sed -nre 's/.*\\[off\\].*/      muted/p; s/.*\\[(.*%)\\].*/    \\1/p'";
-            "on-click" = ''alacritty -H -e "alsamixer"'';
-            "on-scroll-up" = "amixer set Master 1+; pkill -x -RTMIN+11 waybar";
-            "on-scroll-down" = "amixer set Master 1-; pkill -x -RTMIN+11 waybar";
-            "signal" = 11;
-            "interval" = 10;
-            "tooltip" = false;
+          "custom/pipewire" = {
+            "format" = "{icon}";
+            "return-type" = "json";
+            "signal" = 8;
+            "interval" = "once";
+            "format-icons" = {
+              "mute" = "";
+              "default" = ["" "" "" ""];
+            };
+            "exec" = "pw-volume status";
+            on-click = "coppwr";
           };
           temperature = {
             critical-threshold = 80;
