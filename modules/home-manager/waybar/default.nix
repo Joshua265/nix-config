@@ -142,7 +142,7 @@ in {
           # };
           "custom/alsa" = {
             "exec" = "amixer get Master | sed -nre 's/.*\\[off\\].*/      muted/p; s/.*\\[(.*%)\\].*/    \\1/p'";
-            "on-click" = "alsamixer";
+            "on-click" = "alsa-scarlett-gui";
             "on-scroll-up" = "amixer set Master 1+; pkill -x -RTMIN+11 waybar";
             "on-scroll-down" = "amixer set Master 1-; pkill -x -RTMIN+11 waybar";
             "signal" = 11;

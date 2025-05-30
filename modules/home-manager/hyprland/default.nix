@@ -23,6 +23,8 @@ in {
     iwgtk # wifi management
     blueberry # bluetooth management
     alsa-utils
+    alsa-scarlett-gui
+    playerctl # media player control
     grim # screenshot
     slurp # grim dependencies
     qt6.qtwayland # qt6 obs patch
