@@ -33,15 +33,13 @@ in {
       background = {
         monitor = "";
         path = "$HOME/.config/hypr/wallpaper.jpg";
-        blur_passes = 3;
-        blur_size = 8;
         color = background;
       };
 
       input-field = {
         size = "200, 50";
         position = "0, -80";
-        monitor = null;
+        monitor = "";
         dots_center = true;
         fade_on_empty = false;
         font_color = "rgb(202, 211, 245)";
@@ -56,38 +54,38 @@ in {
         fingerprint.enabled = true;
       };
 
-      # label = [
-      #   {
-      #     monitor = null;
-      #     text = "cmd[update:1000] echo \"$(date +\"%-I:%M%p\")\"";
-      #     color = foreground;
-      #     font_size = 120;
-      #     font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
-      #     position = "0 ,-300";
-      #     halign = "center";
-      #     valign = "top";
-      #   }
-      #   {
-      #     monitor = null;
-      #     text = "Hi there, $USER";
-      #     color = foreground;
-      #     font_size = 25;
-      #     font_family = "JetBrains Mono Nerd Font Mono";
-      #     position = "0 ,-40";
-      #     halign = "center";
-      #     valign = "center";
-      #   }
-      #   {
-      #     monitor = null;
-      #     text = ''cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"'';
-      #     color = foreground;
-      #     font_size = 18;
-      #     font_family = "JetBrainsMono, Font Awesome 6 Free Solid";
-      #     position = "0 ,-50";
-      #     halign = "center";
-      #     valign = "bottom";
-      #   }
-      # ];
+      label = [
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo \"$(date +\"%-I:%M%p\")\"";
+          color = foreground;
+          font_size = 120;
+          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
+          position = "0 ,-300";
+          halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "Hi there, $USER";
+          color = foreground;
+          font_size = 25;
+          font_family = "JetBrains Mono Nerd Font Mono";
+          position = "0 ,-40";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"'';
+          color = foreground;
+          font_size = 18;
+          font_family = "JetBrainsMono, Font Awesome 6 Free Solid";
+          position = "0 ,-50";
+          halign = "center";
+          valign = "bottom";
+        }
+      ];
     };
   };
 }
