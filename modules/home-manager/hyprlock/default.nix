@@ -57,38 +57,38 @@ in {
         fingerprint.enabled = true;
       };
 
-      label = [
-        {
-          monitor = null;
-          text = "cmd[update:1000] echo \"$(date +\"%-I:%M%p\")\"";
-          color = foreground;
-          font_size = 120;
-          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
-          position = "0 ,-300";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          monitor = null;
-          text = "Hi there, $USER";
-          color = foreground;
-          font_size = 25;
-          font_family = "JetBrains Mono Nerd Font Mono";
-          position = "0 ,-40";
-          halign = "center";
-          valign = "center";
-        }
-        {
-          monitor = null;
-          text = ''cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"'';
-          color = foreground;
-          font_size = 18;
-          font_family = "JetBrainsMono, Font Awesome 6 Free Solid";
-          position = "0 ,-50";
-          halign = "center";
-          valign = "bottom";
-        }
-      ];
+      # label = [
+      #   {
+      #     monitor = null;
+      #     text = "cmd[update:1000] echo \"$(date +\"%-I:%M%p\")\"";
+      #     color = foreground;
+      #     font_size = 120;
+      #     font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
+      #     position = "0 ,-300";
+      #     halign = "center";
+      #     valign = "top";
+      #   }
+      #   {
+      #     monitor = null;
+      #     text = "Hi there, $USER";
+      #     color = foreground;
+      #     font_size = 25;
+      #     font_family = "JetBrains Mono Nerd Font Mono";
+      #     position = "0 ,-40";
+      #     halign = "center";
+      #     valign = "center";
+      #   }
+      #   {
+      #     monitor = null;
+      #     text = ''cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"'';
+      #     color = foreground;
+      #     font_size = 18;
+      #     font_family = "JetBrainsMono, Font Awesome 6 Free Solid";
+      #     position = "0 ,-50";
+      #     halign = "center";
+      #     valign = "bottom";
+      #   }
+      # ];
     };
   };
 }
