@@ -38,12 +38,12 @@ in {
 
       input-field = {
         size = "200, 50";
-        position = "0, -80";
+        position = "0, -120";
         monitor = "";
         dots_center = true;
         fade_on_empty = false;
-        font_color = "rgb(202, 211, 245)";
-        inner_color = "rgb(91, 96, 120)";
+        font_color = foreground;
+        inner_color = background;
         outer_color = "rgb(24, 25, 38)";
         outline_thickness = 5;
         shadow_passes = 2;
@@ -59,7 +59,7 @@ in {
           monitor = "";
           text = "cmd[update:1000] echo \"$(date +\"%-I:%M%p\")\"";
           color = foreground;
-          font_size = 120;
+          font_size = 80;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
           position = "0 ,-300";
           halign = "center";
