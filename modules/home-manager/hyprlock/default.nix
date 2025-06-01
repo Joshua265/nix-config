@@ -5,9 +5,15 @@
   nix-colors,
   ...
 }: let
+  hexToRGBString = hex: let
+    rgb = nix-colors.lib.conversions.hexToRGB hex;
+    r = toString (builtins.elemAt rgb 0);
+    g = toString (builtins.elemAt rgb 1);
+    b = toString (builtins.elemAt rgb 2);
+  in "rgb(${r}, ${g}, ${b})";
   palette = config.colorScheme.palette;
-  foreground = nix-colors.lib.conversions.hexToRGB (palette.base05);
-  background = nix-colors.lib.conversions.hexToRGB (palette.base00);
+  foreground = hexToRGBString (palette.base05);
+  background = hexToRGBString (palette.base00);
 in {
   home.packages = with pkgs; [
     wayland-protocols
@@ -20,9 +26,14 @@ in {
     package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
 
     settings = {
+      general = {
+        hide_cursor = false;
+      };
+
       background = {
         monitor = null; # empty means all monitors
-        path = "$HOME/.config/hypr/wallpaper.jpg";
+        # path = "$HOME/.config/hypr/wallpaper.jpg";
+        path = "screenshot";
         blur_passes = 3;
         blur_size = 8;
         color = background;
