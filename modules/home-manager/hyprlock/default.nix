@@ -31,9 +31,8 @@ in {
       };
 
       background = {
-        monitor = null; # empty means all monitors
-        # path = "$HOME/.config/hypr/wallpaper.jpg";
-        path = "screenshot";
+        monitor = "";
+        path = "$HOME/.config/hypr/wallpaper.jpg";
         blur_passes = 3;
         blur_size = 8;
         color = background;
