@@ -13,7 +13,6 @@
   imports = [
     ../common
     ./packages.nix
-    outputs.homeManagerModules.adour
   ];
 
   home.shellAliases = {
