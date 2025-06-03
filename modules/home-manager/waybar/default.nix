@@ -39,6 +39,7 @@ in {
     home.packages = [
       pkgs.playerctl
       pkgs.coppwr
+      pkgs.pavucontrol
     ];
 
     programs.waybar = {
@@ -59,8 +60,8 @@ in {
           modules-right = [
             "tray"
             "custom/keyboard_layout"
-            # "pulseaudio"
-            "custom/alsa"
+            "pulseaudio"
+            # "custom/pipewire"
             "backlight"
             "network"
             "custom/wlogout"
@@ -123,36 +124,36 @@ in {
             tooltip-format = "{essid}";
             on-click-right = "nm-connection-editor";
           };
-          # pulseaudio = {
-          #   format = "{volume}% {icon} {format_source}";
-          #   format-bluetooth = "{volume}% {icon} {format_source}";
-          #   format-bluetooth-muted = " {icon} {format_source}";
-          #   format-icons = {
-          #     car = "";
-          #     default = ["" "" ""];
-          #     handsfree = "";
-          #     headphones = "";
-          #     headset = "";
-          #     phone = "";
-          #     portable = "";
-          #   };
-          #   format-muted = " {format_source}";
-          #   format-source = "{volume}% ";
-          #   format-source-muted = "";
-          #   on-click = "pavucontrol";
-          # };
-          "custom/pipewire" = {
-            "format" = "{icon}";
-            "return-type" = "json";
-            "signal" = 8;
-            "interval" = "once";
-            "format-icons" = {
-              "mute" = "";
-              "default" = ["" "" "" ""];
+          pulseaudio = {
+            format = "{volume}% {icon} {format_source}";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-icons = {
+              car = "";
+              default = ["" "" ""];
+              handsfree = "";
+              headphones = "";
+              headset = "";
+              phone = "";
+              portable = "";
             };
-            "exec" = "pw-volume status";
-            on-click = "coppwr";
+            format-muted = " {format_source}";
+            format-source = "{volume}% ";
+            format-source-muted = "";
+            on-click = "pavucontrol";
           };
+          # "custom/pipewire" = {
+          #   "format" = "{icon}";
+          #   "return-type" = "json";
+          #   "signal" = 8;
+          #   "interval" = "once";
+          #   "format-icons" = {
+          #     "mute" = "";
+          #     "default" = ["" "" "" ""];
+          #   };
+          #   "exec" = "pw-volume status";
+          #   on-click = "";
+          # };
           temperature = {
             critical-threshold = 80;
             format = "{temperatureC}°C {icon}";
