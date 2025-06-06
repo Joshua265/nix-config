@@ -20,26 +20,6 @@
     '';
   };
   programs.zsh.enable = true;
-  programs.starship = {
-    enable = true;
-    enableTransience = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    settings = {
-      add_newline = false;
-      format = lib.concatStrings [
-        "$line_break"
-        "$package"
-        "$line_break"
-        "$character"
-      ];
-      scan_timeout = 10;
-      character = {
-        success_symbol = "➜";
-        error_symbol = "➜";
-      };
-    };
-  };
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
