@@ -24,6 +24,7 @@
     outputs.homeManagerModules.ghostty
     outputs.homeManagerModules.yazi
     outputs.homeManagerModules.adour
+    outputs.homeManagerModules.starship
   ];
   nixpkgs = {
     # You can add overlays here

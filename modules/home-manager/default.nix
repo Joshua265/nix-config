@@ -14,6 +14,6 @@
   wlogout = import ./wlogout;
   hypridle = import ./hypridle;
   nextcloud-client = import ./nextcloud-client;
-  starship = import ./starship;
+  starship = import ./starship.nix;
   yazi = import ./yazi.nix;
 }
