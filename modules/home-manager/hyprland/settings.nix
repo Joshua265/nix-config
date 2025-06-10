@@ -190,6 +190,8 @@ in {
       '', XF86AudioPause, exec, playerctl play-pause''
       '', XF86AudioNext, exec, playerctl next''
       '', XF86AudioPrev, exec, playerctl previous''
+      '', XF86MonBrightnessUp, exec, brightnessctl set +10%''
+      '', XF86MonBrightnessDown, exec, brightnessctl set 10%''
     ]
     ++ (
       # workspaces
@@ -197,15 +199,15 @@ in {
       builtins.concatLists (builtins.genList (
           x: let
             ws = let
-              c = (x + 1) / 10;
+              c = (x + 1) / 5;
             in
-              builtins.toString (x + 1 - (c * 10));
+              builtins.toString (x + 1 - (c * 5));
           in [
             "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
             "$mod SHIFT, ${ws}, split-movetoworkspacesilent, ${toString (x + 1)}"
           ]
         )
-        10)
+        5)
     );
   bindm = [
     "$mod,mouse:272,movewindow"
