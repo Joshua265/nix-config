@@ -38,6 +38,7 @@ in {
     enable = true;
     xwayland.enable = true;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
     ];
