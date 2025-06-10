@@ -203,8 +203,8 @@ in {
             in
               builtins.toString (x + 1 - (c * 5));
           in [
-            "$mod, ${ws}, split-workspace, ${toString (x + 1)}"
-            "$mod SHIFT, ${ws}, split-movetoworkspacesilent, ${toString (x + 1)}"
+            "$mod, ${ws}, split:workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, split:movetoworkspacesilent, ${toString (x + 1)}"
           ]
         )
         5)
@@ -227,8 +227,9 @@ in {
   #   ];
   # };
 
-  "plugin:split-monitor-workspaces" = {
-    count = 5; # Number of workspaces per monitor
+  plugin.hyprsplit = {
+    num_workspaces = 5;
+    persistent_workspaces = true;
   };
 
   xwayland = {
