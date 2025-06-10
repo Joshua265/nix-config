@@ -41,6 +41,7 @@ in {
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+      inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
     ];
   };
 
