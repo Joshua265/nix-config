@@ -9,10 +9,15 @@
     enable = true;
     enable32Bit = true;
     # extraPackages32 = pkgs.pkgsi686Linux.mesa.drivers;
-    # extraPackages = with pkgs; [
-    #   nvidia-vaapi-driver
-    # ];
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+   ];
   };
+
+  environment.systemPackages = with pkgs; [
+  libvdpau-va-gl
+];
+
 
   hardware.nvidia-container-toolkit.enable = true;
   # Load nvidia driver for Xorg and Wayland
@@ -26,6 +31,7 @@
     # GDK_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
+    VDPAU_DRIVER = "nvidia";
   };
 
   # environment.variables = {
