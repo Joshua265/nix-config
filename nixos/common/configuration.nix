@@ -97,6 +97,7 @@
 
   # Bluetooth
   hardware.bluetooth.enable = true;
+  services.joycond.enable = true; # enable joycond for gamepads
 
   # Main user
   main-user.enable = true;
