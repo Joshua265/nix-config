@@ -17,6 +17,8 @@
     # })
     freecad
 
+    xorg.xrandr
+
     # matlab
 
     # coding
