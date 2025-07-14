@@ -13,6 +13,6 @@
   services.udev.extraRules = ''
     # Switch 2 Pro Controller – USB & BT
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="2069", \
-        MODE="0660", TAG+="uaccess"
+        MODE="0666", TAG+="uaccess"
   '';
 }
