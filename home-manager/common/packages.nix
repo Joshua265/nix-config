@@ -27,7 +27,7 @@
 
     # utils
     unstable.spotify-qt
-    ncspot
+    librespot
 
     # obs and dependencies
     obs-studio
