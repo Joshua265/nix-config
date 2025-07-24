@@ -15,7 +15,6 @@
     outputs.homeManagerModules.alacritty
     outputs.homeManagerModules.wlogout
     outputs.homeManagerModules.hyprlock
-    outputs.homeManagerModules.hypridle
     outputs.homeManagerModules.nextcloud-client
     outputs.homeManagerModules.keepassxc
     outputs.homeManagerModules.hyprland

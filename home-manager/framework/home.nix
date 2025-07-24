@@ -13,6 +13,8 @@
   imports = [
     ../common
     ./packages.nix
+
+    outputs.homeManagerModules.hypridle
   ];
   home.shellAliases = {
     rebuild = "~/Documents/nix-config/rebuild-framework.sh";
