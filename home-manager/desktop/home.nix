@@ -11,12 +11,14 @@
     rebuild = "~/Documents/nix-config/rebuild-desktop.sh";
   };
 
-  wayland.windowManager.hyprland.settings.monitor = [
-    "DP-3, 5120x1440@120, 0x0, 1"
-    "HDMI-A-3, 1920x1080@60, 0x1440, 1"
-  ];
-
-  wayland.windowManager.hyprland.settings.plugin.exec-once = ''${pkgs.xorg.xrandr}/bin/xrandr --output DP-3 --primary'';
+  wayland.windowManager.hyprland.settings = {
+    monitor = [
+      "DP-3, 5120x1440@120, 0x0, 1"
+      "HDMI-A-3, 1920x1080@60, 0x1440, 1"
+    ];
+    plugin.exec-once = ''${pkgs.xorg.xrandr}/bin/xrandr --output DP-3 --primary'';
+    experimental.xx_color_management_v4 = true;
+  };
 
   waybar.keyboard-name = "zsa-technology-labs-moonlander-mark-i-keyboard";
 }
