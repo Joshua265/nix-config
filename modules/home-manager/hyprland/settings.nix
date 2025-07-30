@@ -177,7 +177,8 @@ in {
       "$mod, W, killactive,"
       "$mod, E, exec, $fileManager"
       "$mod, T, togglefloating,"
-      "$mod, L, exec, swaylock -f -c 000000"
+      "$mod, L, exec, hyprlock"
+      "$mod, O, setprop, active opaque toggle"
       '', Print, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       ''$mod, s, exec, filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H%M%S).png"; grim -g "$(slurp -d)" "$filename" && wl-copy < "$filename"''
       '', XF86AudioRaiseVolume, exec, amixer set Master 5%+ && pkill -x -RTMIN+11 waybar''
