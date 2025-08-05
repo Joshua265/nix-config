@@ -46,6 +46,7 @@
     # either list them …
     allowedUDPPorts = [
       27015
+      27016
       27031
       27032
       27033
