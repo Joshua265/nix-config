@@ -38,22 +38,22 @@
 
   networking.firewall = {
     # the firewall is enabled by default, keep it that way
-    enable = true;
+    enable = false;
 
-    # Steam / Core Keeper
-    allowedTCPPorts = [27015 27036];
+    # # Steam / Core Keeper
+    # allowedTCPPorts = [27015 27036];
 
-    # either list them …
-    allowedUDPPorts = [
-      27015
-      27016
-      27031
-      27032
-      27033
-      27034
-      27035
-      27036
-    ];
+    # # either list them …
+    # allowedUDPPorts = [
+    #   27015
+    #   27016
+    #   27031
+    #   27032
+    #   27033
+    #   27034
+    #   27035
+    #   27036
+    # ];
   };
 
   # Bootloader
