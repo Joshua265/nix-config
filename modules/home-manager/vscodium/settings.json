@@ -257,5 +257,13 @@
   ],
   "vim.statusBarColorControl": true,
   "window.zoomLevel": 0.5,
-  "editor.fontSize": 14
+  "editor.fontSize": 14,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#5f0000",
+    "statusBar.noFolderBackground": "#5f0000",
+    "statusBar.debuggingBackground": "#5f0000",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

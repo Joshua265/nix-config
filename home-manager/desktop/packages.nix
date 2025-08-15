@@ -19,6 +19,8 @@
 
     xorg.xrandr
 
+    openrgb-with-all-plugins
+
     # matlab
 
     # coding
