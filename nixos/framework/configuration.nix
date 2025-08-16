@@ -29,18 +29,6 @@
   # hostname
   networking.hostName = "nixos-framework-13";
 
-  # Bootloader
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      devices = ["nodev"];
-      efiSupport = true;
-      useOSProber = false;
-      configurationLimit = 25;
-    };
-  };
-
   # firmware-updates
   services.fwupd.enable = true;
 

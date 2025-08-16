@@ -20,6 +20,7 @@
     outputs.nixosModules.usb-automount
     outputs.nixosModules.flipper-zero
     outputs.nixosModules.steam
+    outputs.nixosModules.grub
 
     # cachix
     ../../cachix.nix
