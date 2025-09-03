@@ -153,10 +153,11 @@ in {
     ];
   };
 
-  gesture = [
-    "3, left, split:workspace, -1"
-    "3, right, split:workspace, +1"
-  ];
+  # gesture = [
+  #   "3, left, split:workspace, -1"
+  #   "3, right, split:workspace, +1"
+  # ];
+  # wait till latest git >v50 in nixos
 
   # Set programs that you use
   "$terminal" = "ghostty";
