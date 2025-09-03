@@ -153,10 +153,10 @@ in {
     ];
   };
 
-  gestures = {
-    workspace_swipe = true;
-    workspace_swipe_cancel_ratio = 0.15;
-  };
+  gesture = [
+    "3, left, split:workspace, -1"
+    "3, right, split:workspace, +1"
+  ];
 
   # Set programs that you use
   "$terminal" = "ghostty";

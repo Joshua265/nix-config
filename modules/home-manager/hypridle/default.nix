@@ -18,15 +18,15 @@
           timeout = 900;
           on-timeout = "loginctl lock-session";
         }
-        {
-          timeout = 930;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 1800;
-          on-timeout = "systemctl suspend";
-        }
+        # {
+        #   timeout = 930;
+        #   on-timeout = "hyprctl dispatch dpms off";
+        #   on-resume = "hyprctl dispatch dpms on";
+        # }
+        # {
+        #   timeout = 1800;
+        #   on-timeout = "systemctl suspend";
+        # }
         {
           event = "lid_close";
           on-event = "loginctl lock-session";
