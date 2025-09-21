@@ -41,7 +41,7 @@ in {
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
-      inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+      # inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
     ];
   };
 
@@ -64,7 +64,7 @@ in {
   systemd.user.services.hyprland.Service.Environment = "HYPRCURSOR_THEME=catppuccin-mocha-mauve-cursors;HYPRCURSOR_SIZE=24;XCURSOR=catppuccin-mocha-mauve-cursors;XCURSOR_SIZE=24;WLR_NO_HARDWARE_CURSORS=1;_JAVA_AWT_WM_NONREPARENTING=1";
 
   # enable hyprctl
-  systemd.user.services.waybar.Service.Environment = "PATH=${pkgs.hyprland}/bin";
+  systemd.user.services.waybar.Service.Environment = "PATH=${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin";
 
   gtk = {
     enable = true;
