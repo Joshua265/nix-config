@@ -80,6 +80,11 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    youtube-transcribe-flake = {
+      url = "path:./pkgs/youtube-transcribe";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -88,6 +93,7 @@
     nixpkgs-xr,
     home-manager,
     nix-colors,
+    youtube-transcribe-flake,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -160,7 +166,7 @@
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs nix-colors;
+              inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };
           }
         ];
@@ -178,7 +184,7 @@
             home-manager.users.user = import ./home-manager/surface/home.nix;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs nix-colors;
+              inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };
           }
         ];
@@ -196,7 +202,7 @@
             home-manager.users.user = import ./home-manager/framework/home.nix;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs pkgs nix-colors;
+              inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };
           }
         ];

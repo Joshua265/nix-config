@@ -24,6 +24,7 @@
     outputs.homeManagerModules.yazi
     outputs.homeManagerModules.adour
     outputs.homeManagerModules.starship
+    outputs.homeManagerModules.sioyek-obsidian
   ];
   nixpkgs = {
     # You can add overlays here
@@ -66,6 +67,25 @@
   programs.git = {
     userEmail = "Joshua_Noel@gmx.de";
     userName = "Joshua265";
+  };
+
+  programs.sioyekObs = {
+    enable = true;
+    vaultPath = /home/user/Nextcloud/notes;
+    notesSubdir = "papers"; # optional
+    sharedDbRelative = "Sioyek/shared.db"; # optional
+    # Add or override Sioyek prefs if you like:
+    extraPrefs = {
+      dark_mode = "1";
+      trim_margins_on_startup = "1";
+      fit_to_page_mode = "1";
+      smooth_scrolling = "1";
+    };
+    extraKeys = ''
+      # Example: faster zoom and navigation
+      map z zoom_in
+      map Z zoom_out
+    '';
   };
 
   home.sessionVariables = {

@@ -5,7 +5,7 @@
   ...
 }: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = final: _prev: import ../pkgs {pkgs = final; youtube-transcribe-flake = inputs.youtube-transcribe-flake;};
 
   nixGLOverlay = import ./nix-gl.nix {
     nixGL = inputs.nixGL.packages.${system};
@@ -41,13 +41,6 @@
 
   legacy-packages = final: _prev: {
     legacy = import inputs.nixpkgs-legacy {
-      system = final.system;
-      config.allowUnfree = true;
-    };
-  };
-
-  personal-packages = final: _prev: {
-    personal = import inputs.nixpkgs-personal {
       system = final.system;
       config.allowUnfree = true;
     };

@@ -7,5 +7,5 @@ sudo nixos-rebuild switch --flake .#nixos-desktop "$@" &> nixos-switch-desktop.l
 )
 
 gen=$(nixos-rebuild list-generations | grep current)
-git commit -am "$gen"
+git commit -am "desktop $gen"
 git push

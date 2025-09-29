@@ -7,5 +7,5 @@ sudo nixos-rebuild switch --flake .#nixos-framework "$@" &> nixos-switch-framewo
 )
 
 gen=$(nixos-rebuild list-generations | grep current)
-git commit -am "$gen"
+git commit -am "framework $gen"
 git push

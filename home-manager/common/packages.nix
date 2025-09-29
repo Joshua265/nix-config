@@ -67,5 +67,8 @@
     unstable.godot_4
 
     adwaita-icon-theme
+
+    #custom
+    youtube-transcribe
   ];
 }
