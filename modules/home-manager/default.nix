@@ -9,7 +9,7 @@
   keepassxc = import ./keepassxc;
   waybar = import ./waybar;
   rofi = import ./rofi;
-  sioyek-obsidian = import ./sioyek-obsidian.nix;
+  okular-obsidian = import ./okular-obsidian.nix;
   eww = import ./eww;
   alacritty = import ./alacritty;
   wlogout = import ./wlogout;
