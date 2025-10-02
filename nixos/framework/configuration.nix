@@ -41,28 +41,57 @@
     tlp = {
       enable = true;
       settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # More conservative
-        CPU_SCALING_GOVERNOR_ON_BAT = "low-power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance-performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "low-power";
-
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100; # or lower if desired
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 70; # lower from 80 to 70 or even less
-
         # If your hardware supports it:
         START_CHARGE_THRESH_BAT0 = 40;
         STOP_CHARGE_THRESH_BAT0 = 80;
 
         USB_AUTOSUSPEND = 1; # Auto-suspend USB
+
+        # governors
+        CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+        # Intel/AMD EPP (energy performance preference)
+        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power"; # or "power" for maximum savings
+
+        # cap peak clocks on battery
+        CPU_MAX_PERF_ON_BAT = 60; # try 60 first; 50 if you want more savings
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_AC = 0;
+
+        # Optional: disable turbo on battery for big gains (test workload impact)
+        CPU_BOOST_ON_BAT = 0;
       };
     };
 
     upower = {
       enable = true;
-      criticalPowerAction = "Hibernate";
+      criticalPowerAction = "HybridSleep";
     };
+  };
+  services.power-profiles-daemon.enable = false; # avoid conflicts with TLP
+  services.auto-cpufreq.enable = false;
+
+  # Powertop for profiling + autotune
+  powerManagement.powertop.enable = true;
+
+  # Prefer deep sleep, then auto-hibernate after 1h
+  boot.kernelParams = ["mem_sleep_default=deep"];
+
+  systemd.sleep.extraConfig = ''
+    SuspendState=mem
+    HibernateDelaySec=1h
+  '';
+
+  # Optional: also steer logind’s idle/lid actions
+  services.logind = {
+    # IdleAction="suspend-then-hibernate"; IdleActionSec="30min";
+    # lidSwitch="suspend-then-hibernate";
+    extraConfig = ''
+      HandlePowerKey=ignore
+    '';
   };
 
   # Enable OpenGL support
