@@ -32,6 +32,7 @@ in {
         ms-azuretools.vscode-docker
         ms-python.black-formatter
         ms-python.isort
+        ms-python.flake8
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
