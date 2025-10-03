@@ -86,14 +86,6 @@ in {
     "float, title:^(Save As).*$"
     "float, title:^(Library).*$"
     "opacity:1.0, floating:1"
-    "minsize:230 200, initialTitle:^(UnityEditor\\.Rendering\\.FilterWindow)$"
-    "minsize:300 200, initialTitle:^(UnityEditor\\.LayerVisibilityWindow)$"
-    "minsize:230 500, initialTitle:^(UnityEditor\\.AnnotationWindow)$"
-    "minsize:150 300, initialTitle:^(UnityEditor\\.PopupWindow)$"
-    "minsize:500 350, initialTitle:^(Select Preset\\.\\.\\.)$"
-    "minsize:300 100, initialTitle:^(UnityEditor\\.Snap\\.GridSettingsWindow)$"
-    "minsize:500 500, initialTitle:^(UnityEngine\\.InputSystem\\.Editor\\.AdvancedDropdownWindow)$"
-    "suppressevent:maximize, class:.*"
   ];
 
   layerrule = [
