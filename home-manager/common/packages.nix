@@ -27,7 +27,7 @@
 
     # utils
     unstable.spotify-qt
-    spotify
+    unstable.spotify
     librespot
 
     # obs and dependencies
