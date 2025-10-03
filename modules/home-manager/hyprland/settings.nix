@@ -85,7 +85,7 @@ in {
     "float, title:^(Open Folder).*$"
     "float, title:^(Save As).*$"
     "float, title:^(Library).*$"
-    "opacity:1.0, floating:1"
+    "opacity 1.0, floating:1"
   ];
 
   layerrule = [
