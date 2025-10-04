@@ -122,7 +122,6 @@ in {
         # Set the public URL of OWUI if you later put it behind a reverse proxy.
         WEBUI_URL = "http://localhost:${toString webUiPort}";
         # Lock down signups by default (use Admin to invite users)
-        ENABLE_SIGNUP = "false";
         DEFAULT_USER_ROLE = "admin";
       };
     };
