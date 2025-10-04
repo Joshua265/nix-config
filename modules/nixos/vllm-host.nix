@@ -61,8 +61,6 @@ in {
         "0.0.0.0"
         "--port"
         "${toString vllmPort}"
-        "--gpu-memory-utilization"
-        "0.90"
       ];
     };
   };
