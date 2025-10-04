@@ -89,15 +89,15 @@ in {
         mode = "0400";
       };
     };
-    sops.templates."vllm-credentials.json".content = ''
+    sops.templates."n8n-credentials.json".content = ''
       {
-        "OpenAi": {
+        "exampleCredentials": {
           "baseUrl": "${cfg.upstreamRoot}",
           "apiKey": "${config.sops.placeholder.vllm_api_key}"
         }
       }
     '';
-    sops.templates."vllm-credentials.json".owner = "n8n";
+    sops.templates."n8n-credentials.json".owner = "n8n";
     # Tailscale client(safe to enable on all)
     services.tailscale = {
       enable = true;
@@ -120,16 +120,16 @@ in {
         "N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.secrets."n8n_basic_pass".path}"
         "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
 
-        "CREDENTIALS_OVERWRITE_DATA_FILE=${config.sops.templates."vllm-credentials.json".path}"
+        "CREDENTIALS_OVERWRITE_DATA_FILE=${config.sops.templates."n8n-credentials.json".path}"
       ];
     };
 
     sops.templates."nextchat.env".content = ''
-      BASE_URL = ${cfg.upstreamRoot};
-      OPENAI_API_KEY =${config.sops.placeholder.vllm_api_key};
-      CODE = cfg.code;
-      HIDE_USER_API_KEY = "1";
-      CUSTOM_MODELS = "-all,+meta-llama/Llama-3.1-8B-Instruct";
+      BASE_URL=${cfg.upstreamRoot}
+      OPENAI_API_KEY=${config.sops.placeholder.vllm_api_key}
+      CODE=cfg.code
+      HIDE_USER_API_KEY="1"
+      CUSTOM_MODELS="-all,+meta-llama/Llama-3.1-8B-Instruct"
     '';
 
     # NextChat container
