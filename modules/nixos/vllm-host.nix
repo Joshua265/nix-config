@@ -49,11 +49,10 @@ in {
       ports = ["0.0.0.0:${toString vllmPort}:${toString vllmPort}"];
       volumes = ["/var/cache/vllm/huggingface:/root/.cache/huggingface"];
       devices = ["nvidia.com/gpu=all"];
-      environmentFiles = [
-        config.sops.secrets."vllm_api_key".path
-        config.sops.secrets."hf_token".path
-      ];
-
+      environment = {
+        HUGGING_FACE_HUB_TOKENd = config.sops.secrets."hf_token".path;
+        VLLM_API_KEY = config.sops.secrets."vllm_api_key".path;
+      };
       cmd = [
         "--model"
         "meta-llama/Llama-3.1-8B-Instruct"
