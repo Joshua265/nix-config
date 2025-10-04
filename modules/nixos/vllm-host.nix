@@ -18,8 +18,8 @@ in {
     "hf_token" = {};
   };
   sops.templates."vllm.env".content = ''
-    HUGGING_FACE_HUB_TOKEN=${config.sops.placeholder.hf_token};
-    VLLM_API_KEY=${config.sops.placeholder.vllm_api_key};
+    HUGGING_FACE_HUB_TOKEN=${config.sops.placeholder.hf_token}
+    VLLM_API_KEY=${config.sops.placeholder.vllm_api_key}
   '';
 
   ################

@@ -129,7 +129,7 @@ in {
       OPENAI_API_KEY=${config.sops.placeholder.vllm_api_key}
       CODE=cfg.code
       HIDE_USER_API_KEY="1"
-      CUSTOM_MODELS="-all,+meta-llama/Llama-3.1-8B-Instruct"
+      CUSTOM_MODELS=-all,+meta-llama/Llama-3.1-8B-Instruct
     '';
 
     # NextChat container
