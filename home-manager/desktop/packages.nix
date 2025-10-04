@@ -31,8 +31,6 @@
     android-tools
     android-studio
 
-    ollama
-
     extra-cmake-modules
 
     # gaming

@@ -18,8 +18,8 @@
     outputs.nixosModules.cuda
     outputs.nixosModules.xp-pen
     outputs.nixosModules.musnix
-    outputs.nixosModules.vllm-host
-    outputs.nixosModules.vllm-client
+    outputs.nixosModules.llm-host
+    outputs.nixosModules.llm-client
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

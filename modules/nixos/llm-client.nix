@@ -90,11 +90,23 @@ in {
       };
     };
     sops.templates."n8n-credentials.json".content = ''
-      {
-        "exampleCredentials": {
-          "baseUrl": "${cfg.upstreamRoot}",
-          "apiKey": "${config.sops.placeholder.vllm_api_key}"
-        }
+            {
+        "createdAt": "2024-02-23T16:26:54.475Z",
+        "updatedAt": "2024-02-23T16:26:58.928Z",
+        "id": "xHuYe0MDGOs9IpBW",
+        "name": "Local Ollama service",
+        "data": "${config.sops.placeholder.vllm_api_key}",
+        "type": "ollamaApi",
+        "nodesAccess": [
+          {
+            "nodeType": "@n8n/n8n-nodes-langchain.lmChatOllama",
+            "date": "2024-02-23T16:26:58.927Z"
+          },
+          {
+            "nodeType": "@n8n/n8n-nodes-langchain.lmOllama",
+            "date": "2024-02-23T16:26:58.927Z"
+          }
+        ]
       }
     '';
     sops.templates."n8n-credentials.json".owner = "n8n";
@@ -114,22 +126,23 @@ in {
         "N8N_HOST=localhost"
         "N8N_PORT=5678"
         "N8N_PROTOCOL=http"
+        "N8N_DIAGNOSTICS_ENABLED=false"
+        "N8N_PERSONALIZATION_ENABLED=false"
 
         "N8N_BASIC_AUTH_ACTIVE=true"
         "N8N_BASIC_AUTH_USER_FILE=${config.sops.secrets."n8n_basic_user".path}"
         "N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.secrets."n8n_basic_pass".path}"
         "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
 
-        "CREDENTIALS_OVERWRITE_DATA_FILE=${config.sops.templates."n8n-credentials.json".path}"
+        "OLLAMA_HOST=${cfg.upstreamRoot}"
       ];
     };
 
     sops.templates."nextchat.env".content = ''
       BASE_URL=${cfg.upstreamRoot}
-      OPENAI_API_KEY=${config.sops.placeholder.vllm_api_key}
       CODE=cfg.code
       HIDE_USER_API_KEY="1"
-      CUSTOM_MODELS=-all,+meta-llama/Llama-3.1-8B-Instruct
+      CUSTOM_MODELS=-all,+llama3.1:8b,+gpt-oss:20b"
     '';
 
     # NextChat container

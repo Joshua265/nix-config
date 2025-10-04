@@ -23,6 +23,6 @@
   fingerprint = import ./fingerprint.nix;
   steam = import ./steam.nix;
   grub = import ./grub;
-  vllm-host = import ./vllm-host.nix;
-  vllm-client = import ./vllm-client.nix;
+  llm-host = import ./llm-host.nix;
+  llm-client = import ./llm-client.nix;
 }

@@ -157,7 +157,7 @@
     nixosConfigurations = {
       nixos-desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs pkgs;};
         modules = [
           # > Our main nixos configuration file <
           ./nixos/desktop/configuration.nix
@@ -194,7 +194,7 @@
       };
       nixos-framework = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs pkgs;};
         modules = [
           # > Our main nixos configuration file <
           ./nixos/framework/configuration.nix
