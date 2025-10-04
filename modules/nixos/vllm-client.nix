@@ -5,12 +5,6 @@
   ...
 }: let
   cfg = config.services.vllmClient;
-  credentialsJson = builtins.toJSON {
-    OpenAI = {
-      baseUrl = cfg.upstreamRoot;
-      apiKey = config.sops.secrets."vllm_api_key".path;
-    };
-  };
 in {
   options.services.vllmClient = {
     enable = lib.mkEnableOption "NextChat + n8n client pointed at vLLM via local NGINX proxy";
@@ -95,9 +89,20 @@ in {
         mode = "0400";
       };
     };
-
-    # Tailscale client (safe to enable on all)
-    services.tailscale.enable = true;
+    sops.templates."vllm-credentials.json".content = ''
+      {
+        "OpenAI": {
+          "baseUrl": "${cfg.upstreamRoot}",
+          "apiKey": "${config.sops.placeholder.vllm_api_key}"
+        }
+      }
+    '';
+    sops.templates."vllm-credentials.json".owner = "n8n";
+    # Tailscale client(safe to enable on all)
+    services.tailscale = {
+      enable = true;
+      authKeyFile = config.sops.secrets."tailscale_auth_key".path;
+    };
 
     # n8n (optional per host)
     services.n8n = lib.mkIf cfg.enableN8n {
@@ -115,7 +120,7 @@ in {
         "N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.secrets."n8n_basic_pass".path}"
         "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
 
-        "CREDENTIALS_OVERWRITE_DATA_FILE=${credentialsJson}"
+        "CREDENTIALS_OVERWRITE_DATA_FILE=$(cat ${config.sops.templates."vllm-credentials.json".path})"
       ];
     };
 
