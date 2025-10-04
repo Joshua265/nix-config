@@ -125,8 +125,6 @@ in {
         ENABLE_SIGNUP = "false";
         DEFAULT_USER_ROLE = "admin";
       };
-      # Restart policy (optional)
-      extraOptions = ["--restart=always"];
     };
   };
 
