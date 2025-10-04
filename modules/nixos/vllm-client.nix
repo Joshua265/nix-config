@@ -91,7 +91,7 @@ in {
     };
     sops.templates."vllm-credentials.json".content = ''
       {
-        "OpenAI": {
+        "OpenAi": {
           "baseUrl": "${cfg.upstreamRoot}",
           "apiKey": "${config.sops.placeholder.vllm_api_key}"
         }
@@ -124,19 +124,22 @@ in {
       ];
     };
 
+    sops.templates."nextchat.env".content = ''
+      BASE_URL = ${cfg.upstreamRoot};
+      OPENAI_API_KEY =${config.sops.placeholder.vllm_api_key};
+      CODE = cfg.code;
+      HIDE_USER_API_KEY = "1";
+      CUSTOM_MODELS = "-all,+meta-llama/Llama-3.1-8B-Instruct";
+    '';
+
     # NextChat container
     virtualisation.docker.enable = true;
     virtualisation.oci-containers.containers.nextchat = {
       image = "yidadaa/chatgpt-next-web:latest";
       # Expose to localhost only (or more, if you want remote)
       ports = ["127.0.0.1:${toString cfg.uiPort}:3000"];
-      environment = {
-        # Use BASE_URL pointing RIGHT at the vLLM root (no /v1 here)
-        BASE_URL = cfg.upstreamRoot;
-        OPENAI_API_KEY = config.sops.secrets."vllm_api_key".path;
-        CODE = cfg.code;
-        HIDE_USER_API_KEY = "1";
-      };
+
+      environmentFiles = [config.sops.templates."nextchat.env".path];
     };
 
     networking.firewall = {

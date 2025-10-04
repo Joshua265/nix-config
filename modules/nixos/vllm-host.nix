@@ -17,6 +17,10 @@ in {
     "vllm_api_key" = {};
     "hf_token" = {};
   };
+  sops.templates."vllm.env".content = ''
+    HUGGING_FACE_HUB_TOKEN=${config.sops.placeholder.hf_token};
+    VLLM_API_KEY=${config.sops.placeholder.vllm_api_key};
+  '';
 
   ################
   # Tailscale    #
@@ -49,10 +53,7 @@ in {
       ports = ["0.0.0.0:${toString vllmPort}:${toString vllmPort}"];
       volumes = ["/var/cache/vllm/huggingface:/root/.cache/huggingface"];
       devices = ["nvidia.com/gpu=all"];
-      environment = {
-        HUGGING_FACE_HUB_TOKEN = config.sops.secrets."hf_token".path;
-        VLLM_API_KEY = config.sops.secrets."vllm_api_key".path;
-      };
+      environmentFiles = [config.sops.templates."vllm.env".path];
       cmd = [
         "--model"
         "meta-llama/Llama-3.1-8B-Instruct"
