@@ -48,18 +48,9 @@
   # Temp zfs setup
   boot.kernelModules = ["zfs"];
 
-  services.vllmClient = {
+  services.llmClient = {
     enable = true;
     secretsFile = ../../secrets/secrets.yaml;
     ageKeyFile = "/home/user/.config/sops/age/keys.txt";
-
-    # Desktop client → local vLLM
-    upstreamRoot = "http://127.0.0.1:8000";
-    upstreamV1 = "http://127.0.0.1:8000/v1";
-
-    uiPort = 3000;
-
-    code = "local-only"; # optional UI password
-    enableN8n = true; # or false if you don't want n8n on the desktop
   };
 }

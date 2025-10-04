@@ -103,18 +103,9 @@
     #    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
   };
 
-  services.vllmClient = {
+  services.llmClient = {
     enable = true;
     secretsFile = ../../secrets/secrets.yaml;
     ageKeyFile = "/home/user/.config/sops/age/keys.txt";
-
-    # Laptop client → desktop via Tailscale IP
-    upstreamRoot = "http://nixos-desktop:8000";
-    upstreamV1 = "http://nixos-desktop:8000/v1";
-
-    uiPort = 3000;
-
-    code = "local-only";
-    enableN8n = true; # keep n8n handy on the laptop
   };
 }
