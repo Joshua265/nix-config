@@ -42,6 +42,7 @@ in {
     plugins = [
       inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
       # inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+      inputs.hyprgrass.packages.${pkgs.system}.default
     ];
   };
 

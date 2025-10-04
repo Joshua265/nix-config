@@ -18,6 +18,8 @@
     outputs.nixosModules.cuda
     outputs.nixosModules.xp-pen
     outputs.nixosModules.musnix
+    outputs.nixosModules.vllm-host
+    outputs.nixosModules.vllm-client
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -41,28 +43,24 @@
   networking.hostName = "nixos-desktop";
   networking.hostId = "8374973e";
 
-  networking.firewall = {
-    # the firewall is enabled by default, keep it that way
-    enable = false;
-
-    # # Steam / Core Keeper
-    # allowedTCPPorts = [27015 27036];
-
-    # # either list them …
-    # allowedUDPPorts = [
-    #   27015
-    #   27016
-    #   27031
-    #   27032
-    #   27033
-    #   27034
-    #   27035
-    #   27036
-    # ];
-  };
-
   hardware.keyboard.zsa.enable = true;
 
   # Temp zfs setup
   boot.kernelModules = ["zfs"];
+
+  services.vllmClient = {
+    enable = true;
+    secretsFile = ../../secrets/secrets.yaml;
+    ageKeyFile = "/home/user/.config/sops/age/keys.txt";
+
+    # Desktop client → local vLLM
+    upstreamRoot = "http://127.0.0.1:8000";
+    upstreamV1 = "http://127.0.0.1:8000/v1";
+
+    proxyPort = 7999;
+    uiPort = 3000;
+
+    code = "local-only"; # optional UI password
+    enableN8n = true; # or false if you don't want n8n on the desktop
+  };
 }

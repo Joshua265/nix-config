@@ -16,6 +16,7 @@
     # NixOS modules
     outputs.nixosModules.fingerprint
     outputs.nixosModules.musnix
+    outputs.nixosModules.vllm-client
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -100,5 +101,21 @@
     enable32Bit = true;
     #    package = pkgs-hyprland.mesa;
     #    package32 = pkgs-hyprland.pkgsi686Linux.mesa;
+  };
+
+  services.vllmClient = {
+    enable = true;
+    secretsFile = ../../secrets/secrets.yaml;
+    ageKeyFile = "/home/user/.config/sops/age/keys.txt";
+
+    # Laptop client → desktop via Tailscale IP
+    upstreamRoot = "http://nixos-desktop:8000";
+    upstreamV1 = "http://nixos-desktop:8000/v1";
+
+    proxyPort = 7999;
+    uiPort = 3000;
+
+    code = "local-only";
+    enableN8n = true; # keep n8n handy on the laptop
   };
 }

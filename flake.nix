@@ -19,6 +19,11 @@
       url = "gitlab:doronbehar/nix-matlab";
     };
 
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+    };
+
     nixGL.url = "github:guibou/nixGL";
 
     # Home manager
@@ -27,10 +32,7 @@
 
     # Add any other flake you might need
     nixos-hardware = {url = "github:NixOS/nixos-hardware/master";};
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions";
-    #   input.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+
     nix-colors.url = "github:misterio77/nix-colors";
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -101,7 +103,7 @@
     system = "x86_64-linux";
     # Your custom packages and modifications, exported as overlays
     openglWrappedOverlay = final: prev:
-      prev.lib.genAttrs ["kitty" "alacritty" "blender" "zen-browser" "freecad" "sioyek"]
+      prev.lib.genAttrs ["kitty" "alacritty" "blender" "zen-browser" "freecad"]
       (name: final.wrapWithNixGLIntel prev.${name});
     overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {
@@ -163,6 +165,7 @@
           home-manager.nixosModules.home-manager
           nixpkgs-xr.nixosModules.nixpkgs-xr
           inputs.musnix.nixosModules.musnix
+          inputs.sops-nix.nixosModules.sops
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
             home-manager.extraSpecialArgs = {
@@ -197,6 +200,7 @@
           ./nixos/framework/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
           inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series1
           {
             home-manager.users.user = import ./home-manager/framework/home.nix;

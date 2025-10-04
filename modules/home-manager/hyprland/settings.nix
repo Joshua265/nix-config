@@ -213,13 +213,13 @@ in {
     ", XF86AudioLowerVolume, exec, amixer set Master 5%- && pkill -x -RTMIN+11 waybar"
   ];
 
-  # "plugin:touch_gestures" = {
-  #   hyprgrass-bindm = [
-  #     ", tap:3, exec, rofi -show drun -show-icons || rofi"
-  #     ", longpress:2, movewindow"
-  #     ", longpress:3, resizewindow"
-  #   ];
-  # };
+  "plugin:touch_gestures" = {
+    hyprgrass-bindm = [
+      ", tap:3, exec, rofi -show drun -show-icons || rofi"
+      ", longpress:2, movewindow"
+      ", longpress:3, resizewindow"
+    ];
+  };
 
   plugin.hyprsplit = {
     num_workspaces = 5;
