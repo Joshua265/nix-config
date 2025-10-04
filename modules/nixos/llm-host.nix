@@ -116,10 +116,10 @@ in {
       # Bind to localhost; reach it via Tailscale proxy or SSH tunnel if needed.
       ports = ["127.0.0.1:${toString webUiPort}:8080"];
       volumes = ["/var/lib/openwebui:/app/backend/data"];
-      extraOptions = ["--add-host=host.docker.internal:host-gateway"];
+      extraOptions = ["--network=host"];
       environment = {
         # Point OWUI to your host Ollama
-        OLLAMA_BASE_URL = "http://host.docker.internal:${toString llmPort}";
+        OLLAMA_BASE_URL = "http://localhost:${toString llmPort}";
         # Set the public URL of OWUI if you later put it behind a reverse proxy.
         WEBUI_URL = "http://localhost:${toString webUiPort}";
         # Lock down signups by default (use Admin to invite users)
