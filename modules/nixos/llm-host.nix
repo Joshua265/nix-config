@@ -91,9 +91,9 @@ in {
     # Set these 2 to your actual Tailscale MagicDNS name if you use it:
     # e.g. "myhost.your-tailnet.ts.net"
     "N8N_HOST=${config.networking.hostName}.ts.net"
-    "N8N_EDITOR_BASE_URL=http://${config.networking.hostName}.ts.net:${toString n8nPort}"
+    "N8N_EDITOR_BASE_URL=http://${config.networking.hostName}:${toString n8nPort}"
     # Webhook URLs used by triggers (important for external calls)
-    "N8N_WEBHOOK_URL=http://${config.networking.hostName}.ts.net:${toString n8nPort}"
+    "N8N_WEBHOOK_URL=http://${config.networking.hostName}:${toString n8nPort}"
 
     "N8N_PORT=${toString n8nPort}"
     "N8N_PROTOCOL=http"
@@ -116,6 +116,7 @@ in {
       # Bind to localhost; reach it via Tailscale proxy or SSH tunnel if needed.
       ports = ["127.0.0.1:${toString webUiPort}:8080"];
       volumes = ["/var/lib/openwebui:/app/backend/data"];
+      extraOptions = ["--add-host=host.docker.internal:host-gateway"];
       environment = {
         # Point OWUI to your host Ollama
         OLLAMA_BASE_URL = "http://host.docker.internal:${toString llmPort}";
