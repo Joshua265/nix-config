@@ -114,7 +114,7 @@ in {
     containers.openwebui = {
       image = "ghcr.io/open-webui/open-webui:main";
       # Bind to localhost; reach it via Tailscale proxy or SSH tunnel if needed.
-      ports = ["127.0.0.1:${toString webUiPort}"];
+      ports = ["127.0.0.1:${toString webUiPort}:8080"];
       volumes = ["/var/lib/openwebui:/app/backend/data"];
       environment = {
         # Point OWUI to your host Ollama
