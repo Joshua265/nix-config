@@ -112,7 +112,6 @@
     upstreamRoot = "http://nixos-desktop:8000";
     upstreamV1 = "http://nixos-desktop:8000/v1";
 
-    proxyPort = 7999;
     uiPort = 3000;
 
     code = "local-only";

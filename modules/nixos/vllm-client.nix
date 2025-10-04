@@ -5,6 +5,12 @@
   ...
 }: let
   cfg = config.services.vllmClient;
+  credentialsJson = builtins.toJSON {
+    OpenAI = {
+      baseUrl = cfg.upstreamRoot;
+      apiKey = config.sops.secrets."vllm_api_key".path;
+    };
+  };
 in {
   options.services.vllmClient = {
     enable = lib.mkEnableOption "NextChat + n8n client pointed at vLLM via local NGINX proxy";
@@ -28,12 +34,6 @@ in {
       description = "OpenAI-compatible /v1 base used by n8n";
     };
 
-    # Local ports
-    proxyPort = lib.mkOption {
-      type = lib.types.port;
-      default = 7999;
-      description = "Local NGINX proxy port (injects Authorization header)";
-    };
     uiPort = lib.mkOption {
       type = lib.types.port;
       default = 3000;
@@ -68,6 +68,14 @@ in {
     # only set age key if provided here
     sops.age.keyFile = lib.mkIf (cfg.ageKeyFile != null) cfg.ageKeyFile;
 
+    users.groups.n8n = {};
+    users.users.n8n = {
+      isSystemUser = true;
+      home = "/var/lib/n8n";
+      shell = pkgs.runtimeShell;
+      group = "n8n";
+    };
+
     # Secrets we expect inside the file
     sops.secrets = {
       "vllm_api_key" = {};
@@ -88,12 +96,6 @@ in {
       };
     };
 
-    # Environment for n8n (uses /v1)
-    sops.templates."llm-client.env".content = ''
-      OPENAI_API_BASE=${cfg.upstreamV1}
-      OPENAI_API_KEY=${config.sops.placeholder."vllm_api_key"}
-    '';
-
     # Tailscale client (safe to enable on all)
     services.tailscale.enable = true;
 
@@ -102,50 +104,41 @@ in {
       enable = true;
       openFirewall = true; # stays local unless reverse-proxied
     };
-    systemd.services.n8n.serviceConfig.EnvironmentFile =
-      lib.mkIf cfg.enableN8n [config.sops.templates."llm-client.env".path];
+    systemd.services.n8n.serviceConfig = {
+      Environment =
+        [
+          "N8N_HOST=localhost"
+          "N8N_PORT=5678"
+          "N8N_PROTOCOL=http"
 
-    # NGINX proxy (inject Authorization)
-    sops.templates."nginx-vllm-auth.conf".content = ''
-      proxy_set_header Authorization "Bearer ${config.sops.placeholder."vllm_api_key"}";
-    '';
-
-    services.nginx = {
-      enable = true;
-      virtualHosts."nextchat-proxy.local" = {
-        listen = [
-          {
-            addr = "127.0.0.1";
-            port = cfg.proxyPort;
-          }
+          "N8N_BASIC_AUTH_ACTIVE=true"
+          "N8N_BASIC_AUTH_USER_FILE=${config.sops.secrets."n8n_basic_user".path}"
+          "N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.secrets."n8n_basic_pass".path}"
+          "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
+        ]
+        ++ [
+          ("CREDENTIALS_OVERWRITE_DATA=" + credentialsJson)
         ];
-        locations."/v1/".proxyPass = "${cfg.upstreamRoot}/v1/";
-        locations."/v1/".extraConfig = ''
-          proxy_set_header Authorization "";
-          include ${config.sops.templates."nginx-vllm-auth.conf".path};
-        '';
-      };
     };
 
     # NextChat container
     virtualisation.docker.enable = true;
-    virtualisation.oci-containers = {
-      backend = "docker";
-      containers.nextchat = {
-        image = "yidadaa/chatgpt-next-web:latest";
-        ports = ["127.0.0.1:${toString cfg.uiPort}:3000"];
-        environment = {
-          BASE_URL = "http://127.0.0.1:${toString cfg.proxyPort}";
-          OPENAI_API_KEY = "dummy"; # proxy injects real header
-          CODE = cfg.code;
-          HIDE_USER_API_KEY = "1";
-        };
+    virtualisation.oci-containers.containers.nextchat = {
+      image = "yidadaa/chatgpt-next-web:latest";
+      # Expose to localhost only (or more, if you want remote)
+      ports = ["127.0.0.1:${toString cfg.uiPort}:3000"];
+      environment = {
+        # Use BASE_URL pointing RIGHT at the vLLM root (no /v1 here)
+        BASE_URL = cfg.upstreamRoot;
+        OPENAI_API_KEY = config.sops.secrets."vllm_api_key".path;
+        CODE = cfg.code;
+        HIDE_USER_API_KEY = "1";
       };
     };
 
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [cfg.proxyPort cfg.uiPort] ++ lib.optionals cfg.enableN8n [5678];
+      allowedTCPPorts = [cfg.uiPort] ++ lib.optionals cfg.enableN8n [5678];
     };
   };
 }

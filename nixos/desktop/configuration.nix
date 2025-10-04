@@ -57,7 +57,6 @@
     upstreamRoot = "http://127.0.0.1:8000";
     upstreamV1 = "http://127.0.0.1:8000/v1";
 
-    proxyPort = 7999;
     uiPort = 3000;
 
     code = "local-only"; # optional UI password
