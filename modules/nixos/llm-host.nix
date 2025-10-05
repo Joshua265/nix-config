@@ -4,191 +4,229 @@
   lib,
   ...
 }: let
-  llmPort = 8000; # Ollama/vLLM (here: Ollama)
-  webUiPort = 8080; # Open WebUI
-  n8nPort = 5678; # n8n
-  pgPort = 5432;
+  # Ports (only UIs are bound to localhost)
+  n8nPort = 5678;
+  webUiPort = 8080;
+
+  # Network names
+  internalNet = "ai_internal"; # internal-only, no egress
+  edgeNet = "ai_edge"; # for binding localhost UI ports
+
+  # Convenience: container unit names so we can wire systemd deps
+  svc = {
+    postgres = "docker-postgres";
+    n8n = "docker-n8n";
+    ollama = "docker-ollama";
+    owui = "docker-openwebui";
+    qdrant = "docker-qdrant";
+  };
 in {
+  #################################
+  # Runtime and GPU prerequisites #
+  #################################
+  virtualisation.docker.enable = true;
+  virtualisation.oci-containers.backend = "docker";
+
+  # NVIDIA Container Toolkit via CDI (modern way).
+  # See notes below if you prefer --gpus=all.
+  hardware.nvidia-container-toolkit.enable = true; # CDI publishes devices for Docker/Podman
+
   ########################
   # Secrets via sops-nix #
   ########################
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.age.keyFile = "/home/user/.config/sops/age/keys.txt";
-  # Keep/extend your secrets set as needed
   sops.secrets = {
     "tailscale_auth_key" = {};
-    "n8n_postgres_password" = {
-      owner = "n8n";
-      group = "n8n";
-      mode = "0400";
-    };
-    "n8n_encryption_key" = {
-      owner = "n8n";
-      group = "n8n";
-      mode = "0400";
-    };
-    "n8n_basic_user" = {
-      owner = "n8n";
-      group = "n8n";
-      mode = "0400";
-    };
-    "n8n_basic_pass" = {
-      owner = "n8n";
-      group = "n8n";
-      mode = "0400";
-    };
+    "n8n_postgres_password" = {};
+    "n8n_encryption_key" = {};
+    "n8n_basic_user" = {};
+    "n8n_basic_pass" = {};
   };
-
   ################
-  # Tailscale    #
+  # Firewall     #
   ################
   services.tailscale = {
     enable = true;
     authKeyFile = config.sops.secrets."tailscale_auth_key".path;
   };
-
-  ################
-  # Firewall     #
-  ################
   networking.firewall = {
     enable = true;
     # Expose services only over the Tailscale interface
-    interfaces.tailscale0.allowedTCPPorts = [llmPort webUiPort n8nPort];
+    interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort];
     allowedUDPPorts = [config.services.tailscale.port];
   };
-
-  ################
-  # Postgres     #
-  ################
-  sops.templates."pg-init.sql" = {
-    content = ''
-      DO $$ BEGIN
-        CREATE ROLE n8n WITH LOGIN PASSWORD '${config.sops.placeholder.n8n_postgres_password}';
-      EXCEPTION WHEN duplicate_object THEN
-        RAISE NOTICE 'role n8n already exists, skipping';
-      END $$;
-      CREATE DATABASE n8n OWNER n8n;
-      ALTER DATABASE n8n OWNER TO n8n;
-    '';
-    owner = "postgres";
-  };
-
-  services.postgresql = {
-    enable = true;
-    enableTCPIP = true;
-    settings.port = pgPort;
-    ensureDatabases = ["n8n"];
-    ensureUsers = [
-      {
-        name = "n8n";
-        ensureDBOwnership = true;
-      }
-    ];
-    initialScript = config.sops.templates."pg-init.sql".path;
-    authentication = lib.mkOverride 10 ''
-      local   all   all                 peer
-      host    all   all   127.0.0.1/32  scram-sha-256
-      host    all   all   ::1/128       scram-sha-256
-    '';
-  };
-
-  ###################################
-  # Ollama (LLM server on the host) #
-  ###################################
-  services.ollama = {
-    enable = true;
-    package = pkgs.unstable.ollama;
-    acceleration = "cuda"; # or "rocm" | null
-    host = "0.0.0.0";
-    port = llmPort;
-    # CORS not strictly needed when OWUI calls via server→server,
-    # but harmless to keep for local testing.
-    environmentVariables = {
-      OLLAMA_ORIGINS = "http://localhost:${toString webUiPort}";
-    };
-    # Optionally pre-pull models:
-    loadModels = ["llama3.1:8b" "gpt-oss:20b"];
-  };
-
-  ################
-  # n8n on host  #
-  ################
-  users.groups.n8n = {};
-  users.users.n8n = {
-    isSystemUser = true;
-    home = "/var/lib/n8n";
-    shell = pkgs.runtimeShell;
-    group = "n8n";
-  };
-
-  services.n8n = {
-    enable = true;
-    openFirewall = false; # we control exposure via tailscale0 only
-  };
-
-  # n8n runtime env (UI + webhooks reachable over Tailscale/MagicDNS)
-  systemd.services.n8n.serviceConfig.Environment = [
-    # Set these 2 to your actual Tailscale MagicDNS name if you use it:
-    # e.g. "myhost.your-tailnet.ts.net"
-    "N8N_HOST=${config.networking.hostName}.ts.net"
-    "N8N_EDITOR_BASE_URL=http://${config.networking.hostName}:${toString n8nPort}"
-    # Webhook URLs used by triggers (important for external calls)
-    "N8N_WEBHOOK_URL=http://${config.networking.hostName}:${toString n8nPort}"
-
-    "N8N_PORT=${toString n8nPort}"
-    "N8N_PROTOCOL=http"
-    "N8N_DIAGNOSTICS_ENABLED=false"
-    "N8N_PERSONALIZATION_ENABLED=false"
-
-    "N8N_BASIC_AUTH_ACTIVE=true"
-    "N8N_BASIC_AUTH_USER_FILE=${config.sops.secrets."n8n_basic_user".path}"
-    "N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.secrets."n8n_basic_pass".path}"
-    "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
-
-    "DB_TYPE=postgresdb"
-    "DB_POSTGRESDB_HOST=127.0.0.1:${toString pgPort}"
-    "DB_POSTGRESDB_USER=n8n"
-    "DB_POSTGRESDB_PASSWORD_FILE=${config.sops.secrets."n8n_postgres_password".path}"
-  ];
-
-  ########################################
-  # Add Open WebUI (as the chat frontend)
-  ########################################
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      openwebui = {
-        image = "ghcr.io/open-webui/open-webui:main";
-        # Bind to localhost; reach it via Tailscale proxy or SSH tunnel if needed.
-        ports = ["127.0.0.1:${toString webUiPort}:8080"];
-        volumes = ["/var/lib/openwebui:/app/backend/data"];
-        extraOptions = ["--network=host"];
-        environment = {
-          # Point OWUI to your host Ollama
-          OLLAMA_BASE_URL = "http://localhost:${toString llmPort}";
-          # Set the public URL of OWUI if you later put it behind a reverse proxy.
-          WEBUI_URL = "http://localhost:${toString webUiPort}";
-          # Lock down signups by default (use Admin to invite users)
-          DEFAULT_USER_ROLE = "admin";
-        };
-      };
-      qdrant = {
-        image = "qdrant/qdrant:latest";
-        ports = ["127.0.0.1:6333:6333" "127.0.0.1:6334:6334"];
-        volumes = ["/var/lib/qdrant:/qdrant/storage"];
-        extraOptions = ["--network=host"];
-      };
-    };
-  };
-
-  system.activationScripts.qdrant-data.text = ''
-    install -d -m0750 -o root -g root /var/lib/qdrant
+  #############
+  # Data dirs #
+  #############
+  system.activationScripts.aiDataDirs.text = ''
+    install -d -m0750 -o root -g root /var/lib/{postgres,n8n,ollama,openwebui,qdrant}
   '';
 
-  # Ensure data dir exists for OWUI
-  system.activationScripts.openwebui-data = {
-    text = ''
-      install -d -m0750 -o root -g root /var/lib/openwebui
+  ############################################
+  # Create Docker networks (idempotent, boot)#
+  ############################################
+  systemd.services."docker-net-${internalNet}" = {
+    description = "Create internal Docker network ${internalNet}";
+    after = ["docker.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      ${pkgs.docker}/bin/docker network inspect ${internalNet} >/dev/null 2>&1 || \
+        ${pkgs.docker}/bin/docker network create --internal ${internalNet}
     '';
   };
+  systemd.services."docker-net-${edgeNet}" = {
+    description = "Create edge Docker network ${edgeNet}";
+    after = ["docker.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      ${pkgs.docker}/bin/docker network inspect ${edgeNet} >/dev/null 2>&1 || \
+        ${pkgs.docker}/bin/docker network create ${edgeNet}
+    '';
+  };
+
+  #########################################
+  # Containers (all traffic on internalNet)
+  # Only UIs also join edgeNet + bind 127.0.0.1
+  #########################################
+  virtualisation.oci-containers.containers = {
+    postgres = {
+      serviceName = svc.postgres;
+      autoStart = true;
+      image = "postgres:16-alpine";
+      networks = [internalNet];
+      volumes = [
+        "/var/lib/postgres:/var/lib/postgresql/data"
+        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
+      ];
+      environment = {
+        POSTGRES_USER = "n8n";
+        POSTGRES_DB = "n8n";
+        POSTGRES_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
+      };
+      extraOptions = [
+        "--health-cmd=pg_isready -U n8n -d n8n -h 127.0.0.1"
+        "--health-interval=10s"
+        "--health-timeout=5s"
+        "--health-retries=5"
+        "--health-start-period=20s"
+      ];
+    };
+
+    n8n = {
+      serviceName = svc.n8n;
+      autoStart = true;
+      image = "n8nio/n8n:latest";
+      networks = [internalNet edgeNet];
+      ports = ["127.0.0.1:${toString n8nPort}:5678"];
+      volumes = [
+        "/var/lib/n8n:/home/node/.n8n"
+        # mount secrets as files; n8n reads *_FILE envs
+        "${config.sops.secrets."n8n_basic_user".path}:/run/secrets/n8n_basic_user:ro"
+        "${config.sops.secrets."n8n_basic_pass".path}:/run/secrets/n8n_basic_pass:ro"
+        "${config.sops.secrets."n8n_encryption_key".path}:/run/secrets/n8n_encryption_key:ro"
+        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
+      ];
+      environment = {
+        N8N_HOST = "${config.networking.hostName}.ts.net"; # or your domain
+        N8N_PORT = toString n8nPort;
+        N8N_PROTOCOL = "http";
+        N8N_EDITOR_BASE_URL = "http://${config.networking.hostName}:${toString n8nPort}";
+        N8N_WEBHOOK_URL = "http://${config.networking.hostName}:${toString n8nPort}";
+        N8N_DIAGNOSTICS_ENABLED = "false";
+        N8N_PERSONALIZATION_ENABLED = "false";
+
+        N8N_BASIC_AUTH_ACTIVE = "true";
+        N8N_BASIC_AUTH_USER_FILE = "/run/secrets/n8n_basic_user";
+        N8N_BASIC_AUTH_PASSWORD_FILE = "/run/secrets/n8n_basic_pass";
+        N8N_ENCRYPTION_KEY_FILE = "/run/secrets/n8n_encryption_key";
+
+        DB_TYPE = "postgresdb";
+        DB_POSTGRESDB_HOST = "postgres";
+        DB_POSTGRESDB_PORT = "5432";
+        DB_POSTGRESDB_DATABASE = "n8n";
+        DB_POSTGRESDB_USER = "n8n";
+        DB_POSTGRESDB_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
+      };
+      dependsOn = ["postgres"];
+      extraOptions = [
+        "--health-cmd=wget -qO- http://localhost:5678/healthz || exit 1"
+        "--health-interval=30s"
+        "--health-timeout=5s"
+        "--health-retries=5"
+        "--health-start-period=30s"
+      ];
+    };
+
+    ollama = {
+      serviceName = svc.ollama;
+      autoStart = true;
+      image = "ollama/ollama:latest";
+      networks = [internalNet];
+      volumes = ["/var/lib/ollama:/root/.ollama"];
+      # CDI devices (set by hardware.nvidia-container-toolkit.enable)
+      devices = ["nvidia.com/gpu=all"];
+      environment = {
+        OLLAMA_HOST = "0.0.0.0"; # listen inside container
+      };
+      # If you also want host access to API, add: ports = [ "127.0.0.1:11434:11434" ];
+      extraOptions = [
+        "--health-cmd=wget -qO- http://localhost:11434/api/version || exit 1"
+        "--health-interval=30s"
+        "--health-timeout=5s"
+        "--health-retries=5"
+        "--health-start-period=30s"
+      ];
+    };
+
+    qdrant = {
+      serviceName = svc.qdrant;
+      autoStart = true;
+      image = "qdrant/qdrant:latest";
+      networks = [internalNet];
+      volumes = ["/var/lib/qdrant:/qdrant/storage"];
+      extraOptions = [
+        "--health-cmd=wget -qO- http://localhost:6333/readyz || exit 1"
+        "--health-interval=30s"
+        "--health-timeout=5s"
+        "--health-retries=10"
+        "--health-start-period=30s"
+      ];
+    };
+
+    openwebui = {
+      serviceName = svc.owui;
+      autoStart = true;
+      image = "ghcr.io/open-webui/open-webui:main";
+      networks = [internalNet edgeNet];
+      ports = ["127.0.0.1:${toString webUiPort}:8080"];
+      volumes = ["/var/lib/openwebui:/app/backend/data"];
+      environment = {
+        OLLAMA_BASE_URL = "http://ollama:11434";
+        VECTOR_DB = "qdrant";
+        QDRANT_URL = "http://qdrant:6333";
+        DEFAULT_USER_ROLE = "admin";
+        WEBUI_URL = "http://localhost:${toString webUiPort}";
+      };
+      dependsOn = ["ollama" "qdrant"];
+      extraOptions = [
+        "--health-cmd=wget -qO- http://localhost:8080/health || exit 1"
+        "--health-interval=30s"
+        "--health-timeout=5s"
+        "--health-retries=5"
+        "--health-start-period=20s"
+      ];
+    };
+  };
+
+  ##########################################
+  # Make containers wait for network units #
+  ##########################################
+  systemd.services.${svc.postgres}.after = ["docker-net-${internalNet}.service"];
+  systemd.services.${svc.n8n}.after = ["docker-net-${internalNet}.service" "docker-net-${edgeNet}.service"];
+  systemd.services.${svc.ollama}.after = ["docker-net-${internalNet}.service"];
+  systemd.services.${svc.qdrant}.after = ["docker-net-${internalNet}.service"];
+  systemd.services.${svc.owui}.after = ["docker-net-${internalNet}.service" "docker-net-${edgeNet}.service"];
 }
