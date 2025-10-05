@@ -25,8 +25,6 @@
     ../../cachix.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   # hostname
   networking.hostName = "nixos-framework-13";
 

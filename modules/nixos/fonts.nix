@@ -3,8 +3,6 @@
   lib,
   ...
 }: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) ["corefonts"];
   fonts.packages = with pkgs;
     [
       # icon fonts

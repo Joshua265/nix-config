@@ -76,7 +76,7 @@ in {
   services.postgresql = {
     enable = true;
     enableTCPIP = true;
-    port = pgPort;
+    settings.port = pgPort;
     ensureDatabases = ["n8n"];
     ensureUsers = [
       {

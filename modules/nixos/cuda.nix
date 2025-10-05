@@ -9,12 +9,12 @@
     autoAddDriverRunpath
   ];
 
-  nixpkgs.config = {
-    cudaSupport = true;
-    cudnnSupport = true;
-    allowUnfree = true;
-    cudaCapabilities = ["8.6"];
-  };
+  # nixpkgs.config = {
+  #   cudaSupport = true;
+  #   cudnnSupport = true;
+  #   allowUnfree = true;
+  #   cudaCapabilities = ["8.6"];
+  # };
 
   systemd.services.nvidia-control-devices = {
     wantedBy = ["multi-user.target"];
