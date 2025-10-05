@@ -38,10 +38,10 @@ in {
   sops.age.keyFile = "/home/user/.config/sops/age/keys.txt";
   sops.secrets = {
     "tailscale_auth_key" = {};
-    "n8n_postgres_password" = {};
-    "n8n_encryption_key" = {};
-    "n8n_basic_user" = {};
-    "n8n_basic_pass" = {};
+    "n8n_postgres_password" = {mode = "0444";}; # war 0400
+    "n8n_encryption_key" = {mode = "0444";};
+    "n8n_basic_user" = {mode = "0444";};
+    "n8n_basic_pass" = {mode = "0444";};
   };
   ################
   # Firewall     #
@@ -120,7 +120,7 @@ in {
       autoStart = true;
       image = "n8nio/n8n:latest";
       networks = [internalNet edgeNet];
-      ports = ["127.0.0.1:${toString n8nPort}:5678"];
+      # ports = ["127.0.0.1:${toString n8nPort}:5678"];
       volumes = [
         "/var/lib/n8n:/home/node/.n8n"
         # mount secrets as files; n8n reads *_FILE envs
@@ -152,6 +152,7 @@ in {
       };
       dependsOn = ["postgres"];
       extraOptions = [
+        "--publish=127.0.0.1:${toString n8nPort}:5678"
         "--health-cmd=wget -qO- http://localhost:5678/healthz || exit 1"
         "--health-interval=30s"
         "--health-timeout=5s"
@@ -201,7 +202,7 @@ in {
       autoStart = true;
       image = "ghcr.io/open-webui/open-webui:main";
       networks = [internalNet edgeNet];
-      ports = ["127.0.0.1:${toString webUiPort}:8080"];
+      # ports = ["127.0.0.1:${toString webUiPort}:8080"];
       volumes = ["/var/lib/openwebui:/app/backend/data"];
       environment = {
         OLLAMA_BASE_URL = "http://ollama:11434";
@@ -212,6 +213,7 @@ in {
       };
       dependsOn = ["ollama" "qdrant"];
       extraOptions = [
+        "--publish=127.0.0.1:${toString webUiPort}:8080"
         "--health-cmd=wget -qO- http://localhost:8080/health || exit 1"
         "--health-interval=30s"
         "--health-timeout=5s"
