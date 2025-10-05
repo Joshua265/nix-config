@@ -146,8 +146,7 @@ in {
     "N8N_ENCRYPTION_KEY_FILE=${config.sops.secrets."n8n_encryption_key".path}"
 
     "DB_TYPE=postgresdb"
-    "DB_POSTGRESDB_HOST=http://127.0.0.1"
-    "DB_POSTGRESDB_PORT=${toString pgPort}"
+    "DB_POSTGRESDB_HOST=127.0.0.1:${toString pgPort}"
     "DB_POSTGRESDB_USER=n8n"
     "DB_POSTGRESDB_PASSWORD_FILE=${config.sops.secrets."n8n_postgres_password".path}"
   ];
