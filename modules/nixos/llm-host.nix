@@ -147,7 +147,7 @@ in {
       };
       dependsOn = ["postgres"];
       extraOptions = [
-        "--publish=127.0.0.1:${toString n8nPort}:5678"
+        "--publish=0.0.0.0:${toString n8nPort}:5678"
         "--health-cmd=wget -qO- http://localhost:5678/healthz || exit 1"
         "--health-interval=30s"
         "--health-timeout=5s"
@@ -208,7 +208,7 @@ in {
       };
       dependsOn = ["ollama" "qdrant"];
       extraOptions = [
-        "--publish=127.0.0.1:${toString webUiPort}:8080"
+        "--publish=0.0.0.0:${toString webUiPort}:8080"
         "--health-cmd=wget -qO- http://localhost:8080/health || exit 1"
         "--health-interval=30s"
         "--health-timeout=5s"
