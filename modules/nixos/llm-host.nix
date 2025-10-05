@@ -84,15 +84,6 @@ in {
   # Containers (all traffic on internalNet)
   # Only UIs also join edgeNet + bind 127.0.0.1
   #########################################
-  sops.templates."n8n.env" = {
-    content = ''
-      N8N_ENCRYPTION_KEY=${config.sops.placeholder.n8n_encryption_key}
-      N8N_BASIC_AUTH_USER=${config.sops.placeholder.n8n_basic_user}
-      N8N_BASIC_AUTH_PASSWORD=${config.sops.placeholder.n8n_basic_pass}
-      DB_POSTGRESDB_PASSWORD=${config.sops.placeholder.n8n_postgres_password}
-    '';
-    mode = "0444";
-  };
   virtualisation.oci-containers.containers = {
     postgres = {
       serviceName = svc.postgres;
@@ -124,8 +115,11 @@ in {
       # ports = ["127.0.0.1:${toString n8nPort}:5678"];
       volumes = [
         "n8n_data:/var/lib/n8n"
+        "${config.sops.secrets."n8n_encryption_key".path}:/run/secrets/n8n_encryption_key:ro"
+        "${config.sops.secrets."n8n_basic_user".path}:/run/secrets/n8n_basic_user:ro"
+        "${config.sops.secrets."n8n_basic_pass".path}:/run/secrets/n8n_basic_pass:ro"
+        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
       ];
-      environmentFiles = [config.sops.templates."n8n.env".path];
       environment = {
         N8N_HOST = "${config.networking.hostName}.ts.net"; # or your domain
         N8N_PORT = toString n8nPort;
@@ -142,6 +136,13 @@ in {
         DB_POSTGRESDB_PORT = "5432";
         DB_POSTGRESDB_DATABASE = "n8n";
         DB_POSTGRESDB_USER = "n8n";
+
+        N8N_BASIC_AUTH_USER_FILE = "/run/secrets/n8n_basic_user";
+        N8N_BASIC_AUTH_PASSWORD_FILE = "/run/secrets/n8n_basic_pass";
+
+        # Encryption key from a mounted file
+        N8N_ENCRYPTION_KEY_FILE = "/run/secrets/n8n_encryption_key";
+        DB_POSTGRESDB_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
       };
       dependsOn = ["postgres"];
       extraOptions = [
