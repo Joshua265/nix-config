@@ -86,10 +86,10 @@ in {
   #########################################
   sops.templates."n8n.env" = {
     content = ''
-      N8N_ENCRYPTION_KEY_FILE=${config.sops.placeholder.n8n_encryption_key}
-      N8N_BASIC_AUTH_USER_FILE=${config.sops.placeholder.n8n_basic_user}
-      N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.placeholder.n8n_basic_pass}
-      DB_POSTGRESDB_PASSWORD_FILE=${config.sops.placeholder.n8n_postgres_password}
+      N8N_ENCRYPTION_KEY=${config.sops.placeholder.n8n_encryption_key}
+      N8N_BASIC_AUTH_USER=${config.sops.placeholder.n8n_basic_user}
+      N8N_BASIC_AUTH_PASSWORD=${config.sops.placeholder.n8n_basic_pass}
+      DB_POSTGRESDB_PASSWORD=${config.sops.placeholder.n8n_postgres_password}
     '';
     mode = "0444";
   };
