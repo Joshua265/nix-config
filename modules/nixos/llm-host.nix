@@ -104,7 +104,7 @@ in {
       environment = {
         POSTGRES_USER = "n8n";
         POSTGRES_DB = "n8n";
-        POSTGRES_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
+        POSTGRES_PASSWORD_FILE = config.sops.secrets.n8n_postgres_password.path;
       };
       extraOptions = [
         "--health-cmd=pg_isready -U n8n -d n8n -h 127.0.0.1"
