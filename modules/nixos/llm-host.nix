@@ -10,6 +10,7 @@
 
   # Network names
   internalNet = "ai_internal"; # internal-only, no egress
+  egressNet = "ai_egress";
   edgeNet = "ai_edge"; # for binding localhost UI ports
 
   # Convenience: container unit names so we can wire systemd deps
@@ -79,6 +80,16 @@ in {
         ${pkgs.docker}/bin/docker network create ${edgeNet}
     '';
   };
+  systemd.services."docker-net-${egressNet}" = {
+    description = "Create Docker egress network ${egressNet}";
+    after = ["docker.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      ${pkgs.docker}/bin/docker network inspect ${egressNet} >/dev/null 2>&1 || \
+        ${pkgs.docker}/bin/docker network create ${egressNet}
+    '';
+  };
 
   #########################################
   # Containers (all traffic on internalNet)
@@ -112,7 +123,7 @@ in {
       serviceName = svc.n8n;
       autoStart = true;
       image = "n8nio/n8n:latest";
-      networks = [internalNet edgeNet];
+      networks = [internalNet egressNet edgeNet];
       # ports = ["127.0.0.1:${toString n8nPort}:5678"];
       volumes = [
         "n8n_data:/var/lib/n8n"
@@ -160,7 +171,7 @@ in {
       serviceName = svc.ollama;
       autoStart = true;
       image = "ollama/ollama:latest";
-      networks = [internalNet];
+      networks = [internalNet egressNet];
       volumes = ["/var/lib/ollama:/root/.ollama"];
       # CDI devices (set by hardware.nvidia-container-toolkit.enable)
       devices = ["nvidia.com/gpu=all"];
