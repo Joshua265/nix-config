@@ -38,7 +38,7 @@ in {
   sops.age.keyFile = "/home/user/.config/sops/age/keys.txt";
   sops.secrets = {
     "tailscale_auth_key" = {};
-    "n8n_postgres_password" = {mode = "0444";}; # war 0400
+    "n8n_postgres_password" = {mode = "0444";};
     "n8n_encryption_key" = {mode = "0444";};
     "n8n_basic_user" = {mode = "0444";};
     "n8n_basic_pass" = {mode = "0444";};
@@ -100,7 +100,6 @@ in {
       networks = [internalNet];
       volumes = [
         "pgdata:/var/lib/postgresql/data"
-        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
       ];
       environment = {
         POSTGRES_USER = "n8n";
@@ -142,7 +141,7 @@ in {
         DB_POSTGRESDB_PORT = "5432";
         DB_POSTGRESDB_DATABASE = "n8n";
         DB_POSTGRESDB_USER = "n8n";
-        DB_POSTGRESDB_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
+        DB_POSTGRESDB_PASSWORD_FILE = config.sops.secrets.n8n_postgres_password.path;
       };
       dependsOn = ["postgres"];
       extraOptions = [
