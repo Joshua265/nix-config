@@ -89,6 +89,7 @@ in {
       N8N_ENCRYPTION_KEY_FILE=${config.sops.placeholder.n8n_encryption_key}
       N8N_BASIC_AUTH_USER_FILE=${config.sops.placeholder.n8n_basic_user}
       N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.placeholder.n8n_basic_pass}
+      DB_POSTGRESDB_PASSWORD_FILE=${config.sops.placeholder.n8n_postgres_password}
     '';
     mode = "0444";
   };
@@ -141,7 +142,6 @@ in {
         DB_POSTGRESDB_PORT = "5432";
         DB_POSTGRESDB_DATABASE = "n8n";
         DB_POSTGRESDB_USER = "n8n";
-        DB_POSTGRESDB_PASSWORD_FILE = config.sops.secrets.n8n_postgres_password.path;
       };
       dependsOn = ["postgres"];
       extraOptions = [
