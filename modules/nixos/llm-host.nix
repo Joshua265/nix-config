@@ -92,11 +92,12 @@ in {
       networks = [internalNet];
       volumes = [
         "pgdata:/var/lib/postgresql/data"
+        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
       ];
       environment = {
         POSTGRES_USER = "n8n";
         POSTGRES_DB = "n8n";
-        POSTGRES_PASSWORD_FILE = config.sops.secrets.n8n_postgres_password.path;
+        POSTGRES_PASSWORD_FILE = "/run/secrets/n8n_postgres_password";
       };
       extraOptions = [
         "--health-cmd=pg_isready -U n8n -d n8n -h 127.0.0.1"
