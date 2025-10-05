@@ -122,7 +122,7 @@ in {
       networks = [internalNet edgeNet];
       # ports = ["127.0.0.1:${toString n8nPort}:5678"];
       volumes = [
-        "/var/lib/n8n:/home/node/.n8n"
+        "n8n_data:/var/lib/n8n"
         # mount secrets as files; n8n reads *_FILE envs
         "${config.sops.secrets."n8n_basic_user".path}:/run/secrets/n8n_basic_user:ro"
         "${config.sops.secrets."n8n_basic_pass".path}:/run/secrets/n8n_basic_pass:ro"
