@@ -56,13 +56,6 @@ in {
     interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort];
     allowedUDPPorts = [config.services.tailscale.port];
   };
-  #############
-  # Data dirs #
-  #############
-  system.activationScripts.aiDataDirs.text = ''
-    install -d -m0750 -o root -g root /var/lib/{postgres,n8n,ollama,openwebui,qdrant}
-  '';
-
   ############################################
   # Create Docker networks (idempotent, boot)#
   ############################################
@@ -91,6 +84,14 @@ in {
   # Containers (all traffic on internalNet)
   # Only UIs also join edgeNet + bind 127.0.0.1
   #########################################
+  sops.templates."n8n.env" = {
+    content = ''
+      N8N_ENCRYPTION_KEY_FILE=${config.sops.placeholder.n8n_encryption_key}
+      N8N_BASIC_AUTH_USER_FILE=${config.sops.placeholder.n8n_basic_user}
+      N8N_BASIC_AUTH_PASSWORD_FILE=${config.sops.placeholder.n8n_basic_pass}
+    '';
+    mode = "0444";
+  };
   virtualisation.oci-containers.containers = {
     postgres = {
       serviceName = svc.postgres;
@@ -98,7 +99,7 @@ in {
       image = "postgres:16-alpine";
       networks = [internalNet];
       volumes = [
-        "/var/lib/postgres:/var/lib/postgresql/data"
+        "pgdata:/var/lib/postgresql/data"
         "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
       ];
       environment = {
@@ -123,12 +124,8 @@ in {
       # ports = ["127.0.0.1:${toString n8nPort}:5678"];
       volumes = [
         "n8n_data:/var/lib/n8n"
-        # mount secrets as files; n8n reads *_FILE envs
-        "${config.sops.secrets."n8n_basic_user".path}:/run/secrets/n8n_basic_user:ro"
-        "${config.sops.secrets."n8n_basic_pass".path}:/run/secrets/n8n_basic_pass:ro"
-        "${config.sops.secrets."n8n_encryption_key".path}:/run/secrets/n8n_encryption_key:ro"
-        "${config.sops.secrets."n8n_postgres_password".path}:/run/secrets/n8n_postgres_password:ro"
       ];
+      environmentFiles = [config.sops.templates."n8n.env".path];
       environment = {
         N8N_HOST = "${config.networking.hostName}.ts.net"; # or your domain
         N8N_PORT = toString n8nPort;
@@ -137,6 +134,7 @@ in {
         N8N_WEBHOOK_URL = "http://${config.networking.hostName}:${toString n8nPort}";
         N8N_DIAGNOSTICS_ENABLED = "false";
         N8N_PERSONALIZATION_ENABLED = "false";
+        N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS = "true";
 
         N8N_BASIC_AUTH_ACTIVE = "true";
         N8N_BASIC_AUTH_USER_FILE = "/run/secrets/n8n_basic_user";
