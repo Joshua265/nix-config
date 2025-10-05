@@ -135,11 +135,7 @@ in {
         N8N_DIAGNOSTICS_ENABLED = "false";
         N8N_PERSONALIZATION_ENABLED = "false";
         N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS = "true";
-
         N8N_BASIC_AUTH_ACTIVE = "true";
-        N8N_BASIC_AUTH_USER_FILE = "/run/secrets/n8n_basic_user";
-        N8N_BASIC_AUTH_PASSWORD_FILE = "/run/secrets/n8n_basic_pass";
-        N8N_ENCRYPTION_KEY_FILE = "/run/secrets/n8n_encryption_key";
 
         DB_TYPE = "postgresdb";
         DB_POSTGRESDB_HOST = "postgres";
