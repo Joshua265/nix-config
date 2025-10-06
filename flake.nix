@@ -201,7 +201,6 @@
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
           inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          nixpkgs.nixosModules.readOnlyPkgs
           {nixpkgs.pkgs = pkgs;}
           {
             home-manager.users.user = import ./home-manager/surface/home.nix;
@@ -214,7 +213,7 @@
       };
       nixos-framework = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs outputs pkgs;};
+        specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
           ./nixos/framework/configuration.nix
@@ -222,13 +221,12 @@
           home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
           inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series1
-          nixpkgs.nixosModules.readOnlyPkgs
           {nixpkgs.pkgs = pkgs;}
           {
             home-manager.users.user = import ./home-manager/framework/home.nix;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
-              inherit inputs outputs nix-colors youtube-transcribe-flake;
+              inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };
           }
         ];

@@ -12,7 +12,6 @@
     outputs.nixosModules.discord
     outputs.nixosModules.docker
     outputs.nixosModules.display-manager
-    outputs.nixosModules.auto-upgrade
     outputs.nixosModules.security
     outputs.nixosModules.fonts
     outputs.nixosModules.musnix

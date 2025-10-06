@@ -16,7 +16,7 @@
     # NixOS modules
     outputs.nixosModules.fingerprint
     outputs.nixosModules.musnix
-    outputs.nixosModules.vllm-client
+    outputs.nixosModules.llm-client
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -61,7 +61,7 @@
         CPU_MIN_PERF_ON_AC = 0;
 
         # Optional: disable turbo on battery for big gains (test workload impact)
-        CPU_BOOST_ON_BAT = 0;
+        CPU_BOOST_ON_BAT = 1;
       };
     };
 
