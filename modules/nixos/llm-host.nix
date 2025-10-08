@@ -54,7 +54,7 @@ in {
   networking.firewall = {
     enable = true;
     # Expose services only over the Tailscale interface
-    interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort];
+    interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort 22];
     allowedUDPPorts = [config.services.tailscale.port];
   };
   ############################################
