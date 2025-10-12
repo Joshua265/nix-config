@@ -50,6 +50,7 @@
 
     # music & DAW
     audacity
+    musescore
 
     # coding
     # vscodium from modules
