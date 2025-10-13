@@ -195,7 +195,7 @@ in ''
     font-size: 24px;
     padding: 0px;
     margin: 2px 2px;
-    min-width: 24px
+    min-width: 24px;
     border-radius: 12px;
   }
   #custom-launcher:hover {
