@@ -75,7 +75,6 @@ in ''
   #disk,
   #temperature,
   #custom-hyprpicker,
-  #custom-launcher,
   #custom-power,
   #custom-wlogout,
   #window,
@@ -85,7 +84,7 @@ in ''
     color: ${text_main};
     padding: 6px 10px;
     margin: 6px 6px;
-    border-radius: 14px;
+    border-radius: 12px;
     border: 1px solid ${glass_stroke};
     box-shadow:
       inset 0 1px 0 ${glass_inner},
@@ -93,7 +92,7 @@ in ''
   }
 
   /* Slightly softer backdrop for some blocks to create hierarchy */
-  #clock, #tray, #custom-launcher {
+  #clock, #tray {
     background: ${glass_bg_soft};
   }
 
@@ -130,7 +129,7 @@ in ''
   #clock {
     font-weight: 700;
     padding: 6px 14px;
-    border-radius: 12px 12px 12px 24px;
+    border-radius: 12px 12px 12px 12px;
     color: ${cyan_fg}; /* base06 pop */
   }
 
@@ -193,9 +192,10 @@ in ''
   /* ==== Launcher / Power / Window title =================================== */
   #custom-launcher {
     color: ${acc_fg};
-    font-size: 42px;
-    padding: 2px 2px 2px 2px;
-    border-radius: 14px 14px 22px 14px;
+    font-size: 36px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 18px;
   }
   #custom-launcher:hover {
     background: ${acc_bg};

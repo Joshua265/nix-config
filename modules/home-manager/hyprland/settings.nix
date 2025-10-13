@@ -59,24 +59,29 @@ in {
   decoration = {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-    rounding = 8;
-    inactive_opacity = 0.8;
-    active_opacity = 0.95;
+    rounding = 12;
+    inactive_opacity = 0.93;
+    active_opacity = 0.98;
 
     blur = {
       enabled = true;
-      xray = true;
       special = false;
       new_optimizations = true;
-      size = 5;
-      passes = 4;
+      size = 8;
+      passes = 2;
       brightness = 1;
       noise = 1.0e-2;
       contrast = 1;
+      vibrancy = 0.2;
+      ignore_opacity = true;
+      xray = false;
     };
 
     shadow = {
       enabled = true;
+      range = 4;
+      render_power = 3;
+      color = "#1a1a1aff";
     };
   };
 
