@@ -153,7 +153,7 @@ in {
   };
 
   gesture = [
-    "3, horizontal, split:workspace"
+    "3, horizontal, workspace"
   ];
 
   # Set programs that you use
