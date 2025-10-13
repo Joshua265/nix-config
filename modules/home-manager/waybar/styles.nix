@@ -194,7 +194,7 @@ in ''
     color: ${acc_fg};
     font-size: 36px;
     padding: 0px;
-    margin: 0px;
+    margin: 6px 6px;
     border-radius: 18px;
   }
   #custom-launcher:hover {
