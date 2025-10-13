@@ -21,8 +21,8 @@
   };
 
   wayland.windowManager.hyprland.settings.monitor = [
-    "eDP-1, 2256x1504@60, 0x0, 1"
-    ",preferred,auto,1,mirror,eDP-1"
+    "eDP-1, 2256x1504@60, 0x0, 2"
+    ",preferred,auto,2,mirror,eDP-1"
   ];
 
   waybar.keyboard-name = "at-translated-set-2-keyboard";

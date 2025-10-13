@@ -1,9 +1,26 @@
 {
   inputs,
-  lib,
+  config,
   pkgs,
+  nix-colors,
   ...
 }: let
+  hexToRGB = hex: let
+    rgb = nix-colors.lib.conversions.hexToRGB hex;
+  in
+    rgb;
+  hexToRGBA = hex: alpha: let
+    rgb = hexToRGB hex;
+    r = toString (builtins.elemAt rgb 0);
+    g = toString (builtins.elemAt rgb 1);
+    b = toString (builtins.elemAt rgb 2);
+    a = toString alpha;
+  in "rgba(${r}${g}${b}${a})";
+
+  palette = config.colorScheme.palette;
+  active_border = hexToRGBA palette.base05 1.00;
+  inactive_border = hexToRGBA palette.base02 0.55;
+
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     # killall -q waybar &
     systemctl --user start hyprpolkitagent
@@ -24,8 +41,8 @@ in {
     gaps_in = 4;
     gaps_out = 5;
     border_size = 2;
-    "col.active_border" = "rgba(471868FF)";
-    "col.inactive_border" = "rgba(4f4256CC)";
+    "col.active_border" = active_border;
+    "col.inactive_border" = inactive_border;
 
     layout = "dwindle";
 
@@ -93,8 +110,10 @@ in {
     "noanim, selection"
     "noanim, overview"
     "noanim, anyrun"
+    "blur, notifications"
+    "ignorealpha 0.06, notifications"
     "blur, waybar"
-    "ignorealpha 0.8, waybar"
+    "ignorealpha 0.06, waybar"
     "noanim, noanim"
     "blur, noanim"
     "blur, gtk-layer-shell"

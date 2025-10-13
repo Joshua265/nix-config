@@ -2,19 +2,18 @@
   config,
   pkgs,
   inputs,
+  nix-colors,
   lib,
   ...
 }: let
-  settings = import ./settings.nix {inherit inputs config pkgs lib;};
+  settings = import ./settings.nix {inherit inputs config pkgs lib nix-colors;};
 in {
   home.packages = with pkgs; [
-    libnotify # Required for dunst
     dconf # Required for gtk
     cliphist # Clipboard manager
     wl-clipboard # Cliphist dependency
     go # Required for cliphist
     xdg-utils # mimetypes
-    mako
     swww
     kitty
     alacritty
@@ -89,7 +88,6 @@ in {
     xdgOpenUsePortal = true;
     config = {
       common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
       pantheon = {
         default = [
           "pantheon"
@@ -114,9 +112,9 @@ in {
   };
 
   # use KDE filepicker
-  # home.file.".config/xdg-desktop-portal/hyprland-portals.conf".source = ''
-  #   [preferred]
-  #   default = hyprland;gtk
-  #   org.freedesktop.impl.portal.FileChooser = kde
-  # '';
+  home.file.".config/xdg-desktop-portal/hyprland-portals.conf".text = ''
+    [preferred]
+    default = hyprland;gtk
+    org.freedesktop.impl.portal.FileChooser = kde
+  '';
 }

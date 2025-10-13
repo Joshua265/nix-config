@@ -67,16 +67,6 @@ in {
         }
         {
           monitor = "";
-          text = "Hi there, $USER";
-          color = foreground;
-          font_size = 25;
-          font_family = "JetBrains Mono Nerd Font Mono";
-          position = "0 ,-40";
-          halign = "center";
-          valign = "center";
-        }
-        {
-          monitor = "";
           text = ''cmd[update:1000] echo "$(playerctl metadata --format '{{title}}  {{artist}}')"'';
           color = foreground;
           font_size = 18;

@@ -17,4 +17,5 @@
   nextcloud-client = import ./nextcloud-client;
   starship = import ./starship.nix;
   yazi = import ./yazi.nix;
+  mako = import ./mako.nix;
 }

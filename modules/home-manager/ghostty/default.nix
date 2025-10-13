@@ -29,19 +29,19 @@
       theme = "custom-base16";
       font-size = 10;
       keybind = [
-        # "ctrl+h=goto_split:left"
-        # "ctrl+l=goto_split:right"
-        # "ctrl+n=new_window"
-        # "ctrl+h=goto_split:left"
-        # "ctrl+j=goto_split:bottom"
-        # "ctrl+k=goto_split:top"
-        # "ctrl+l=goto_split:right"
+        "ctrl+h=goto_split:left"
+        "ctrl+l=goto_split:right"
+        "ctrl+n=new_window"
+        "ctrl+h=goto_split:left"
+        "ctrl+j=goto_split:bottom"
+        "ctrl+k=goto_split:top"
+        "ctrl+l=goto_split:right"
 
-        # "ctrl+a>h=new_split:left"
-        # "ctrl+a>j=new_split:down"
-        # "ctrl+a>k=new_split:up"
-        # "ctrl+a>l=new_split:right"
-        # "ctrl+a>f=toggle_split_zoom"
+        "ctrl+a>h=new_split:left"
+        "ctrl+a>j=new_split:down"
+        "ctrl+a>k=new_split:up"
+        "ctrl+a>l=new_split:right"
+        "ctrl+a>f=toggle_split_zoom"
 
         "ctrl+a>n=next_tab"
         "ctrl+a>p=previous_tab"
@@ -72,8 +72,8 @@
           "14=#${config.colorScheme.palette.base0E}"
           "15=#${config.colorScheme.palette.base0F}"
         ];
-        selection-background = "353749";
-        selection-foreground = "cdd6f4";
+        selection-background = "#${config.colorScheme.palette.base03}";
+        selection-foreground = "#${config.colorScheme.palette.base02}";
       };
     };
   };

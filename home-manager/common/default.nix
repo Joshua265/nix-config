@@ -25,6 +25,7 @@
     outputs.homeManagerModules.adour
     outputs.homeManagerModules.starship
     outputs.homeManagerModules.okular-obsidian
+    outputs.homeManagerModules.mako
   ];
   nixpkgs = {
     # You can add overlays here
@@ -79,7 +80,30 @@
     EDITOR = "nvim";
   };
 
-  colorScheme = nix-colors.colorSchemes.mellow-purple;
+  colorScheme = {
+    slug = "robotic-mermaid";
+    name = "Robotic Mermaid";
+    author = "Joshua Hermann";
+    variant = "dark";
+    palette = {
+      base00 = "#271C3A";
+      base01 = "#002122";
+      base02 = "#034a4c";
+      base03 = "#106f71";
+      base04 = "#269093";
+      base05 = "#44aeb1";
+      base06 = "#6ac8cb";
+      base07 = "#98dfe1";
+      base08 = "#cff3f3";
+      base09 = "#d76d6a";
+      base0A = "#b0893b";
+      base0B = "#73a83c";
+      base0C = "#46b66c";
+      base0D = "#41acaf";
+      base0E = "#698fdd";
+      base0F = "#a571dc";
+    };
+  };
 
   # Shell Aliases
   home.shellAliases = {
