@@ -16,7 +16,7 @@
     ${pkgs.waybar}/bin/waybar &
     ${inputs.hypridle.packages.${pkgs.system}.hypridle}/bin/hypridle &
     sleep 1
-    ${pkgs.swww}/bin/swww img ${./wallpaper/hhma415rpztb1.jpg} &
+    ${pkgs.swww}/bin/swww img ${./wallpaper/cyberpunk-street-night-4k-ol.jpg} &
     ${pkgs.mako}/bin/mako init &
     nm-applet --indicator &
     wl-paste --type text --watch cliphist store &
