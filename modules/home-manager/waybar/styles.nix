@@ -73,9 +73,11 @@ in ''
   #cpu,
   #memory,
   #disk,
+  #temperature,
   #custom-hyprpicker,
   #custom-launcher,
   #custom-power,
+  #custom-wlogout,
   #window,
   #language,
   #custom-wf-recorder {
@@ -91,7 +93,7 @@ in ''
   }
 
   /* Slightly softer backdrop for some blocks to create hierarchy */
-  #clock, #tray, #custom-launcher, #custom-power {
+  #clock, #tray, #custom-launcher {
     background: ${glass_bg_soft};
   }
 
@@ -101,7 +103,7 @@ in ''
   }
 
   #workspaces button {
-    padding: 2px 8px;
+    padding: 2px 2px;
     margin: 2px 3px;
     color: ${text_muted};
     border-radius: 10px;
@@ -178,6 +180,7 @@ in ''
   #cpu,
   #memory,
   #disk,
+  #temperature,
   #custom-hyprpicker {
     font-weight: 700;
     padding: 4px 12px;
@@ -190,9 +193,9 @@ in ''
   /* ==== Launcher / Power / Window title =================================== */
   #custom-launcher {
     color: ${acc_fg};
-    font-size: 20px;
-    padding: 4px 16px 4px 14px;
-    border-radius: 14px 22px 14px 14px;
+    font-size: 42px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 14px 14px 22px 14px;
   }
   #custom-launcher:hover {
     background: ${acc_bg};

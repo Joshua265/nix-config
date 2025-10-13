@@ -9,23 +9,8 @@
 
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
-    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == ${config.waybar.keyboard-name}) | .active_keymap')
-    echo $layout
-  '';
-  playerctl = pkgs.writeScriptBin "playerctl" ''
-    #!/bin/bash
-
-    playerctl_status=$(playerctl status 2>/dev/null)
-
-    if [[ $playerctl_status == "Playing" ]]; then
-        title=$(playerctl metadata title 2>/dev/null)
-        echo '{"text":"󰎈 󰏤","class":"playing","title":"$title"}'
-    elif [[ $playerctl_status == "Paused" ]]; then
-        title=$(playerctl metadata title 2>/dev/null)
-        echo '{"text":"󰎈 󰐊","class":"paused","title":"$title"}'
-    else
-        echo '{"text":""}'
-    fi
+    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "${config.waybar.keyboard-name}") | .active_keymap')
+    'echo ''${layout//\"}'
   '';
 in {
   options = {
