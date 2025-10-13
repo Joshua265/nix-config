@@ -90,7 +90,8 @@ in {
             interval = 5;
             format = " {}";
           };
-          "clock" = {
+          clock = {
+            interval = 1;
             "format" = "  {:%H:%M:%S}";
             "tooltip" = "true";
             "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
