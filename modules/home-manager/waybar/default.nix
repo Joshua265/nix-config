@@ -9,8 +9,20 @@
 
   getKeyboardLayoutScript = pkgs.writeScriptBin "getKeyboardLayout" ''
     #!${pkgs.bash}/bin/bash
-    layout=$(hyprctl devices -j | jq '.keyboards[] | select(.name == "${config.waybar.keyboard-name}") | .active_keymap')
-    'echo ''${layout//\"}'
+    set -euo pipefail
+
+    layout=$(
+      hyprctl devices -j \
+      | jq -r --arg name "${config.waybar.keyboard-name}" \
+          '.keyboards[] | select(.name == $name) | .active_keymap'
+    )
+
+    if [[ -n "$layout" && "$layout" != "null" ]]; then
+      echo "$layout"
+    else
+      echo "unknown"
+      exit 1
+    fi
   '';
 in {
   options = {
