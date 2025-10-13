@@ -192,10 +192,10 @@ in ''
   /* ==== Launcher / Power / Window title =================================== */
   #custom-launcher {
     color: ${acc_fg};
-    font-size: 36px;
+    font-size: 24px;
     padding: 0px;
-    margin: 6px 6px;
-    border-radius: 18px;
+    margin: 2px 2px;
+    border-radius: 12px;
   }
   #custom-launcher:hover {
     background: ${acc_bg};
