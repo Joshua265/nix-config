@@ -1,8 +1,22 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
-}: {
+}: let
+  obsidianWithExtras = pkgs.symlinkJoin {
+    name = "obsidian-with-extras";
+    paths = [pkgs.obsidian];
+    buildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/obsidian \
+        --prefix PATH : ${lib.makeBinPath [
+        pkgs.tesseract
+        pkgs.pdfannots2json
+      ]}
+    '';
+  };
+in {
   home.packages = with pkgs; [
     # essentials
     discord
@@ -41,8 +55,10 @@
     teams-for-linux
     whatsapp-for-linux
     webex
-    unstable.obsidian
     kdePackages.xwaylandvideobridge
+
+    obsidianWithExtras
+    zotero
 
     # 2D
     krita
