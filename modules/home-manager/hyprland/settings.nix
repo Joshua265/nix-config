@@ -5,21 +5,9 @@
   nix-colors,
   ...
 }: let
-  hexToRGB = hex: let
-    rgb = nix-colors.lib.conversions.hexToRGB hex;
-  in
-    rgb;
-  hexToRGBA = hex: alpha: let
-    rgb = hexToRGB hex;
-    r = toString (builtins.elemAt rgb 0);
-    g = toString (builtins.elemAt rgb 1);
-    b = toString (builtins.elemAt rgb 2);
-    a = toString alpha;
-  in "rgba(${r}${g}${b}${a})";
-
   palette = config.colorScheme.palette;
-  active_border = hexToRGBA palette.base05 1.00;
-  inactive_border = hexToRGBA palette.base02 0.55;
+  active_border = "rgba(${palette.base05}FF)";
+  inactive_border = "rgba(${palette.base02}C5)";
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     # killall -q waybar &
@@ -164,11 +152,10 @@ in {
     ];
   };
 
-  # gesture = [
-  #   "3, left, split:workspace, -1"
-  #   "3, right, split:workspace, +1"
-  # ];
-  # wait till latest git >v50 in nixos
+  gesture = [
+    "3, left, split:workspace, -1"
+    "3, right, split:workspace, +1"
+  ];
 
   # Set programs that you use
   "$terminal" = "ghostty";
