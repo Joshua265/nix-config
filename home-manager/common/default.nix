@@ -86,7 +86,7 @@
     author = "Joshua Hermann";
     variant = "dark";
     palette = {
-      base00 = "#271C3A";
+      base00 = "#181818";
       base01 = "#002122";
       base02 = "#034a4c";
       base03 = "#106f71";

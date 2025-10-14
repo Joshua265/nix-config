@@ -7,6 +7,7 @@
   # Ports (only UIs are bound to localhost)
   n8nPort = 5678;
   webUiPort = 8080;
+  ollamaPort = 11434;
 
   # Network names
   internalNet = "ai_internal"; # internal-only, no egress
@@ -54,7 +55,7 @@ in {
   networking.firewall = {
     enable = true;
     # Expose services only over the Tailscale interface
-    interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort 22];
+    interfaces.tailscale0.allowedTCPPorts = [webUiPort n8nPort ollamaPort 22];
     allowedUDPPorts = [config.services.tailscale.port];
   };
   ############################################
@@ -171,7 +172,7 @@ in {
       serviceName = svc.ollama;
       autoStart = true;
       image = "ollama/ollama:latest";
-      networks = [internalNet egressNet];
+      networks = [internalNet egressNet edgeNet];
       volumes = ["/var/lib/ollama:/root/.ollama"];
       # CDI devices (set by hardware.nvidia-container-toolkit.enable)
       devices = ["nvidia.com/gpu=all"];
@@ -180,6 +181,7 @@ in {
       };
       # If you also want host access to API, add: ports = [ "127.0.0.1:11434:11434" ];
       extraOptions = [
+        "--publish=0.0.0.0:${toString ollamaPort}:11434"
         "--health-cmd=wget -qO- http://localhost:11434/api/version || exit 1"
         "--health-interval=30s"
         "--health-timeout=5s"
