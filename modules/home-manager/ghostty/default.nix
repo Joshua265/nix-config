@@ -51,9 +51,9 @@
     };
     themes = {
       custom-base16 = {
-        background = config.colorScheme.palette.base01;
+        background = config.colorScheme.palette.base00;
         cursor-color = config.colorScheme.palette.base07;
-        foreground = config.colorScheme.palette.base05;
+        foreground = config.colorScheme.palette.base06;
         palette = [
           "0=#${config.colorScheme.palette.base00}"
           "1=#${config.colorScheme.palette.base01}"

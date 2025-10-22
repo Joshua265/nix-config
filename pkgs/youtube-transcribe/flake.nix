@@ -44,7 +44,7 @@
         runtimeDependencies = with pkgs; [
           yt-dlp # For downloading videos
           ffmpeg # For video/audio processing
-          whisper-cpp-vulkan # Whisper C++ CLI
+          whisper-cpp # Whisper C++ CLI
           glib # Also a runtime dependency
           openssl # Also a runtime dependency
           zlib # Also a runtime dependency
