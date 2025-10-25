@@ -42,6 +42,6 @@
 
     # flatpak
     # gnome.gnome-software
-    lutris
+    unstable.lutris
   ];
 }

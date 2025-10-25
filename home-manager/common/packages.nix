@@ -25,6 +25,7 @@ in {
     blender
     cura-appimage
     orca-slicer
+    bambu-studio
 
     # essentials
     firefox

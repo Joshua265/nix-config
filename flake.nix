@@ -108,7 +108,12 @@
     overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "mbedtls-2.28.10"
+        ];
+      };
       overlays = [
         overlays.additions
         overlays.legacy-packages
@@ -125,6 +130,9 @@
         cudaSupport = true;
         cudnnSupport = true;
         cudaCapabilities = ["8.6"];
+        permittedInsecurePackages = [
+          "mbedtls-2.28.10"
+        ];
       };
       overlays = [
         overlays.additions
