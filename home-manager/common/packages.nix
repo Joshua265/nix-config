@@ -25,15 +25,19 @@ in {
     blender
     cura-appimage
     orca-slicer
-    (bambu-studio.overrideAttrs (old: {
-      version = "02.03.00.70";
+    (bambu-studio.overrideAttrs (old: let
+      newVersion = "02.03.00.70";
+    in {
+      version = newVersion;
 
+      # Wichtig: rev statt tag
       src = fetchFromGitHub {
         owner = "bambulab";
         repo = "BambuStudio";
-        tag = "v02.03.00.70";
-        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8=";
+        rev = "v${newVersion}";
+        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8="; # anpassen falls nötig
       };
+
       cmakeFlags =
         (old.cmakeFlags or [])
         ++ [
