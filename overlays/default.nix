@@ -48,6 +48,12 @@
               done
             '';
 
+          postInstall =
+            (old.postInstall or "")
+            + ''
+              wrapProgram $out/bin/bambu-studio --set GBM_BACKEND dri
+            '';
+
           cmakeFlags =
             (old.cmakeFlags or [])
             ++ [
