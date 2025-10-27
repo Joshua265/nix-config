@@ -119,6 +119,7 @@
         overlays.legacy-packages
         overlays.unstable-packages
         overlays.nixGLOverlay
+        overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
       ];
@@ -139,6 +140,7 @@
         overlays.legacy-packages
         overlays.unstable-packages
         overlays.nixGLOverlay
+        overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
       ];

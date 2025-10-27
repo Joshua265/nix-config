@@ -5,7 +5,11 @@
   ...
 }: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs {pkgs = final; youtube-transcribe-flake = inputs.youtube-transcribe-flake;};
+  additions = final: _prev:
+    import ../pkgs {
+      pkgs = final;
+      youtube-transcribe-flake = inputs.youtube-transcribe-flake;
+    };
 
   nixGLOverlay = import ./nix-gl.nix {
     nixGL = inputs.nixGL.packages.${system};
@@ -15,19 +19,42 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    xwayland = prev.xwayland.overrideAttrs (o: {
-      patches =
-        (o.patches or [])
-        ++ [
-        ];
-    });
-    # kwin = prev.kwin.overrideAttrs (o: {
-    #   patches =
-    #     (o.patches or [])
-    #     ++ [
-    #       ./patches/kwin.patch
-    #     ];
-    # });
+    unstable =
+      prev.unstable
+      // {
+        bambu-studio = prev.unstable.bambu-studio.overrideAttrs (old: let
+          newVersion = "02.03.00.70";
+        in {
+          version = newVersion;
+          src = prev.fetchFromGitHub {
+            owner = "bambulab";
+            repo = "BambuStudio";
+            rev = "v${newVersion}";
+            hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8="; # ggf. mit lib.fakeSha256 ermitteln
+          };
+
+          # falls nötig: nativeBuildInputs erweitern, nicht buildInputs
+          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [prev.cmake prev.pkg-config];
+
+          postPatch =
+            (old.postPatch or "")
+            + ''
+              # Entferne fälschliche cereal-Links (header-only).
+              grep -RIl "target_link_libraries" . | while read -r f; do
+                sed -i \
+                  -e 's/\bcereal::cereal\b//g' \
+                  -e 's/[[:space:]]\bcereal\b//g' \
+                  "$f"
+              done
+            '';
+
+          cmakeFlags =
+            (old.cmakeFlags or [])
+            ++ [
+              "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+            ];
+        });
+      };
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

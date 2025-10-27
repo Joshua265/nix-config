@@ -25,25 +25,8 @@ in {
     blender
     cura-appimage
     orca-slicer
-    (bambu-studio.overrideAttrs (old: let
-      newVersion = "02.03.00.70";
-    in {
-      version = newVersion;
+    unstable.bambu-studio
 
-      # Wichtig: rev statt tag
-      src = fetchFromGitHub {
-        owner = "bambulab";
-        repo = "BambuStudio";
-        tag = "v${newVersion}";
-        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8=";
-      };
-
-      cmakeFlags =
-        (old.cmakeFlags or [])
-        ++ [
-          "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-        ];
-    }))
     # essentials
     firefox
     chromium
