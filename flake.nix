@@ -87,6 +87,8 @@
       url = "path:./pkgs/youtube-transcribe";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # bambu-studio.url = "path:./pkgs/bambu-studio";
   };
 
   outputs = {
@@ -103,7 +105,7 @@
     system = "x86_64-linux";
     # Your custom packages and modifications, exported as overlays
     openglWrappedOverlay = final: prev:
-      prev.lib.genAttrs ["kitty" "alacritty" "blender" "zen-browser" "freecad" "wasistlos"]
+      prev.lib.genAttrs ["kitty" "alacritty" "blender" "zen-browser" "freecad" "wasistlos" "bambu-studio"]
       (name: final.wrapWithNixGLIntel prev.${name});
     overlays = import ./overlays {inherit inputs system;};
     pkgs = import nixpkgs {
