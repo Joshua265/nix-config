@@ -34,8 +34,8 @@ in {
       src = fetchFromGitHub {
         owner = "bambulab";
         repo = "BambuStudio";
-        rev = "v${newVersion}";
-        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8="; # anpassen falls nötig
+        tag = "v${newVersion}";
+        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8=";
       };
 
       cmakeFlags =
