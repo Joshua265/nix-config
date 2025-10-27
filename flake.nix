@@ -87,8 +87,6 @@
       url = "path:./pkgs/youtube-transcribe";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # bambu-studio.url = "path:./pkgs/bambu-studio";
   };
 
   outputs = {

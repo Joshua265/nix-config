@@ -17,7 +17,6 @@
     '';
   };
 in {
-  # inputs.bambu-studio.buildFromSource.enable = true;
   home.packages = with pkgs; [
     # essentials
     discord
@@ -26,23 +25,21 @@ in {
     blender
     cura-appimage
     orca-slicer
-    # (unstable.bambu-studio.overrideAttrs (old: {
-    #   cmakeFlags =
-    #     (old.cmakeFlags or [])
-    #     ++ [
-    #       "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-    #     ];
+    (bambu-studio.overrideAttrs (old: {
+      version = "02.03.00.70";
 
-    #   # Remove explicit -lcereal link flags injected by upstream CMake
-    #   postPatch =
-    #     (old.postPatch or "")
-    #     + ''
-    #       substituteInPlace src/CMakeLists.txt \
-    #         --replace "-lcereal" ""
-    #     '';
-
-    #   buildInputs = (old.buildInputs or []) ++ [pkgs.cereal];
-    # }))
+      src = fetchFromGitHub {
+        owner = "bambulab";
+        repo = "BambuStudio";
+        tag = "v02.03.00.70";
+        hash = "sha256-2duNeSBi2WvsAUxkzTbKH+SiliNovc7LVICTzgQkrN8=";
+      };
+      cmakeFlags =
+        (old.cmakeFlags or [])
+        ++ [
+          "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+        ];
+    }))
     # essentials
     firefox
     chromium
