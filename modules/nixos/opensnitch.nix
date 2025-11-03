@@ -26,7 +26,7 @@
             {
               type = "simple";
               operand = "process.path";
-              data = "${lib.getBin pkgs.bambu-studio}/bin/bambu-studio";
+              data = "${lib.getBin pkgs.unstable.bambu-studio}/bin/bambu-studio";
             }
             {
               type = "simple";
@@ -57,7 +57,7 @@
             {
               type = "simple";
               operand = "process.path";
-              data = "${lib.getBin pkgs.bambu-studio}/bin/bambu-studio";
+              data = "${lib.getBin pkgs.unstable.bambu-studio}/bin/bambu-studio";
             }
             {
               type = "simple";

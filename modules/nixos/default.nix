@@ -25,4 +25,5 @@
   grub = import ./grub;
   llm-host = import ./llm-host.nix;
   llm-client = import ./llm-client.nix;
+  opensnitch = import ./opensnitch.nix;
 }

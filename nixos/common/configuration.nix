@@ -20,6 +20,7 @@
     outputs.nixosModules.flipper-zero
     outputs.nixosModules.steam
     outputs.nixosModules.grub
+    outputs.nixosModules.opensnitch
 
     # cachix
     ../../cachix.nix
@@ -164,8 +165,9 @@
 
   # Spotify track sync with other devices 57621
   # Bambu studio 8883, 7071 / 15001:15005
-  networking.firewall.allowedTCPPorts = [57621 8883 7071];
-  networking.firewall.allowedUDPPorts = [15001 15002 15003 15004 15005];
+  # networking.firewall.allowedTCPPorts = [57621 8883 7071];
+  # networking.firewall.allowedUDPPorts = [15001 15002 15003 15004 15005];
+  # handled in opensnitch
 
   # State version
   system.stateVersion = "25.05";
