@@ -162,8 +162,10 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  # Spotify track sync with other devices
-  networking.firewall.allowedTCPPorts = [57621];
+  # Spotify track sync with other devices 57621
+  # Bambu studio 8883, 7071 / 15001:15005
+  networking.firewall.allowedTCPPorts = [57621 8883 7071];
+  networking.firewall.allowedUDPPorts = [15001 15002 15003 15004 15005];
 
   # State version
   system.stateVersion = "25.05";
