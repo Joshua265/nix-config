@@ -18,6 +18,12 @@ jobs:
           remove-android: "true"
           remove-haskell: "true"
           remove-docker-images: "true"
+      - name: Nix Space Optimization
+        run: |
+          df -h
+          nix-collect-garbage --delete-older-than 1d
+          nix-store --optimise
+          df -h
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
