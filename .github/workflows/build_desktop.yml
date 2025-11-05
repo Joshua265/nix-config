@@ -29,9 +29,6 @@ jobs:
       - uses: cachix/cachix-action@v14
         with:
           name: joshua265
-          # If you chose signing key for write access
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
-          # If you chose API tokens for write access OR if you have a private cache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Configure Nix optimizations
@@ -49,7 +46,7 @@ jobs:
           nix-store --optimise
           df -h
 
-      - run: nix build .#nixosConfigurations.nixos-desktop.config.system.build.toplevel --no-update-lock-file
+      - run: nix build .#nixosConfigurations.nixos-desktop.config.system.build.toplevel --no-update-lock-file  --option cores 3 --option max-jobs 6 --option max-memory-size 14G
 
       - name: Post-build cleanup
         run: |
