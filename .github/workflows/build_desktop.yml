@@ -10,9 +10,14 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
+          root-reserve-mb: 2048
+          temp-reserve-mb: 500
+          swap-size-mb: 8192
+          overprovision-lvm: "false"
           remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-docker-images: "true"
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
