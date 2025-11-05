@@ -10,6 +10,7 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
+          build-mount-path: /nix # <— put the big volume at /nix
           root-reserve-mb: 2048
           temp-reserve-mb: 500
           swap-size-mb: 8192
