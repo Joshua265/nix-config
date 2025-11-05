@@ -1,5 +1,6 @@
 name: "build desktop system for cachix"
 on:
+  workflow_dispatch: # allows manual triggering
   push:
     paths: ["flake.lock"]
 jobs:
