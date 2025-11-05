@@ -86,6 +86,7 @@
     youtube-transcribe-flake = {
       url = "path:./pkgs/youtube-transcribe";
       inputs.nixpkgs.follows = "nixpkgs";
+      flake = true;
     };
   };
 
