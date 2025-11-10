@@ -1,10 +1,16 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{pkgs, ...}: {
+{
+  pkgs,
+  outputs,
+  ...
+}: {
   # Import home-manager modules here
   imports = [
     ../common
     ./packages.nix
+
+    outputs.homeManagerModules.vr
   ];
 
   home.shellAliases = {

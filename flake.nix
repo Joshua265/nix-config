@@ -70,7 +70,12 @@
     };
 
     zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -197,6 +202,7 @@
           {nixpkgs.pkgs = pkgsCuda;}
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };

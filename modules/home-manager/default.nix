@@ -18,4 +18,6 @@
   starship = import ./starship.nix;
   yazi = import ./yazi.nix;
   mako = import ./mako.nix;
+  vr = import ./vr.nix;
+  zen = import ./zen.nix;
 }

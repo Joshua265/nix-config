@@ -30,7 +30,6 @@ in {
     # essentials
     firefox
     chromium
-    inputs.zen-browser.packages.${pkgs.system}.default
     vlc
     libsForQt5.plasma-systemmonitor
     zathura

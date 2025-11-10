@@ -10,6 +10,8 @@
 
     nix-colors.homeManagerModules.default
 
+    inputs.zen-browser.homeModules.beta
+
     outputs.homeManagerModules.git
     outputs.homeManagerModules.vscodium
     outputs.homeManagerModules.alacritty
@@ -26,6 +28,7 @@
     outputs.homeManagerModules.starship
     outputs.homeManagerModules.okular-obsidian
     outputs.homeManagerModules.mako
+    outputs.homeManagerModules.zen
   ];
   nixpkgs = {
     # You can add overlays here
