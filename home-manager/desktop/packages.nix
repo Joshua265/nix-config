@@ -34,9 +34,6 @@
     extra-cmake-modules
 
     # gaming
-    openhmd
-    monado
-    openvr
     wine
     adwaita-icon-theme
 
