@@ -128,6 +128,7 @@
         overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
+        nixpkgs-xr.overlays.default
       ];
     };
     pkgsCuda = import nixpkgs {
@@ -196,7 +197,6 @@
           ./nixos/desktop/configuration.nix
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
-          nixpkgs-xr.nixosModules.nixpkgs-xr
           inputs.musnix.nixosModules.musnix
           inputs.sops-nix.nixosModules.sops
           {nixpkgs.pkgs = pkgsCuda;}
