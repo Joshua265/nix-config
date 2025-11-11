@@ -52,5 +52,3 @@ jobs:
         run: |
           nix-store --optimise
           df -h
-
-      - run: nix-shell --run "echo OK"
