@@ -64,6 +64,7 @@ in {
           modules-right = [
             "tray"
             "custom/keyboard_layout"
+            "custom/displays"
             "pulseaudio"
             # "custom/pipewire"
             "backlight"
