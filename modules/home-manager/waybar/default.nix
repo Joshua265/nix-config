@@ -38,7 +38,13 @@ in {
       pkgs.playerctl
       pkgs.coppwr
       pkgs.pavucontrol
+      pkgs.wofi
     ];
+
+    home.file.".config/waybar/scripts/displays.sh" = {
+      executable = true;
+      text = builtins.readFile ./displays.sh; # or inline the script string here
+    };
 
     programs.waybar = {
       enable = true;
@@ -85,6 +91,13 @@ in {
               "on-discharging-critical" = "notify-send -u critical 'Very Low Battery'";
               "on-charging-100" = "notify-send -u normal 'Battery Full!'";
             };
+          };
+          "custom/displays" = {
+            "return-type" = "json";
+            "exec" = "${config.home.homeDirectory}/.config/waybar/scripts/displays.sh status";
+            "on-click" = "${config.home.homeDirectory}/.config/waybar/scripts/displays.sh menu";
+            "interval" = 5;
+            "tooltip" = true;
           };
           "hyprland/workspaces" = {
             format = "{icon}";
