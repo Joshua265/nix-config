@@ -18,9 +18,9 @@
     )
 
     if [[ -n "$layout" && "$layout" != "null" ]]; then
-      echo "$layout"
+      echo "$layout" | cut -c1-2
     else
-      echo "unknown"
+      echo "unk"
       exit 1
     fi
   '';
@@ -60,7 +60,7 @@ in {
             icon-size = 20;
           };
           modules-center = ["cpu" "memory" "temperature" "battery"];
-          modules-left = ["custom/launcher" "hyprland/workspaces" "custom/playerctl" "custom/playerlabel"];
+          modules-left = ["custom/launcher" "hyprland/workspaces"];
           modules-right = [
             "tray"
             "custom/keyboard_layout"
@@ -124,12 +124,12 @@ in {
             "format-alt" = " {:%d/%m/%y}";
           };
           cpu = {
-            format = " {usage}%";
+            format = "  {usage}%";
             "format-alt" = " {avg_frequency} GHz";
             interval = 5;
           };
           memory = {
-            format = "{}%";
+            format = " {}%";
             "format-alt" = " {used}/{total} GiB";
             "interval" = 5;
           };

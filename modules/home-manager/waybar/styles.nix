@@ -79,6 +79,8 @@ in ''
   #custom-wlogout,
   #window,
   #language,
+  #custom-language,
+  #custom-displays,
   #custom-wf-recorder {
     background: ${glass_bg};
     color: ${text_main};
@@ -248,6 +250,7 @@ in ''
   #custom-power:hover,
   #window:hover,
   #language:hover,
+  #custom-displays:hover,
   #custom-wf-recorder:hover {
     box-shadow:
       inset 0 1px 0 ${glass_inner},
