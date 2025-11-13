@@ -26,21 +26,20 @@
           patches = (old.patches or []) ++ [./patches/nvidia-cuda-toolkit-glibc-2.41-r1.patch];
         });
       };
+    monado = prev.monado.overrideAttrs (old: {
+      # src = prev.fetchFromGitLab {
+      #   domain = "gitlab.freedesktop.org";
+      #   owner = "thaytan";
+      #   repo = "monado";
+      #   rev = "dev-constellation-controller-tracking";
+      #   hash = "sha256-KB+LNwmnlXQAS1vRUy9eLn/ECkPNePUmoFW0O2obYno=";
+      # };
+
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [prev.unstable.opencv];
+    });
     unstable =
       prev.unstable
       // {
-        # monado = prev.monado.overrideAttrs (old: {
-        #   src = prev.fetchFromGitLab {
-        #     domain = "gitlab.freedesktop.org";
-        #     owner = "thaytan";
-        #     repo = "monado";
-        #     rev = "dev-constellation-controller-tracking";
-        #     hash = "sha256-KB+LNwmnlXQAS1vRUy9eLn/ECkPNePUmoFW0O2obYno=";
-        #   };
-        #   patches = [];
-
-        #   nativeBuildInputs = (old.nativeBuildInputs or []) ++ [prev.unstable.opencv];
-        # });
         bambu-studio = prev.unstable.bambu-studio.overrideAttrs (old: let
           newVersion = "02.03.00.70";
         in {

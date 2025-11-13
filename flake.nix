@@ -125,10 +125,10 @@
         overlays.legacy-packages
         overlays.unstable-packages
         overlays.nixGLOverlay
+        nixpkgs-xr.overlays.default
         overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
-        nixpkgs-xr.overlays.default
       ];
     };
     pkgsCuda = import nixpkgs {
