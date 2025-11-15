@@ -199,6 +199,7 @@
           home-manager.nixosModules.home-manager
           inputs.musnix.nixosModules.musnix
           inputs.sops-nix.nixosModules.sops
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           {nixpkgs.pkgs = pkgsCuda;}
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
