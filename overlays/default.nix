@@ -26,6 +26,9 @@
           patches = (old.patches or []) ++ [./patches/nvidia-cuda-toolkit-glibc-2.41-r1.patch];
         });
       };
+    monado = prev.monado.overrideAttrs (old: {
+      cmakeFlags = (old.cmakeFlags or []) ++ ["-DBUILD_WITH_OPENCV=OFF"];
+    });
     unstable =
       prev.unstable
       // {
