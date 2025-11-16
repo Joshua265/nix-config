@@ -19,7 +19,7 @@
 
     xorg.xrandr
 
-    # matlab
+    matlab
 
     # coding
     # vscodium from modules
