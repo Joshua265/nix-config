@@ -64,6 +64,7 @@ in {
         vscodevim.vim
         yoavbls.pretty-ts-errors
         ziglang.vscode-zig
+        reditorsupport.r
       ]
       ++ [
         pkgs.unstable.vscode-extensions.geequlim.godot-tools
