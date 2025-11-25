@@ -203,6 +203,9 @@
           {nixpkgs.pkgs = pkgsCuda;}
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;
+            home-manager.sharedModules = [
+              inputs.sops-nix.homeManagerModules.sops
+            ];
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
@@ -243,6 +246,9 @@
           {
             home-manager.users.user = import ./home-manager/framework/home.nix;
             home-manager.backupFileExtension = "hm-backup";
+            home-manager.sharedModules = [
+              inputs.sops-nix.homeManagerModules.sops
+            ];
             home-manager.extraSpecialArgs = {
               inherit inputs outputs pkgs nix-colors youtube-transcribe-flake;
             };

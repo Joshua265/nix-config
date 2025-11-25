@@ -29,6 +29,7 @@
     outputs.homeManagerModules.okular-obsidian
     outputs.homeManagerModules.mako
     outputs.homeManagerModules.zen
+    outputs.homeManagerModules.syncthing
   ];
   nixpkgs = {
     # You can add overlays here

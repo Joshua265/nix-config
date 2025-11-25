@@ -69,6 +69,7 @@ in {
       ++ [
         pkgs.unstable.vscode-extensions.geequlim.godot-tools
         pkgs.unstable.vscode-extensions.rooveterinaryinc.roo-cline
+        pkgs.unstable.vscode-extensions.llvm-vs-code-extensions.vscode-clangd
       ];
   };
 

@@ -20,4 +20,5 @@
   mako = import ./mako.nix;
   vr = import ./vr.nix;
   zen = import ./zen.nix;
+  syncthing = import ./syncthing.nix;
 }
