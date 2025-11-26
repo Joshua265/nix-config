@@ -86,51 +86,68 @@ in {
   };
 
   windowrule = [
-    "no_blur, match:class .*"
+    # Disable blur for all windows
+    "no_blur on, match:class .*"
 
-    "float, match:class ^(steam)$"
+    # Steam always floating
+    "float on, match:class ^(steam)$"
 
-    "pin, match:class ^(showmethekey-gtk)$"
+    # showmethekey pinned and visible everywhere
+    "pin on, match:class ^(showmethekey-gtk)$"
 
-    "float, match:title ^(Open File).*$"
-    "float, match:title ^(Select a File).*$"
-    "float, match:title ^(Choose wallpaper).*$"
-    "float, match:title ^(Open Folder).*$"
-    "float, match:title ^(Save As).*$"
-    "float, match:title ^(Library).*$"
+    # Common file dialogs and special windows always floating
+    "float on, match:title ^(Open File).*$"
+    "float on, match:title ^(Select a File).*$"
+    "float on, match:title ^(Choose wallpaper).*$"
+    "float on, match:title ^(Open Folder).*$"
+    "float on, match:title ^(Save As).*$"
+    "float on, match:title ^(Library).*$"
 
-    "opacity 1.0, match:float 1"
+    # Ensure floating windows are fully opaque
+    # match:float 1 -> floating windows only
+    # three values: active, inactive, fullscreen
+    "opacity 1.0 override 1.0 override 1.0 override, match:float 1"
   ];
 
   layerrule = [
-    "xray 1, match:namespace .*"
-    "no_anim, match:namespace selection"
-    "no_anim, match:namespace overview"
-    "no_anim, match:namespace anyrun"
+    # Global: xray blur for all layers
+    "xray on, match:namespace .*"
 
-    "blur, match:namespace notifications"
+    # No animations for specific namespaces
+    "no_anim on, match:namespace selection"
+    "no_anim on, match:namespace overview"
+    "no_anim on, match:namespace anyrun"
+
+    # Notifications – blur + different ignore_alpha values, in the same order as before
+    "blur on, match:namespace notifications"
     "ignore_alpha 0.06, match:namespace notifications"
 
-    "blur, match:namespace waybar"
+    # Waybar – blur + ignore_alpha
+    "blur on, match:namespace waybar"
     "ignore_alpha 0.06, match:namespace waybar"
 
-    "no_anim, match:namespace noanim"
-    "blur, match:namespace noanim"
+    # Namespace literally called "noanim"
+    "no_anim on, match:namespace noanim"
+    "blur on, match:namespace noanim"
 
-    "blur, match:namespace gtk-layer-shell"
-    # ignorezero ≈ ignore_alpha 0
-    "ignore_alpha 0, match:namespace gtk-layer-shell"
+    # Generic gtk-layer-shell surfaces (used by many bars/launchers)
+    "blur on, match:namespace gtk-layer-shell"
+    "ignore_alpha 0, match:namespace gtk-layer-shell" # old ignorezero
 
-    "blur, match:namespace launcher"
+    # Launcher
+    "blur on, match:namespace launcher"
     "ignore_alpha 0.5, match:namespace launcher"
 
-    "blur, match:namespace notifications"
+    # Notifications again (you had two sets; order preserved)
+    "blur on, match:namespace notifications"
     "ignore_alpha 0.69, match:namespace notifications"
 
-    "blur, match:namespace session"
+    # Session layer
+    "blur on, match:namespace session"
 
-    "no_anim, match:namespace sideright"
-    "no_anim, match:namespace sideleft"
+    # Side panels – no animation
+    "no_anim on, match:namespace sideright"
+    "no_anim on, match:namespace sideleft"
   ];
 
   misc = {
