@@ -86,38 +86,51 @@ in {
   };
 
   windowrule = [
-    "noblur, class:.*"
-    "float, class:^(steam)$"
-    "pin, class:^(showmethekey-gtk)$"
-    "float, title:^(Open File).*$"
-    "float, title:^(Select a File).*$"
-    "float, title:^(Choose wallpaper).*$"
-    "float, title:^(Open Folder).*$"
-    "float, title:^(Save As).*$"
-    "float, title:^(Library).*$"
-    "opacity 1.0, floating:1"
+    "no_blur, match:class .*"
+
+    "float, match:class ^(steam)$"
+
+    "pin, match:class ^(showmethekey-gtk)$"
+
+    "float, match:title ^(Open File).*$"
+    "float, match:title ^(Select a File).*$"
+    "float, match:title ^(Choose wallpaper).*$"
+    "float, match:title ^(Open Folder).*$"
+    "float, match:title ^(Save As).*$"
+    "float, match:title ^(Library).*$"
+
+    "opacity 1.0, match:float 1"
   ];
 
   layerrule = [
-    "xray 1, .*"
-    "noanim, selection"
-    "noanim, overview"
-    "noanim, anyrun"
-    "blur, notifications"
-    "ignorealpha 0.06, notifications"
-    "blur, waybar"
-    "ignorealpha 0.06, waybar"
-    "noanim, noanim"
-    "blur, noanim"
-    "blur, gtk-layer-shell"
-    "ignorezero, gtk-layer-shell"
-    "blur, launcher"
-    "ignorealpha 0.5, launcher"
-    "blur, notifications"
-    "ignorealpha 0.69, notifications"
-    "blur, session"
-    "noanim, sideright"
-    "noanim, sideleft"
+    "xray 1, match:namespace .*"
+    "no_anim, match:namespace selection"
+    "no_anim, match:namespace overview"
+    "no_anim, match:namespace anyrun"
+
+    "blur, match:namespace notifications"
+    "ignore_alpha 0.06, match:namespace notifications"
+
+    "blur, match:namespace waybar"
+    "ignore_alpha 0.06, match:namespace waybar"
+
+    "no_anim, match:namespace noanim"
+    "blur, match:namespace noanim"
+
+    "blur, match:namespace gtk-layer-shell"
+    # ignorezero ≈ ignore_alpha 0
+    "ignore_alpha 0, match:namespace gtk-layer-shell"
+
+    "blur, match:namespace launcher"
+    "ignore_alpha 0.5, match:namespace launcher"
+
+    "blur, match:namespace notifications"
+    "ignore_alpha 0.69, match:namespace notifications"
+
+    "blur, match:namespace session"
+
+    "no_anim, match:namespace sideright"
+    "no_anim, match:namespace sideleft"
   ];
 
   misc = {
