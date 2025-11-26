@@ -48,7 +48,6 @@ in {
         pkief.material-icon-theme
         mechatroner.rainbow-csv
         redhat.vscode-yaml
-        rust-lang.rust-analyzer
         stkb.rewrap
         tamasfe.even-better-toml
         tomoki1207.pdf
@@ -67,6 +66,7 @@ in {
         reditorsupport.r
       ]
       ++ [
+        pkgs.unstable.vscode-extensions.rust-lang.rust-analyzer
         pkgs.unstable.vscode-extensions.geequlim.godot-tools
         pkgs.unstable.vscode-extensions.rooveterinaryinc.roo-cline
         # pkgs.unstable.vscode-extensions.llvm-vs-code-extensions.vscode-clangd
