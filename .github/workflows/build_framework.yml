@@ -46,7 +46,7 @@ jobs:
           nix-store --optimise
           df -h
 
-      - run: nix build .#nixosConfigurations.nixos-framework.config.system.build.toplevel --no-update-lock-file  --option cores 3 --option max-jobs 6 --option max-memory-size 14G
+      - run: nix build .#nixosConfigurations.nixos-framework.config.system.build.toplevel --no-update-lock-file  --option cores 3 --option max-jobs 3 --option max-memory-size 12G
 
       - name: Post-build cleanup
         run: |
