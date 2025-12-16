@@ -60,7 +60,7 @@ in {
       ++ lib.optionals cfg.installExtras [
         pkgs.ocrmypdf
         pkgs.tesseract
-        pkgs.poppler_utils
+        pkgs.poppler-utils
         pkgs.ripgrep-all
       ];
 

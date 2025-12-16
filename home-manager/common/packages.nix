@@ -31,7 +31,7 @@ in {
     firefox
     chromium
     vlc
-    libsForQt5.plasma-systemmonitor
+    kdePackages.plasma-systemmonitor
     zathura
     keymapp
     eduvpn-client
@@ -50,12 +50,11 @@ in {
 
     marp-cli
     xournalpp
-    onlyoffice-bin # office suite
+    onlyoffice-desktopeditors # office suite
     thunderbird # email client
     teams-for-linux
-    whatsapp-for-linux
+    wasistlos
     webex
-    kdePackages.xwaylandvideobridge
 
     obsidianWithExtras
     zotero

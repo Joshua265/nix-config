@@ -60,12 +60,12 @@
     sudo.wheelNeedsPassword = false;
   };
 
-  services.logind.extraConfig = ''
-    IdleAction=lock                       # let hypridle lock first …
-    IdleActionSec=10min
-    HandlePowerKey=suspend-then-hibernate # for laptops with power-button
+  services.logind.settings.Login = {
+    IdleAction = "lock"; # let hypridle lock first …
+    IdleActionSec = "10min";
+    HandlePowerKey = "suspend-then-hibernate"; # for laptops with power-button
     # tweak lid / battery actions here if wanted
-  '';
+  };
 
   systemd.sleep.extraConfig = ''
     SuspendState=mem                      # use "deep" by default

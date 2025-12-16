@@ -84,14 +84,15 @@
     HibernateDelaySec=1h
   '';
 
-  # Optional: also steer logind’s idle/lid actions
-  services.logind = {
-    # IdleAction="suspend-then-hibernate"; IdleActionSec="30min";
-    # lidSwitch="suspend-then-hibernate";
-    extraConfig = ''
-      HandlePowerKey=ignore
-    '';
-  };
+  # # Optional: also steer logind’s idle/lid actions
+  # services.logind = {
+  #   # IdleAction="suspend-then-hibernate"; IdleActionSec="30min";
+  #   # lidSwitch="suspend-then-hibernate";
+
+  #   settings.Login = {
+  #     HandlePowerKey = "ignore";
+  #   };
+  # };
 
   # Enable OpenGL support
   hardware.graphics = {

@@ -25,7 +25,7 @@
           rustc # The Rust compiler
           cargo # The Rust build tool
           git # May be needed for fetching sources or Git-related build steps
-          wrapGAppsHook # For wrapping GTK applications
+          wrapGAppsHook3 # For wrapping GTK applications
         ];
 
         # Libraries that the Rust code links against.

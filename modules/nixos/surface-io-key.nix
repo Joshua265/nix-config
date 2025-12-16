@@ -12,8 +12,8 @@
     install surfacepro3_button /bin/false
   '';
 
-  services.logind = {
-    lidSwitch = "ignore";
-    powerKey = "ignore";
-  };
+  # services.logind = {
+  #   lidSwitch = "ignore";
+  #   powerKey = "ignore";
+  # };
 }

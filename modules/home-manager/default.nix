@@ -2,6 +2,7 @@
   adour = import ./adour;
   git = import ./git;
   vscodium = import ./vscodium;
+  vscode = import ./vscode;
   ghostty = import ./ghostty;
   hyprland = import ./hyprland;
   hyprlock = import ./hyprlock;
@@ -21,4 +22,5 @@
   vr = import ./vr.nix;
   zen = import ./zen.nix;
   syncthing = import ./syncthing.nix;
+  quickshell = import ./quickshell;
 }

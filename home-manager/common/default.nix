@@ -13,7 +13,8 @@
     inputs.zen-browser.homeModules.beta
 
     outputs.homeManagerModules.git
-    outputs.homeManagerModules.vscodium
+    # outputs.homeManagerModules.vscodium
+    outputs.homeManagerModules.vscode
     outputs.homeManagerModules.alacritty
     outputs.homeManagerModules.wlogout
     outputs.homeManagerModules.hyprlock
@@ -30,6 +31,7 @@
     outputs.homeManagerModules.mako
     outputs.homeManagerModules.zen
     outputs.homeManagerModules.syncthing
+    outputs.homeManagerModules.quickshell
   ];
   nixpkgs = {
     # You can add overlays here
@@ -69,9 +71,9 @@
     username = "user";
     homeDirectory = "/home/user";
   };
-  programs.git = {
-    userEmail = "Joshua_Noel@gmx.de";
-    userName = "Joshua265";
+  programs.git.settings.user = {
+    email = "Joshua_Noel@gmx.de";
+    name = "Joshua265";
   };
 
   programs.okularObs = {
@@ -124,5 +126,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 }

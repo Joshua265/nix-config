@@ -10,7 +10,7 @@
     ../common
     ./packages.nix
 
-    outputs.homeManagerModules.vr
+    # outputs.homeManagerModules.vr
   ];
 
   home.shellAliases = {

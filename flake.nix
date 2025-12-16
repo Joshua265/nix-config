@@ -3,12 +3,12 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
-    nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-legacy.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nix-matlab = {
       # nix-matlab's Nixpkgs input follows Nixpkgs' nixos-unstable branch. However
@@ -27,7 +27,7 @@
     nixGL.url = "github:guibou/nixGL";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Add any other flake you might need
@@ -67,6 +67,11 @@
 
     custom-nvim = {
       url = "github:Joshua265/neovim";
+    };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
@@ -116,9 +121,6 @@
       inherit system;
       config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "mbedtls-2.28.10"
-        ];
       };
       overlays = [
         overlays.additions
@@ -138,9 +140,6 @@
         cudaSupport = true;
         cudnnSupport = true;
         cudaCapabilities = ["8.6"];
-        permittedInsecurePackages = [
-          "mbedtls-2.28.10"
-        ];
       };
       overlays = [
         overlays.additions
@@ -241,6 +240,7 @@
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
+          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series1
           {nixpkgs.pkgs = pkgs;}
           {

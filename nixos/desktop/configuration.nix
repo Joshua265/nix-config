@@ -20,7 +20,7 @@
     outputs.nixosModules.musnix
     outputs.nixosModules.llm-host
     outputs.nixosModules.llm-client
-    outputs.nixosModules.monado
+    # outputs.nixosModules.monado
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

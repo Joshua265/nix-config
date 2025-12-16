@@ -115,7 +115,7 @@
     cargo
     cargo-info
     curl
-    du-dust
+    dust
     dua
     htop
     hyperfine
@@ -170,5 +170,5 @@
   # handled in opensnitch
 
   # State version
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
