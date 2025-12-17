@@ -240,7 +240,6 @@
           # > Our main home-manager configuration file <
           home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
-          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series1
           {nixpkgs.pkgs = pkgs;}
           {
