@@ -161,7 +161,7 @@ in {
     swallow_regex = "(foot|kitty|allacritty|Alacritty)";
 
     disable_hyprland_logo = true;
-    new_window_takes_over_fullscreen = 2;
+    # new_window_takes_over_fullscreen = 2;
   };
 
   animations = {

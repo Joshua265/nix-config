@@ -63,7 +63,8 @@
       url = "github:nix-community/rnix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/master";
+    # nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
     custom-nvim = {
       url = "github:Joshua265/neovim";
@@ -88,10 +89,10 @@
     musnix = {url = "github:musnix/musnix";};
 
     # tree wide formatter
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # treefmt-nix = {
+    #   url = "github:numtide/treefmt-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     youtube-transcribe-flake = {
       url = "path:./pkgs/youtube-transcribe";
@@ -103,7 +104,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-xr,
+    # nixpkgs-xr,
     home-manager,
     nix-colors,
     youtube-transcribe-flake,
@@ -127,10 +128,11 @@
         overlays.legacy-packages
         overlays.unstable-packages
         overlays.nixGLOverlay
-        nixpkgs-xr.overlays.default
+        # nixpkgs-xr.overlays.default
         overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
+        inputs.nix-vscode-extensions.overlays.default
       ];
     };
     pkgsCuda = import nixpkgs {
@@ -149,6 +151,7 @@
         overlays.modifications
         openglWrappedOverlay
         inputs.nix-matlab.overlay
+        inputs.nix-vscode-extensions.overlays.default
       ];
     };
   in {
@@ -198,7 +201,7 @@
           home-manager.nixosModules.home-manager
           inputs.musnix.nixosModules.musnix
           inputs.sops-nix.nixosModules.sops
-          nixpkgs-xr.nixosModules.nixpkgs-xr
+          # nixpkgs-xr.nixosModules.nixpkgs-xr
           {nixpkgs.pkgs = pkgsCuda;}
           {
             home-manager.users.user = import ./home-manager/desktop/home.nix;

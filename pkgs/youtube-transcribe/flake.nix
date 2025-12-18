@@ -2,68 +2,59 @@
   description = "A flake for the youtube-transcribe Rust project";
 
   inputs = {
-    # Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Using unstable for latest features
-
-    # Utility for flake boilerplate
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = {
     self,
     nixpkgs,
-    flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem (
+    ...
+  }: let
+    supportedSystems = nixpkgs.lib.systems.flakeExposed;
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+  in {
+    packages = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        # Dependencies required for building the Rust package.
-        # These are tools and libraries needed during the build process.
         nativeBuildInputs = with pkgs; [
-          pkg-config # For pkg-config integration
-          rustc # The Rust compiler
-          cargo # The Rust build tool
-          git # May be needed for fetching sources or Git-related build steps
-          wrapGAppsHook3 # For wrapping GTK applications
+          pkg-config
+          rustc
+          cargo
+          git
+          wrapGAppsHook3
         ];
 
-        # Libraries that the Rust code links against.
         buildInputs = with pkgs; [
-          gtk4 # GTK4 library for GUI
-          libadwaita # Libadwaita library for GTK4 theming
-          glib # GLib library, a dependency for GTK and others
-          gsettings-desktop-schemas # GTK settings schemas
-          openssl # For TLS support in reqwest
-          zlib # Compression library
-          which # Utility to find executables
+          gtk4
+          libadwaita
+          glib
+          gsettings-desktop-schemas
+          openssl
+          zlib
+          which
         ];
 
-        # Dependencies that the final executable needs to run.
-        # These will be made available in the package's PATH.
         runtimeDependencies = with pkgs; [
-          yt-dlp # For downloading videos
-          ffmpeg # For video/audio processing
-          whisper-cpp # Whisper C++ CLI
-          glib # Also a runtime dependency
-          openssl # Also a runtime dependency
-          zlib # Also a runtime dependency
-          which # Also a runtime dependency
+          yt-dlp
+          ffmpeg
+          whisper-cpp
+          glib
+          openssl
+          zlib
+          which
         ];
       in {
-        # Package output: defines how to build the youtube-transcribe application.
-        packages.default = pkgs.rustPlatform.buildRustPackage {
+        default = pkgs.rustPlatform.buildRustPackage {
           pname = "youtube-transcribe";
           version = "0.1.0";
 
-          src = ./.; # Source code is in the current directory
+          src = ./.;
 
           cargoHash = "sha256-GBV2RBBpqhivTTAzgkTCUajz+8OKMq08pz82XdS7BXQ=";
+          cargoBuildType = "release";
 
-          cargoBuildType = "release"; # Build in release mode for performance
-
-          nativeBuildInputs = nativeBuildInputs;
-          buildInputs = buildInputs;
+          inherit nativeBuildInputs buildInputs;
 
           preFixup = ''
             gappsWrapperArgs+=(
@@ -71,9 +62,14 @@
             )
           '';
         };
+      }
+    );
 
-        # Development shell: provides an environment with all necessary tools and dependencies.
-        devShells.default = pkgs.mkShell {
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        default = pkgs.mkShell {
           packages = [
             pkgs.pkg-config
             pkgs.rustc
@@ -90,12 +86,8 @@
             pkgs.ffmpeg
             pkgs.whisper-cpp-vulkan
           ];
-          # Optional: Add environment variables or shell hooks for development.
-          # For example, to help rust-analyzer find sources:
-          # shellHook = ''
-          #   export RUST_SRC_PATH=${pkgs.rust.src}/library
-          # '';
         };
       }
     );
+  };
 }

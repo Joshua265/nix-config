@@ -16,7 +16,7 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     package = pkgs.vscode;
-    profiles.default.extensions = with pkgs.unstable.vscode-extensions; [
+    profiles.default.extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
       catppuccin.catppuccin-vsc-icons
       carrie999.cyberpunk-2020
       dracula-theme.theme-dracula
@@ -67,6 +67,7 @@ in {
       rust-lang.rust-analyzer
       geequlim.godot-tools
       rooveterinaryinc.roo-cline
+      theqtcompany.qt-qml
     ];
   };
 
